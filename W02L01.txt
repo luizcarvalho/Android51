@@ -1,0 +1,36 @@
+Aplications Components(Blocks)
+- Activity - Provide Graphical User Interface (GUI)
+- Services - Supporting long running or in background applications
+- Broadcast receivers for listen and responde eventos that happen on a devices
+- ContentProvides - allow multiples aplications store and share data.
+
+:: Activity Class
+- Interface to user and capiture user interface, provide a GUI
+- Activite usually implemente a single and focused task that user can do. But in a tablet, this is maybe change.
+
+:: Services
+- Services run in the background, for that not need interfaces
+- Used for long running process 
+- TO Support interaction with remote processes (requests operations and share data)
+
+::ContentProvider
+- Provide database-style interface, mas é mais que uma base de dados
+- Provide low-levew details of inter-process comunication 
+- so that aplications running in separate processes can communicate and exchange data safely and easily
+- 
+
+
+::: Createing Applications
+- Defining resources
+- IMplement applicaiton classes
+- Packaging (make apk) aplication
+- Installing and Running application
+
+
+:: Defining applicaiton resrouces
+- managings resources separate of code has benefices,you can easily alter those resources, allow apps be customizes for a differentes devices and users
+- Android has three types of string s resources: individual strings, arrays of strings and plurals
+- Plural strings basically a array string that can be used to choose espefici string that are associated with a quantities, such as one book or two books 
+
+
+

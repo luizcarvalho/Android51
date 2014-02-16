@@ -1,0 +1,152 @@
+Standard Services
+- Security
+- Memory e PRocess management
+- File and network IO
+- Device Drivers
+
+
+:: Android Exclusive features
+- Power management
+- Low memor Killer
+ANdroid share memory
+Inteprocess comunications
+And much more
+
+
+== Loibrarires
+
+Librariers
+:: System C Library
+- Matematics computations
+- memory Allocation
+
+:: Surface Manager
+- Display
+- Management
+- Media fw
+audio video, open gl, SQL,
+
+ANdroid Runtime
+- Core java librarues and Dalvik
+
+::Core Java library 
+- Java e Javax
+- App Lifecucle
+Intenet
+Unit Test
+
+:: Dalvik
+- Execute apps
+- The apps has writing in Java language, but not running over Java virtual machine.
+- Java copile code ei Bytecodees in dx dex
+- Dalvick execute dex
+- Dalvik is similar a Java virtual Machine, but os designed for mobile applications.
+- For what devices have limited resources, like a slower CPU, less RAM and limited baterry life
+
+== APlications Framework 
+- has components acessibles for all applications
+
+:: Package Manager
+- Stores informations about my applications (has icons showings in homescreen)
+- and trade informations between installeds applications
+
+:: WIndows Manager
+- The window manager, as your name suggest manage android windows.
+When you open appp two windows is showings
+- resposabble by notication bar and dialogs, menus
+
+
+:: Views System
+-  Provide common user interfaces such icons, fonts, buttons, 
+View system is responsable for a creation of interfaces, and apresentations her.
+
+:: Resources Manager
+- Responsable for a string, graphs, Layout Files (XML)
+- Translation (i18n)
+
+
+:: Activity manager
+- Higle leve, resposable for a interaction of user, helps to coordinate navigations, for example. Passing parameters and behavior screens.
+
+
+::ContentProvides
+- The stucture resposable for a store and share structured informations. For example the aplications need access to a concact information
+- ContentProvide is designed to work between several applications.
+
+:: Locations Manager
+- Provide Location and Moviment Information
+- Provides GSP infromations, has localization, direction etc.
+- 
+:: Notifications Manager
+- 
+
+== APLICATION LAYER
+Resposable for build-in applications
+
+:: Standard Apps
+ - Home
+- Concatc
+- Phone
+- Browser
+- Mail
+- Messages
+This apps has nothing special, only app hardcoded into system, if you build better app, you can change standard app for your app.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
