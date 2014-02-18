@@ -80,7 +80,7 @@ Component Permission - restrict access of the a component for other
 Service Permissions- Restrict which components cat start pr bind to the associated service 
 BroadcastReceiver Permissions- Restricit which components can send and reveive broadcasts
 Content Provider Permissions - Resticti which components read and write data in a ComtentProvider 
-
+- 
 
 
 
