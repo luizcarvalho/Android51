@@ -66,8 +66,10 @@ public class ActivityLoaderActivity extends Activity {
 		Log.i(TAG,"Entered startExplicitActivation()");
 		
 		// TODO - Create a new intent to launch the ExplicitlyLoadedActivity class
+		Intent intent = new Intent(this, ExplicitlyLoadedActivity.class);
 		
 		// TODO - Start an Activity using that intent and the request code defined above
+		startActivityForResult(intent, GET_TEXT_REQUEST_CODE);
 
 
 	}
@@ -87,7 +89,9 @@ public class ActivityLoaderActivity extends Activity {
 		// chooserIntent variable below. HINT: using the Intent class' 
 		// createChooser())
 		
-		Intent chooserIntent = null;
+		Intent chooserIntent = new Intent();
+		chooserIntent.setAction("android.intent.action.VIEW");
+		chooserIntent.setData(Uri.parse(URL));
 
 		Log.i(TAG,"Chooser Intent Action:" + chooserIntent.getAction());
 		// TODO - Start the chooser Activity, using the chooser intent
@@ -97,12 +101,18 @@ public class ActivityLoaderActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+		String result = data.getStringExtra("hello");
 		Log.i(TAG, "Entered onActivityResult()");
+		
 		
 		// TODO - Process the result only if this method received both a
 		// RESULT_OK result code and a recognized request code
-		// If so, update the Textview showing the user-entered text.
+		// If so, update the Textview showing the user-entered text.		
+		if(requestCode==GET_TEXT_REQUEST_CODE){
+			if(resultCode==RESULT_OK){				
+				mUserTextView.setText(result);				
+			}
+		}
 
 
 	}
