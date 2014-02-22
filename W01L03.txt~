@@ -1,6 +1,0 @@
-:: Dalvik Debug Monitor Service (DDMS) Tool for Monitoring Apllication Behaviors.
-- File Explorer - for view file device system
-- Logcat - Loggin and displaing run time events
-- Traceview - Display Method Executions trace (Show methods wich yout application call)
-- HierarchyView for exemingin interfaces layouts
- 

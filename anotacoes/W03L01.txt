@@ -1,0 +1,103 @@
+::: Activity
+
+:: Intent Class
+- Explicity Activation
+- Implicity Activation via intent resolution, Don't describle the activity, but describle operation to android find and start the activity
+
+- Intent class is a Data structure that serve for two propouse in Android, 
+-- One: specify operation that you want to perform
+-- Two: Represent a event occured in system, that you want to notify other component about
+-- Received a activity that can perform that work
+
+:: Intent Fileds
+- Action
+- Data
+- Category
+- Mime Type
+- Componet
+- Extras
+- Flags
+
+:: SET Action
+- Are string that represent desired operation
+- You can create Intent passing Action as params or create blank intent and after set action for him (setAction)
+
+- Setting Data
+On Creating object or using setData method
+
+:: Intent Category
+- Adicional information about the components thar can handle the intent
+Ex:
+category_browsebly
+category_lancher
+
+- Type (mime)
+image/*, image/png, image/jps
+!! If unspecified type, Android will infer the type
+
+:: Flags
+- Specify how Intent should be handled
+
+
+= Fragments
+
+represents a behavior/portion of UI within a Activity
+- Fragments hosted by activities
+
+== Fragments Lifecycle
+- Fragment Lifecycle is coordinate with  lifecycle host activity
+- Fragments have their own lifecycles and receive their own callbacks
+- When a host Actity has created, fragment hosted execute several of callbacks:
+- First, onAtach
+- onCreate
+- onCreateView (return view with user interface, and install in activity host layout)
+- after all, fragment execute onAcitivityCreated
+- Fragment so, syncronize our callbacks with hosting activity
+
+- When Activity has detroy, Fragment execute , on DestroyView and when no long use call onDestroy, onDetach
+
+
+
+= 02
+
+== Implicity Activation
+- IN this situation you don't have passe that Activity Android will do start
+- Android try match the parameters with a capability of activities thar are on your device;
+- In these processo will be call intent resolution relies on two kinds of information;
+- first: Androi start Activity that to describle the operation that wants to be perfomed.
+- Second: ANdroid Intent filed specify filters whitch describle the kinds of, of operation, or intents,  the can handle.
+-- This fileds are, Action, data (URI and TYPE) and Category
+-- This intent Filters is defined in Android Manifest File
+- For view Android Categories use: adb shell dumpsys packgae
+
+
+= PERMISSIONS
+Raise of Permission os Security Permission
+
+<user-permition> - permition taht application have to user a Device User Feature
+<permitions> - tag used for a appliction-specific permission that an application require of any other apllication for interact with it.
+Component Permission - restrict access of the a component for other
+Service Permissions- Restrict which components cat start pr bind to the associated service 
+BroadcastReceiver Permissions- Restricit which components can send and reveive broadcasts
+Content Provider Permissions - Resticti which components read and write data in a ComtentProvider 
+
+
+
+
+
+
+
+
+== LAB 05
+
+
+- two general ways to add fragments and Activity layout
+-- first, Declare statically in the Activity layout file, e.g. the xml layout call by setContentView
+-- Or you cant add fragment programmatically using FragmentManager, him call onCreateView, so Fragment using your own XML layout;
+- Or can create programmatically create your user interfaces
+
+
+
+
+
+
