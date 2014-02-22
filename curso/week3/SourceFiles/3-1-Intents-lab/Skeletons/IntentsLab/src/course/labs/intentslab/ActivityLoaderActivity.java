@@ -92,10 +92,11 @@ public class ActivityLoaderActivity extends Activity {
 		Intent chooserIntent = new Intent();
 		chooserIntent.setAction("android.intent.action.VIEW");
 		chooserIntent.setData(Uri.parse(URL));
+		Intent chooser = Intent.createChooser(chooserIntent, "Chooser navigator");
 
-		Log.i(TAG,"Chooser Intent Action:" + chooserIntent.getAction());
+		Log.i(TAG,"Chooser Intent Action:" + chooser.getAction());
 		// TODO - Start the chooser Activity, using the chooser intent
-		startActivity(chooserIntent);
+		startActivity(chooser);
 
 	}
 

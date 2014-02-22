@@ -43,7 +43,7 @@ public class ExplicitlyLoadedActivity extends Activity {
 	// Sets result to send back to calling Activity and finishes
 	
 	private void enterClicked() {
-
+		Log.i(TAG,"Entered enterClicked()");
 		// TODO - Save user provided input from the EditText field
 		 String texto = mEditText.getText().toString();
 
