@@ -8,6 +8,8 @@
         android:minSdkVersion="13"
         android:targetSdkVersion="18" />
 
+    <permission android:name="course.labs.permissions.DANGEROUS_ACTIVITY_PERM"/>
+    
     <!--
           TODO - Using a permission element,
           define a custom permission with name
@@ -25,18 +27,21 @@
 
         <activity
             android:name=".DangerousActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:permission="course.labs.permissions.DANGEROUS_ACTIVITY_PERM">
 
             <!--
                  TODO - add additional intent filter info so that this Activity
                   will respond to an Implicit Intent with the action
                   "course.labs.permissions.DANGEROUS_ACTIVITY"
             -->
-
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="course.labs.permissions.DANGEROUS_ACTIVITY"/>
+            </intent-filter>
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN" />                
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
