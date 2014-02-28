@@ -3,11 +3,13 @@ package course.labs.todomanager;
 import java.util.ArrayList;
 import java.util.List;
 
+import course.labs.todomanager.R;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -86,11 +88,12 @@ public class ToDoListAdapter extends BaseAdapter {
 
 
 		//TODO - Get the current ToDoItem
-		final ToDoItem toDoItem = null;
+		final ToDoItem toDoItem = mItems.get(position);
 
 		//TODO - Inflate the View for this ToDoItem
 		// from todo_item.xml.
-		RelativeLayout itemLayout = null;
+		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		RelativeLayout itemLayout =  (RelativeLayout) inflater.inflate(R.layout.add_todo, null);
 		
 		//TODO - Fill in specific ToDoItem data
 		// Remember that the data that goes in this View
@@ -99,11 +102,13 @@ public class ToDoListAdapter extends BaseAdapter {
 
 		//TODO - Display Title in TextView
 
-		final TextView titleView = null;
+		final TextView titleView = (TextView) convertView.findViewById(R.id.titleView);
+		titleView.setText(toDoItem.getTitle());
 		
 		// TODO - Set up Status CheckBox
 	
-		final CheckBox statusView = null;
+		final CheckBox statusView = (CheckBox) convertView.findViewById(R.id.statusCheckBox);
+		//if(toDoItem.getStatus()==ToDoitem)
 		
 		
 		statusView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -111,6 +116,11 @@ public class ToDoListAdapter extends BaseAdapter {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				log("Entered onCheckedChanged()");
+				if(isChecked){
+					
+				}else{
+					
+				}
 				
 				// TODO - Set up and implement an OnCheckedChangeListener, which 
 				// is called when the user toggles the status checkbox
