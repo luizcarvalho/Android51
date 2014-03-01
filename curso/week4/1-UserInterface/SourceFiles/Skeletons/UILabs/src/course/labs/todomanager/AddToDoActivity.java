@@ -132,7 +132,7 @@ public class AddToDoActivity extends Activity {
 				Status status = getStatus();
 
 				//TODO -  Title
-				String titleString = (String) getTitle();
+				String titleString = mTitleText.getText().toString();
 
 				// Date
 				String fullDate = dateString + " " + timeString;
