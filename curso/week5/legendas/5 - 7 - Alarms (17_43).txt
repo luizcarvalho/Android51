@@ -1,0 +1,85 @@
+The example applications that we've studied up to now have made decisions and then taken action, now. But what if your application makes a decision, but wants to take an action an hour from now, tomorrow at midnight, or every 15 minutes from now on? In that case, your application will need to create and set alarms. In this lesson, I'll start by discussing what alarms are and how they're used. 
+
+Next, I'll discuss the Android AlarmManager and the APIs it provides for setting and canceling alarms. After that, I'll discuss the various types of alarms that Android supports. And finally, I'll present and discuss an example application that uses alarms. Now in a nutshell, alarms are a mechanism for sending intents at some point, or points, in the future. 
+
+And this is useful because it allows an application to cause some other code to execute even when that application is no longer running. Once alarms have been created and registered, they're retained and monitored even if the device goes to sleep. 
+
+And as we'll talk about later, depending on how you configure an alarm, if it goes off while the device is sleeping, the device can be woken up to handle the alarm, or the alarm can be retained until the next time the device wakes up. And alarms will continue to be active until the device shuts down. 
+
+On shutdown, all registered alarms will be canceled. To give you some examples of alarms, the other day, I was digging through some Android source code and came across several applications that use alarms. For instance, the MMS messaging application uses alarms to start a service that can find MMS messages that haven't been delivered and can try again to deliver them. 
+
+
+The Settings application can made a device discoverable over Bluetooth. And when it does this, that application sets an alarm, and when the alarm goes off, the application makes the device not discoverable anymore. And the Phone application keeps a cache of user information. 
+
+This application uses alarms to periodically update that cache. If you want to use alarms in your own applications, you do so by interacting with the AlarmManager service. To get a reference to this service, you call the context classes GetSystemService, passing in the name of the service, in this case, Alarm_Service as a parameter. 
+
+Once you have a reference to the AlarmManager, you can then use some of its methods to create and set alarms. For instance, you can use the Set method to set a single alarm. And this method has three parameters. 
+
+A type, which we'll discuss shortly, a long, representing the time at which the alarm should go off and a PeningIntent, which encapsulates the operation that should occur when the alarm finally does go off. 
+
+You can use this method, setRepeating, to set an alarm that repeatedly goes off at specific intervals. This method has four parameters, the three we saw in the Set method and an additional long that specifies the amount of time between each successive time that the alarm goes off. 
+
+Another AlarmManager method is setInexactRepeating. This method is similar to setRepeating, in that the alarm should go off periodically, but this method gives Android more flexibility in deciding exactly when to fire the alarms. 
+
+For instance, Android might batch up multiple alarms of this kind and fire them at the same time so as not to wake up the device too many times. And if you want to have this kind of behavior, then your time interval must be one of the following constants, which specifies intervals of 15 minutes, 30 minutes, one hour, 12 hours, and 24 hours. 
+
+And if you don't use one of these constants, then the behavior of the alarms is the same thing that you would have gotten had you used setRepeating instead. Now each of the three methods I just showed you took a parameter called Type. Let's talk about alarm types now. 
+
+Android provides two degrees of configurability with respect to alarms. One has to do with how time information is interpreted, and the other tells Android how to respond if the device is sleeping when the alarm fires. Let's look at each of these one at a time. First, you remember that each of the alarm setting methods took a long as a parameter, and I said that, that long represented a time. 
+
+Android alarms can interpret this long value in two different ways. One, it can consider it to be a real or wall clock time, and in this case, the long represents the number of milliseconds since midnight January 1, 1970. 
+
+And two, it can interpret it to be a, the system's up time, and that is, the amount of time since the time at which the system last booted up. The second issue, is what should Android do if the alarm goes, if, when the alarm goes off, the device is sleeping. One possibility is to wake up the device now, and deliver the intent. 
+
+Another choice, is to let the device continue sleeping, and to deliver the intent, the next time, the device wakes up. So, putting all those together, there are four possibilities, defined as follows. RTC_WAKEUP. Fire the alarm at the specified wall clock time. 
+
+If the device is asleep, wake it now and deliver the intent. RTC. Fire the alarm at the specified wall clock time, but if the device is asleep, don't wake it up now. Instead, deliver the intent when the device next wakes up. And there is ELAPSED_REALTIME and ELAPSED_REALTIME_WAKEUP. 
+
+For these two types of alarms, Android fires the alarm when the device has been up for the specified time, and if the device is sleeping when the alarm goes off, it will not be woken up with ELAPSED_REALTIME. It will be woken up with ELAPSED_REALTIME_WAKEUP. 
+
+The last part of the AlarmManager APIs that we'll discuss is the PendingIntent. As we discussed back in user notifications, a PendingIntent holds a regular intent and essentially serves as a permission slip, in which one component allows a second component to use the underlying intent as if it were the first component.
+
+Three methods that can be used to create a PendingIntent are getActivity, which returns a PendingIntent that can be used to start an activity. GetBroadcast, which returns a PendingIntent that can be used to broadcast an intent. And getService, which returns a PendingIntent that can be used to start a service. 
+
+So now that we've learned about alarms, let's take a look at an example application called AlarmCreate. This application uses alarms to gently encourage a student to stop playing video games and return to his or her studies. Let's take a look. Here's my device. 
+
+I'll now start up the AlarmCreate application. The application displays a simple user interface with four buttons. One button, labeled Set Single Alarm, that sets a single alarm to go off in two minutes. 
+
+One button, labeled Set Repeating Alarm, that sets a repeating alarm that will go off in two minutes, and then continue to go off every 15 minutes after that. One button, labeled Set Inexact Repeating Alarm, that sets a repeating alarm that should go off every 15 minutes starting in about two minutes. 
+
+Now because this is an inexact alarm, Android will try to fire the alarm every 15 minutes but will exercise a lot of flexibility in when exactly those alarms go off. And finally, one button labelled Cancel Repeating Alarm, and that will cancel any currently active repeating or inexact repeating alarms. 
+
+Now, I'll click the button labeled Set Single Alarm, and as you can see, the toast message suggests that the application has now set a single alarm, and in this case, the alarm should go off in two minutes. And when it does, the code will place a user notification in the notification area. 
+
+Let's come back at that point and see what happens. So, now we're back watching the device, and there's the notification asking if I'm playing Angry Birds again. Let me pull down on the notification area. The notification view tells me that this is a kind reminder to get back to studying. 
+
+If I click on this notification view, the AlarmCreate application gets brought back up. Now before we move forward, let's take a look at the source code for this application. Now here I've opened the application in the IDE, and now I'll open the main activity. Let's take a look at the onCreate method. First, the code gets a reference to the AlarmManager service. 
+
+Next, the code creates an intent whose target is the alarm notification receiver class. This intent is then wrapped in a PendingIntent that will cause this intent to be broadcast. And after that, the code creates a second intent, which this time is targeted to another class called AlarmLoggerReceiver. 
+
+And as before, this intent is wrapped in a PendingIntent that will ultimately cause the intent to be broadcast to that receiver. Now, scrolling down, the code sets up the four buttons that we saw earlier. The first button, when pressed, will set up two one-shot alarms. 
+
+The first alarm is scheduled to go off two minutes after the button is pressed. The second of this pair will go off about five seconds later. The second button, when pressed, will set up a pair of repeating alarms. The first alarm is scheduled to go off in two minutes, or two minutes after the button is pressed, and then go off every 15 minutes after that. 
+
+The second alarm of the pair will go off about five seconds after the first. The third button, when pressed, will set up two inexact repeating alarms. The first alarm is scheduled to go off roughly every 15 minutes, starting two minutes after the button is pressed. 
+
+And again, the second alarm is scheduled to go off about five seconds after the first. Now remember, because this is an inexact repeating alarm, Android has considerable flexibility in the exact timing of both of those alarms. 
+
+And in particular, Android will try to minimize the number of times it needs to wake up the device if it's sleeping, for instance, by grouping separate alarms to go off roughly at the same time. Finally, the fourth button, when pressed, will cancel existing alarms. 
+
+In particular, this is important for repeating alarms, which will continue to go off until they're cancelled or until the device shuts down. Returning back to the running application, I'll now press the Set Repeating Alarm button, and this sets some new repeating alarms that will first go off in two minutes and then every 15 minutes after that. 
+
+Let's come back when we're ready. Okay, so we're back now, and it's been about two minutes since the alarms were set. There's the notification showing that the alarm went off. The next alarm will come along in about 15 minutes. Let's take a break now, and when we come back, we'll examine the LogCat output for this application. 
+
+So a bit more than 15 minutes has passed, and here's the application open in the IDE. I'll now expand the LogCat view, and I'll filter the LogCat output to just show log messages that have a tag coming from this application. I'll type tag:alarm, and that leaves just the messages that we're interested in now. 
+
+As you can see, there are four messages, two from the first time the alarms fired, and two more from when the alarms went off again after 15 minutes. And notice that the two alarms which were scheduled to go off with five seconds between them, do in fact go off with that interval of time between them. 
+
+So those were repeating alarms. Let's go back now to the application and take a look at what happens when we use the SetInexactRepeating method to set these same alarms. So here's my device again. And now I'll pull down on the notification area and use it to go back to the application. 
+
+First, I'll cancel the existing alarms, and next I'll set the inexact repeating alarms. So let's let the application run for awhile, and then we'll take another look at the LogCat output for this application. So here we are back in the IDE, and about 20 minutes has passed since we last talked. 
+
+Let's go back to the LogCat view. And here you can see that there are now four new messages, two from the first time the alarms fired and two more from the second time those alarms went off. And some things to notice are that even though at 11:19, we set the alarms to go off starting in two minutes, the first set of alarms actually went off after four or five minutes. 
+
+And the second thing to notice, is that even though the pair of alarms were scheduled to go off with a five second delay between them, Android has actually fired them at essentially the same time. And again, because these are inexact repeating alarms, Android was free to modify the exact alarm timings. So that's all for our lesson on alarms. Please join me next time for a discussion of networking. See you then. 
+

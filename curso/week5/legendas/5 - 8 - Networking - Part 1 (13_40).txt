@@ -1,0 +1,47 @@
+ One of the defining characteristics of modern hand held systems is that they can keep us connected and networked without tethering us to a single location. In this lesson, we'll explore the software and programming practices that you'll need to connect your applications to the network. So I'll start this lesson by discussing networking in general. 
+
+ That discussion will focus on connecting your applications to the internet using the Hypertext Transfer Protocol or HTTP specifically by using HTTP GET requests. After that, I'll present several classes that Android provides to support this kind of networking. And lastly, I'll discuss how your applications can process the data they receive in response to these HTTP GET requests. In particular, I'll talk about two popular data formatting languages. One, the Javascript Object Notation Language, or JSON. 
+
+ And two, the Extensible Markup Language, or XML. And I'll talk about how you parse, or make sense, of these HTTP responses when they're formatted in one of these languages. So early handheld devices gave us mobility. You could move from one place to another, and still perform useful computation. However, their networking capabilities were primitive by today's standards. 
+
+ Now moving forward, today's devices combine powerful processors with fast network connections over WiFi and cellular networks. Handheld applications will therefore often want to make use of these networking capabilities to access and provide data, and services. Now, to help you do this, Android includes a variety of networking support classes, including the Socket and URL classes, in the Java.net packages. The HttpRequest, and HttpResponse classes, in the org.apache packages. 
+
+ And the URI, AndroidHttpClient, and AudioStream classes, in the android.net packages. In this lesson we're going to look at several of these classes using each of them to implement the same example application. And this application interacts with an internet service to get information about earthquakes that have occurred in a particular geographic region. And as you'll see, that data is returned in various formats. Now initially we'll just display the downloaded text as is. 
+
+ Later on in the lesson, I'll show you how to process that data to extract just the information that you want. Oh, and, and one other thing. As you'll see in a second, because this data includes geographic information, it's really begging to be displayed on a map, rather than as text. Now, we won't do that in this lesson, but keep this in mind, because we'll come back to this when we get to the lesson on maps and location. 
+
+ So in order to make this application work, the code needs to create an HTTP request, send it to a server computer, retrieve the results, and then display those results. Android provides several classes for helping with this. Three we'll talk about now are the Socket class, the HttpUrlConnection class and the AndroidHttpClient. So here's my device. And now I'll launch the networking socket application. 
+
+ As you can see, this application initially displays a single button labeled Load Data. When I press that button, the application will issue an HTTP GET request to an external server. And that server will respond with some complex text containing the requested earthquake data. Okay. So now I'll press the Load Data button and there you can see the requested data. 
+
+ Let's look at the source code to see what it took to get that data. Now here I've opened the application in the IDE. Now I'll open the main activity for this application. And here I'm showing the listener for the Load Data button. When this button is pressed, the application will create, and then execute, an AsyncTask called HttpGetTask. Let's look at that class. 
+
+ The HttpGetTask class first declares some variables, they're used in creating an HTTP GET Request. When the execute method is called, on the HttpGetTask, the doInBackground method is called. And that method begins by creating a new socket. That will be connected to the host computer, api.geonames.org on the standard http port port 80. Next, the code gets the socket's output stream, and then writes the HTTP_GET_COMMAND. 
+
+ And this string will be sent to the host computer, which interprets it as an HTTPGetRequest, and then responds by sending back the appropriate response data. And then this code continues by getting the socket's input stream And by passing it to a method called readStream. The readStream method ultimately reads the response data from the socket's InputStream. 
+
+ And then returns the response as a single string. And this string is passed to the onPostExecute method which executes on the main thread and which displays the response in the text view. If we return back to the application, you'll notice that the response text includes not only the earthquake data, but also the HTTP response headers. Now normally, I wouldn't want to display that text here. 
+
+ I really just want to show you the earthquake data. So in the case, I should have parsed the response and pulled out just the data that I wanted. In addition, you might have noticed I didn't write any of the error handling code that you really need to make this application robust. And these points, capture pretty well the trade offs of using sockets. 
+
+ The very low level, you can write whatever you want on the socket but in return, you have to handle all the many details of making the HTTP requests, all the error handling, and all the processing of the HTTP responses. The next implementation we'll look at uses the HttpUrlConnection class. 
+
+ This class provides a higher-level interface that handles more of the networking details than the socket class does. But as we'll see in a moment, it also has a less flexible API than our last option, the H, the Android HTTP client class. Now, having said that, I'll also point out that the Android team is not actively working on the Android HTTP client anymore. 
+
+ And it's putting it's efforts into improving this class going forward. So let's look at the example application implemented this time with the HttpURLConnection class. So here's my device. And now I'll launch the NetworkingURL application. As before, this application initially displays a single button labeled Load Data. 
+
+ And as before, when I press on that button the application will issue an HTTP GET request To an external server, and that server will respond, with some complex text, containing the requested earthquake data. Okay, so now I'll press the Load Data button. There you can see the requested data, appearing in a text view. Notice, however, that this time, the HTTP response headers have been stripped out. 
+
+ Let's look at the source code and see how this works. Now, here I've got the application opened in the IDE. Now, I'll open the main activity for this application. And here, I'm showing the listener for the load data button. As before, when this button is pressed, the application will create and then execute an AsyncTask called, HttpGetTask. 
+
+ Let's look at that class. When the execute method is called on HTTP GetTask, the doInBackground method is invoked. That method begins by creating a new URL object, and passing a URL string for the desired service as a parameter. The code then calls the open connection method on the URL object, which returns an httpUrlConnection. This object is then stored in a variable called HttpURLConnection. 
+
+ The code continues by getting the HTTP URL connection's input stream. And by passing it through the readStream method. And as before, the readStream method, reads the response data from the socket's input stream, and then returns the response, as a single string. 
+
+ This time however, the HTTP URL connection strips off the HTTP response headers and handles the error checking for you. Now this string is then passed to the onPostExecute method which displays the response in a text view. The third class is Android HTTP client. This class is an implementation of the Apache project's DefaultHttpClient and it allows a great deal of customization. 
+
+ In particular, the class breaks an HTTP transaction into a request object and into a response object. So you can create subclasses that customize the handling of requests and their responses. Now, by this point, you know what the application looks like, so let's jump straight into the code and look at the implementation. Now, here I've got the networking Android HTTP client application opened in the IDE. 
+
+ Now, I'll open the main activity for this application. And let's go right to the HTTP get task class. That class begins by creating a new AndroidHttpClient object by calling the classes newInstance method. Now, when the doInBackground method is called, the code creates an HttpGet object, passing in the URL string for that request. Next, it creates a response handler object. 
+
+ This object is responsible for handling the response to the HttpGet request. In this case, a response handler is of type basic response handler. Which will return the response's body. Now we'll see a more complex response handler, later in this lesson. And finally, the request and the ResponseHandler, are passed into the execute method. Which sends the request, gets the response, passing it through the ResponseHandler. And the result of all this is then passed on to onPostExecute. Which displays the response in a text field.  

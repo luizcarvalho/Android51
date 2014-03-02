@@ -1,0 +1,621 @@
+1
+00:00:00,000 --> 00:00:08,737
+[BLANK_AUDIO]
+
+2
+00:00:08,737 --> 00:00:11,815
+Hi I'm Adam Porter, and this is
+
+3
+00:00:11,815 --> 00:00:19,120
+Programming Mobile Applications for
+Android Handheld Systems.
+
+4
+00:00:19,120 --> 00:00:23,340
+In this lesson, we're going to talk about
+notifications.
+
+5
+00:00:23,340 --> 00:00:28,640
+Notifications are basically messages,
+sometimes quite rich, that
+
+6
+00:00:28,640 --> 00:00:34,000
+applications show to users, outside the
+normal user interface of
+
+7
+00:00:34,000 --> 00:00:34,818
+the application.
+
+8
+00:00:34,818 --> 00:00:38,580
+For example, suppose you have an
+application that
+
+9
+00:00:38,580 --> 00:00:41,640
+can download an eBook from over the
+internet.
+
+10
+00:00:42,970 --> 00:00:46,790
+In that case, you probably want to let the
+user select
+
+11
+00:00:46,790 --> 00:00:51,450
+a book to download, but then continue to
+use the application.
+
+12
+00:00:51,450 --> 00:00:56,020
+Or even exit it altogether while the book
+is downloading.
+
+13
+00:00:56,020 --> 00:00:59,870
+And if so, you probably also want to let
+the user know
+
+14
+00:00:59,870 --> 00:01:03,860
+when the download finishes.
+And if it was successful.
+
+15
+00:01:03,860 --> 00:01:06,530
+To do that, you need to do a few things.
+
+16
+00:01:06,530 --> 00:01:09,630
+You need to figure out when the download
+finishes.
+
+17
+00:01:09,630 --> 00:01:15,910
+And then you need to display some kind of
+message to give the user that information.
+
+18
+00:01:17,750 --> 00:01:19,840
+In this lesson, I'll talk about two
+
+19
+00:01:19,840 --> 00:01:23,990
+different kinds of user notifications that
+Android supports.
+
+20
+00:01:23,990 --> 00:01:25,380
+The first kind are
+
+21
+00:01:25,380 --> 00:01:28,850
+toast messages, which, I suppose, get
+their name from
+
+22
+00:01:28,850 --> 00:01:31,680
+the fact that they pop up on the screen.
+
+23
+00:01:33,440 --> 00:01:38,340
+We've actually already seen toast messages
+many times in previous lessons.
+
+24
+00:01:38,340 --> 00:01:40,160
+For example, we've used them quite a
+
+25
+00:01:40,160 --> 00:01:43,350
+bit to demonstrate that something was
+happening.
+
+26
+00:01:43,350 --> 00:01:44,660
+Whenever we pressed a button.
+
+27
+00:01:45,960 --> 00:01:52,420
+The second kind are notification area or
+status bar notifications.
+
+28
+00:01:52,420 --> 00:01:56,080
+These notifications are visible and can be
+accessed in the
+
+29
+00:01:56,080 --> 00:02:00,650
+system controlled notification area at the
+top of the device.
+
+30
+00:02:00,650 --> 00:02:04,000
+And again, we've already seen examples of
+this.
+
+31
+00:02:05,010 --> 00:02:09,320
+For instance in the applications
+fundamentals lesson, I showed
+
+32
+00:02:09,320 --> 00:02:13,730
+how a device was receiving an incoming MMS
+message.
+
+33
+00:02:13,730 --> 00:02:18,290
+And you might remember, that when the MMS
+message actually arrived,
+
+34
+00:02:18,290 --> 00:02:22,040
+an icon appeared at the top left of the
+phone.
+
+35
+00:02:22,040 --> 00:02:24,580
+And the user could then pull down on the
+notification
+
+36
+00:02:24,580 --> 00:02:29,920
+area to expose more information about that
+incoming MMS message.
+
+37
+00:02:31,160 --> 00:02:33,420
+Okay, so let's recap this.
+
+38
+00:02:33,420 --> 00:02:38,030
+Android provides several different kinds
+of user notifications.
+
+39
+00:02:38,030 --> 00:02:41,320
+And these notifications are messages to
+the user
+
+40
+00:02:41,320 --> 00:02:44,550
+that are sent on an as needed basis.
+
+41
+00:02:44,550 --> 00:02:49,620
+And that appear outside the normal user
+interface of the application.
+
+42
+00:02:49,620 --> 00:02:56,110
+So an edit text view in which you type an
+MMS message, or the button that you
+
+43
+00:02:56,110 --> 00:03:00,200
+hit to send the resulting SMS message,
+both of
+
+44
+00:03:00,200 --> 00:03:04,550
+which are always visible, when you compose
+the message.
+
+45
+00:03:04,550 --> 00:03:09,630
+Those are not user notifications.
+But a message that pops
+
+46
+00:03:09,630 --> 00:03:12,060
+up a few seconds after you hit the send
+button.
+
+47
+00:03:13,210 --> 00:03:16,970
+That tells you for example that the
+message was sent successfully.
+
+48
+00:03:16,970 --> 00:03:21,280
+Or an icon that appears at the top of your
+device, indicating that an
+
+49
+00:03:21,280 --> 00:03:23,750
+MMS message has arrived, even though
+you're
+
+50
+00:03:23,750 --> 00:03:27,160
+currently reading a webpage with a browser
+application.
+
+51
+00:03:27,160 --> 00:03:30,160
+Those things are user notifications and
+those are
+
+52
+00:03:30,160 --> 00:03:31,770
+the things that we're going to talk about
+today.
+
+53
+00:03:32,980 --> 00:03:34,760
+Now, some Android
+
+54
+00:03:34,760 --> 00:03:38,000
+user notifications exist to provide
+feedback to
+
+55
+00:03:38,000 --> 00:03:41,220
+the user about something that they're
+doing.
+
+56
+00:03:41,220 --> 00:03:45,440
+And one such mechanism are the toast
+messages that we talked about.
+
+57
+00:03:45,440 --> 00:03:47,260
+Another are dialogs.
+
+58
+00:03:48,460 --> 00:03:51,510
+Now, we went over dialogs in a quite a bit
+of detail during the
+
+59
+00:03:51,510 --> 00:03:54,190
+lesson on user interface classes, so I'm
+
+60
+00:03:54,190 --> 00:03:57,090
+not going to talk about dialogs in this
+lesson.
+
+61
+00:03:58,470 --> 00:04:00,830
+Another kind of user notification
+
+62
+00:04:00,830 --> 00:04:03,610
+are the notification area notifications.
+
+63
+00:04:03,610 --> 00:04:07,040
+And these are typically used to announce
+unpredictable
+
+64
+00:04:07,040 --> 00:04:09,600
+events to the user, and to do it
+
+65
+00:04:09,600 --> 00:04:12,420
+in a way that doesn't interrupt whatever
+else
+
+66
+00:04:12,420 --> 00:04:15,070
+they happen to be doing at that moment.
+
+67
+00:04:15,070 --> 00:04:19,240
+And again, think of the incoming SMS
+message situation.
+
+68
+00:04:19,240 --> 00:04:25,000
+Putting an icon in the notification area
+tells you that a message has arrived.
+
+69
+00:04:25,000 --> 00:04:25,930
+But it doesn't do
+
+70
+00:04:25,930 --> 00:04:28,170
+it in an obtrusive or peremptory way.
+
+71
+00:04:29,210 --> 00:04:32,740
+The message is there, and you're free to
+deal with it.
+
+72
+00:04:32,740 --> 00:04:34,030
+Whenever it's convenient for you.
+
+73
+00:04:36,970 --> 00:04:39,690
+Toast messages, as you've seen, are
+temporary
+
+74
+00:04:39,690 --> 00:04:42,530
+messages that pop up on the display.
+
+75
+00:04:42,530 --> 00:04:47,790
+For instance, to let the user know that an
+operation has completed successfully.
+
+76
+00:04:47,790 --> 00:04:52,180
+Toasts automatically fade in, and fade out
+of view.
+
+77
+00:04:52,180 --> 00:04:56,160
+And their job is to provide information to
+the user, but they're not
+
+78
+00:04:56,160 --> 00:04:59,160
+meant to gather information that's
+going to
+
+79
+00:04:59,160 --> 00:05:01,520
+get sent back to the hosting application.
+
+80
+00:05:02,910 --> 00:05:09,120
+You can create Toast messages using the
+Toast classes' make text method.
+
+81
+00:05:09,120 --> 00:05:13,850
+That method takes a couple parameters,
+including the text that you want to
+
+82
+00:05:13,850 --> 00:05:20,050
+display and the amount of time over which
+you want that text, to be visible.
+
+83
+00:05:20,050 --> 00:05:23,720
+And after you've created the toast, you
+can then display it,
+
+84
+00:05:23,720 --> 00:05:28,150
+by calling the show method, on the toast
+you've just created.
+
+85
+00:05:28,150 --> 00:05:33,420
+So, let's take a look at an example
+application, that uses, toast messages.
+
+86
+00:05:35,860 --> 00:05:39,330
+Here I'm starting up a notification toast
+application.
+
+87
+00:05:41,130 --> 00:05:46,040
+This application displays a single button,
+labeled show toast
+
+88
+00:05:46,040 --> 00:05:48,770
+which is exactly what it'll do when I
+press it.
+
+89
+00:05:49,800 --> 00:05:51,300
+So I'll press that button now.
+
+90
+00:05:52,820 --> 00:05:55,100
+And there, near the bottom of the screen,
+you
+
+91
+00:05:55,100 --> 00:05:58,550
+see a small pop-up window that says,
+you're toast.
+
+92
+00:06:00,550 --> 00:06:00,670
+Now,
+
+93
+00:06:00,670 --> 00:06:02,910
+if we open up the application source code
+
+94
+00:06:02,910 --> 00:06:05,790
+in the ID, we'll see how this is
+implemented.
+
+95
+00:06:07,650 --> 00:06:11,210
+Here I'm highlighting button listener for
+the Show Toast button.
+
+96
+00:06:12,310 --> 00:06:15,390
+Inside, you see a call to the make text
+method.
+
+97
+00:06:18,570 --> 00:06:25,000
+Passing in the text and passing in the
+constant toast.length_long.
+
+98
+00:06:25,000 --> 00:06:28,660
+Which ends up making the text visible for
+about three and a half seconds.
+
+99
+00:06:30,440 --> 00:06:32,680
+And at the end of that line there's a
+
+100
+00:06:32,680 --> 00:06:36,900
+call to the show method that actually
+displays the Toast.
+
+101
+00:06:39,250 --> 00:06:41,890
+Now, if you want a fancier Toast message,
+you
+
+102
+00:06:41,890 --> 00:06:45,820
+an also create a custom view for your
+Toast.
+
+103
+00:06:45,820 --> 00:06:52,920
+For example, you can create a custom
+layout in XML, inflate it and attach
+
+104
+00:06:52,920 --> 00:06:59,050
+the inflated view to the Toast message
+with a call to the set view method.
+
+105
+00:06:59,050 --> 00:06:59,950
+Let's see an example.
+
+106
+00:07:01,870 --> 00:07:03,150
+So, here's my device.
+And
+
+107
+00:07:05,470 --> 00:07:10,090
+now I'll start up the notification, Toast,
+with custom view application.
+
+108
+00:07:12,130 --> 00:07:14,730
+Like the simple toast example, this
+
+109
+00:07:14,730 --> 00:07:19,190
+application displays one button labeled
+Show Toast.
+
+110
+00:07:19,190 --> 00:07:23,230
+And I can press that button to display the
+Toast message.
+
+111
+00:07:23,230 --> 00:07:27,620
+In this case however, when I do press the
+button; you'll see a
+
+112
+00:07:27,620 --> 00:07:33,340
+custom toast view rather than the simple
+grey pop up that we saw before.
+
+113
+00:07:33,340 --> 00:07:37,940
+So here we go.
+And there's your custom Toast message.
+
+114
+00:07:37,940 --> 00:07:43,410
+With a text, Your Toast, and an extra
+eyeball to help drive home the message.
+
+115
+00:07:43,410 --> 00:07:43,910
+So
+
+116
+00:07:48,020 --> 00:07:51,470
+let's open up the main activity for this
+application.
+
+117
+00:07:51,470 --> 00:07:54,490
+And look at how we created the Toast
+message.
+
+118
+00:07:56,000 --> 00:07:59,980
+Now, as you can see, when the show Toast
+button is pressed.
+
+119
+00:08:01,530 --> 00:08:07,490
+The code first creates a new Toast object.
+The next two lines set
+
+120
+00:08:07,490 --> 00:08:13,660
+the location of the Toast on the display.
+And specify the length of time
+
+121
+00:08:13,660 --> 00:08:14,830
+for which it will be visible.
+
+122
+00:08:16,850 --> 00:08:21,750
+Then there's a call to set view, in which
+the first parameter is the result of
+
+123
+00:08:21,750 --> 00:08:28,720
+inflating the XML layout that's in the
+custom_toast.xml file.
+
+124
+00:08:30,880 --> 00:08:31,690
+Let's open that file.
+
+125
+00:08:34,610 --> 00:08:36,410
+Now here you can see that the custom
+
+126
+00:08:36,410 --> 00:08:40,970
+view is a relative layout containing two
+children.
+
+127
+00:08:40,970 --> 00:08:45,830
+The first child is the image view that
+holds the eye ball.
+
+128
+00:08:45,830 --> 00:08:50,800
+The second child is a text view that
+displays the text, you're toast.
+
+129
+00:08:51,870 --> 00:08:56,102
+And then, back in the main activity,
+there's a final
+
+130
+00:08:56,102 --> 00:09:00,245
+line that calls the show method to display
+the toast.
+
+131
+00:09:00,245 --> 00:09:04,980
+[BLANK_AUDIO]
+

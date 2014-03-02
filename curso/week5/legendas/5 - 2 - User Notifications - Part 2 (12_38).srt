@@ -1,0 +1,821 @@
+1
+00:00:00,000 --> 00:00:08,668
+[BLANK_AUDIO]
+
+2
+00:00:08,668 --> 00:00:09,650
+Hi.
+
+3
+00:00:09,650 --> 00:00:12,250
+I'm Adam Porter, and this is
+
+4
+00:00:12,250 --> 00:00:18,160
+Programming Mobile Applications for
+Android Handheld Systems.
+
+5
+00:00:19,780 --> 00:00:22,300
+The other kind of user notification that
+we'll talk about
+
+6
+00:00:22,300 --> 00:00:27,750
+in this lesson are notifications that
+appear in the notification area.
+
+7
+00:00:27,750 --> 00:00:29,800
+And as I said earlier, this kind of
+
+8
+00:00:29,800 --> 00:00:34,130
+user notification appears in the system
+controlled area,
+
+9
+00:00:34,130 --> 00:00:38,970
+at the top of the device, called the
+notification area or the
+
+10
+00:00:38,970 --> 00:00:43,900
+status bar.
+Applications and the android system itself
+
+11
+00:00:43,900 --> 00:00:50,750
+can use this area to inform users about
+the occurrence of various events.
+
+12
+00:00:50,750 --> 00:00:57,090
+The notification area also provides a user
+interface element called a drawer.
+
+13
+00:00:57,090 --> 00:00:59,550
+And the user can pull down on the
+notification
+
+14
+00:00:59,550 --> 00:01:01,570
+area to open the drawer.
+
+15
+00:01:02,670 --> 00:01:05,800
+And once it's open, you can see additional
+information about
+
+16
+00:01:05,800 --> 00:01:11,460
+the various notifications that have been
+placed in the notification area.
+
+17
+00:01:11,460 --> 00:01:15,460
+Let's see an example of how these
+notifications are used in Android.
+
+18
+00:01:18,060 --> 00:01:24,151
+So here's my device.
+And I'll open up the phone application.
+
+19
+00:01:24,151 --> 00:01:26,470
+And now I'll start dialing a phone number.
+
+20
+00:01:28,590 --> 00:01:30,930
+And now, I'll hit the dial button.
+
+21
+00:01:32,590 --> 00:01:36,140
+And the phone will start dialing the
+number, and connecting the phone call.
+
+22
+00:01:37,410 --> 00:01:39,920
+Now let's say that in the middle of this
+phone
+
+23
+00:01:39,920 --> 00:01:44,450
+call I need to get some information off
+the internet.
+
+24
+00:01:44,450 --> 00:01:47,800
+So, I hit the home button to go back to my
+home
+
+25
+00:01:47,800 --> 00:01:54,300
+screen, and from there I'll open up the
+browser application and now
+
+26
+00:01:54,300 --> 00:02:00,300
+notice up at the top left of my device a
+new icon has appeared.
+
+27
+00:02:00,300 --> 00:02:02,440
+That's a notification.
+
+28
+00:02:02,440 --> 00:02:06,650
+When I backed out of the phone
+application, Android created
+
+29
+00:02:06,650 --> 00:02:11,630
+this notification object, and put it in
+the notification area.
+
+30
+00:02:11,630 --> 00:02:15,480
+And this notification serves as a reminder
+to me that the
+
+31
+00:02:15,480 --> 00:02:19,660
+phone call is still connected, and it also
+serves as a way
+
+32
+00:02:19,660 --> 00:02:22,430
+for me to quickly return to that phone
+call.
+
+33
+00:02:23,890 --> 00:02:31,638
+Now, back in the browser, I'll go to
+www.google.com and I'll execute a search.
+
+34
+00:02:31,638 --> 00:02:39,867
+[BLANK_AUDIO]
+
+35
+00:02:39,867 --> 00:02:44,565
+Let's assume at this point I'm armed with
+the information that
+
+36
+00:02:44,565 --> 00:02:47,834
+I needed and I want to go back to my phone
+call.
+
+37
+00:02:47,834 --> 00:02:54,260
+So now, I'll pull down on the notification
+area to open the notification drawer.
+
+38
+00:02:54,260 --> 00:02:56,010
+And once it's open, I can see a
+
+39
+00:02:56,010 --> 00:02:59,630
+view, which shows me some information
+about the call.
+
+40
+00:03:00,660 --> 00:03:04,700
+And, it allows me to either reconnect to
+the call, or to hang up.
+
+41
+00:03:05,800 --> 00:03:07,210
+Now in this case I want to continue the
+
+42
+00:03:07,210 --> 00:03:10,040
+call, so I'll click on the notification
+area.
+
+43
+00:03:11,540 --> 00:03:14,230
+And that brings up the phone application,
+brings it back
+
+44
+00:03:14,230 --> 00:03:17,070
+in to the foreground, and allows me to
+keep talking.
+
+45
+00:03:20,100 --> 00:03:22,100
+When you want to send the notification,
+there
+
+46
+00:03:22,100 --> 00:03:24,770
+are several things that you need to
+consider.
+
+47
+00:03:24,770 --> 00:03:29,510
+First, there's the basic notification
+itself, which must have at least
+
+48
+00:03:29,510 --> 00:03:35,340
+text for its title and content, and also a
+small icon.
+
+49
+00:03:35,340 --> 00:03:38,910
+When the notification is sent, it will
+eventually arrive in
+
+50
+00:03:38,910 --> 00:03:43,050
+the notification area where the small icon
+will be displayed.
+
+51
+00:03:44,120 --> 00:03:45,300
+Additionally,
+
+52
+00:03:45,300 --> 00:03:50,320
+you can set the notifications ticker text,
+in which case that text will
+
+53
+00:03:50,320 --> 00:03:55,350
+also be displayed when the notification
+first appears in the notification area.
+
+54
+00:03:56,830 --> 00:04:01,800
+Finally, if the user opens a notification
+drawer, there's a view that they'll see.
+
+55
+00:04:02,880 --> 00:04:06,080
+Now, by default, this includes the title,
+the
+
+56
+00:04:06,080 --> 00:04:10,630
+detail or content of text, the small icon,
+
+57
+00:04:10,630 --> 00:04:11,450
+and a time stamp.
+
+58
+00:04:12,450 --> 00:04:15,370
+You'll also need to define any action that
+will occur
+
+59
+00:04:15,370 --> 00:04:19,680
+should the user click on the notification
+draw, drawer view.
+
+60
+00:04:19,680 --> 00:04:24,540
+Now once you've created the notification,
+you may want to
+
+61
+00:04:24,540 --> 00:04:29,950
+send it, update it, cancel it, or things
+like that.
+
+62
+00:04:29,950 --> 00:04:32,000
+These operations are managed by an
+
+63
+00:04:32,000 --> 00:04:37,320
+Android system service called the
+notification manager.
+
+64
+00:04:37,320 --> 00:04:42,210
+So let's take a look at two applications
+that send notifications, and then
+
+65
+00:04:42,210 --> 00:04:46,230
+we'll look at some source code to see how
+all of this is implemented.
+
+66
+00:04:51,270 --> 00:04:55,030
+So here, I'll open the notification status
+bar application.
+
+67
+00:04:55,030 --> 00:05:00,560
+And its user interface displays a single
+button, labeled Notify.
+
+68
+00:05:01,970 --> 00:05:07,380
+When I click this button, a notification
+will be created and sent, and
+
+69
+00:05:07,380 --> 00:05:11,620
+it will eventually appear in the
+notification area at the top of the phone.
+
+70
+00:05:13,070 --> 00:05:14,430
+So, let me click on the button now.
+
+71
+00:05:16,010 --> 00:05:18,080
+[SOUND] And the notification is now
+arriving.
+
+72
+00:05:19,700 --> 00:05:21,380
+And that rooster crowing you hear is
+
+73
+00:05:21,380 --> 00:05:25,030
+the sound that I attached to that
+notification.
+
+74
+00:05:25,030 --> 00:05:29,230
+You can also see the ticker text scrolling
+up in the notification area.
+
+75
+00:05:30,460 --> 00:05:34,760
+Now after the ticker text finishes
+scrolling it will go away and the
+
+76
+00:05:34,760 --> 00:05:40,830
+notifications icon will remain visible.
+So, now I'll open the notification drawer.
+
+77
+00:05:42,340 --> 00:05:47,420
+You can see the drawer view showing the
+icon, the notification title
+
+78
+00:05:47,420 --> 00:05:52,800
+text, the notification detail text, which
+shows the number one
+
+79
+00:05:52,800 --> 00:05:57,900
+in parentheses, indicating that the notify
+button has been pressed one time.
+
+80
+00:05:59,180 --> 00:06:01,730
+And finally, there's also a time stamp.
+
+81
+00:06:01,730 --> 00:06:07,350
+Now at this point, I'll just close the
+notification drawer, and go
+
+82
+00:06:07,350 --> 00:06:10,875
+back, and hit the notify button one more
+time.
+
+83
+00:06:10,875 --> 00:06:13,780
+[SOUND]
+
+84
+00:06:13,780 --> 00:06:16,670
+Now I'll open the notification drawer one
+more time.
+
+85
+00:06:18,490 --> 00:06:22,070
+And you can see that detailed text has
+been updated to show
+
+86
+00:06:22,070 --> 00:06:26,680
+that this is the second time that the
+notify button has been pressed.
+
+87
+00:06:26,680 --> 00:06:30,280
+At this point, I'll click on the
+notification, and
+
+88
+00:06:30,280 --> 00:06:32,800
+you can see that a new activity has
+started,
+
+89
+00:06:32,800 --> 00:06:35,120
+printing out the words Got The Intent.
+
+90
+00:06:36,180 --> 00:06:38,080
+And the point here, of course, is that you
+can
+
+91
+00:06:38,080 --> 00:06:42,430
+attach an intent to the notification
+drawer view in order
+
+92
+00:06:42,430 --> 00:06:46,320
+to bring the user to the application that
+should handle
+
+93
+00:06:46,320 --> 00:06:50,870
+whatever follow on action that
+notification was intended to provoke.
+
+94
+00:06:53,450 --> 00:06:58,630
+Lets look at a second application.
+Notification status bar with custom view.
+
+95
+00:06:59,660 --> 00:07:04,050
+This application does the same thing as
+the last example.
+
+96
+00:07:04,050 --> 00:07:08,980
+However, it shows a custom view when the
+notification drawer is opened.
+
+97
+00:07:08,980 --> 00:07:13,940
+Now, I'll start the application and hit
+the Notify button just like before.
+
+98
+00:07:15,260 --> 00:07:19,565
+The notification is created and eventually
+appears [SOUND] in the notification area.
+
+99
+00:07:21,580 --> 00:07:26,640
+However, when I open the notification
+drawer, I'm not going to see the standard
+
+100
+00:07:26,640 --> 00:07:32,020
+view, I'll see my own custom view.
+Let me open the notification drawer now.
+
+101
+00:07:33,450 --> 00:07:36,360
+And, there's our eyeball, and the words,
+
+102
+00:07:36,360 --> 00:07:39,690
+You've Been Notified, with the number in
+parenthesis.
+
+103
+00:07:41,190 --> 00:07:44,855
+Now I'll close the drawer, and I'll hit
+the Notify button again.
+
+104
+00:07:44,855 --> 00:07:47,440
+[SOUND]
+
+105
+00:07:47,440 --> 00:07:49,860
+I'll open the drawer again and you can
+
+106
+00:07:49,860 --> 00:07:53,410
+see that everything's same, except that
+the number one
+
+107
+00:07:53,410 --> 00:07:56,330
+has become the number two to show that
+this
+
+108
+00:07:56,330 --> 00:07:59,830
+is the second notification, which updated
+the first one.
+
+109
+00:08:01,190 --> 00:08:04,800
+And finally, I'll click on the
+notification drawer view, which
+
+110
+00:08:04,800 --> 00:08:08,850
+starts up a new activity displaying the
+words, Got The Intent.
+
+111
+00:08:11,960 --> 00:08:12,680
+Okay.
+
+112
+00:08:12,680 --> 00:08:14,074
+So let's look at the
+
+113
+00:08:14,074 --> 00:08:19,445
+code for that second application
+NotificationStatusBarWithCustomView.
+
+114
+00:08:19,445 --> 00:08:22,078
+[BLANK_AUDIO]
+
+115
+00:08:22,078 --> 00:08:26,590
+And here I'm back in the IDE, and I'll
+open the application's main activity.
+
+116
+00:08:27,850 --> 00:08:30,790
+Starting at the top, this code creates an
+ID
+
+117
+00:08:30,790 --> 00:08:34,390
+for the notification that's, that it's
+going to send.
+
+118
+00:08:36,300 --> 00:08:38,220
+And this allows the notification manager
+to
+
+119
+00:08:38,220 --> 00:08:42,650
+update this notification after it's first
+been sent.
+
+120
+00:08:42,650 --> 00:08:47,450
+And next there's some variables that hold
+the text elements of the notification,
+
+121
+00:08:47,450 --> 00:08:53,520
+including it's ticker text, title, and
+content.
+
+122
+00:08:53,520 --> 00:08:57,530
+After that, the code sets up some
+information that is used to
+
+123
+00:08:57,530 --> 00:09:02,560
+play a sound and to vibrate the device
+when this notification arrives.
+
+124
+00:09:03,900 --> 00:09:07,130
+Next, the code creates the custom view
+
+125
+00:09:07,130 --> 00:09:09,530
+that will be displayed in the notification
+drawer.
+
+126
+00:09:10,580 --> 00:09:12,470
+The layout for that view is in
+
+127
+00:09:12,470 --> 00:09:18,200
+the custom_notification.xml file.
+Let's take a look at that.
+
+128
+00:09:20,720 --> 00:09:24,890
+As you can see this view is a linear
+layout with two child views.
+
+129
+00:09:26,140 --> 00:09:28,990
+One is an image view, the one that
+displays
+
+130
+00:09:28,990 --> 00:09:31,720
+the eyeball, and the other is a text view.
+
+131
+00:09:31,720 --> 00:09:35,320
+And it displays the text you've been
+notified.
+
+132
+00:09:37,340 --> 00:09:41,345
+Back in the main activity, let's look at
+the onCreate method.
+
+133
+00:09:41,345 --> 00:09:48,690
+And here the code creates an intent called
+M notification intent.
+
+134
+00:09:48,690 --> 00:09:56,778
+This intent will explicitly activate the
+notification subactivity.
+
+135
+00:09:56,778 --> 00:10:00,780
+The next line of code is something that we
+haven't talked about before.
+
+136
+00:10:01,910 --> 00:10:02,380
+This line
+
+137
+00:10:02,380 --> 00:10:05,050
+creates something called a pending intent.
+
+138
+00:10:05,050 --> 00:10:09,450
+Based on the M notification intent that
+was created on the previous line.
+
+139
+00:10:10,652 --> 00:10:14,300
+A pending an intent is essentially a
+permission slip that allows
+
+140
+00:10:14,300 --> 00:10:18,920
+one piece of code to stand in for another
+piece of code.
+
+141
+00:10:18,920 --> 00:10:22,460
+And what I mean by that, is that this
+permission
+
+142
+00:10:22,460 --> 00:10:27,710
+slip allows the second piece of code to
+activate the underlying
+
+143
+00:10:27,710 --> 00:10:31,820
+intent, as if it were the first piece of
+code.
+
+144
+00:10:31,820 --> 00:10:33,920
+And that is, it does it with its, the
+
+145
+00:10:33,920 --> 00:10:37,790
+permissions and the identity of that first
+piece of code.
+
+146
+00:10:39,260 --> 00:10:40,660
+So moving on.
+
+147
+00:10:40,660 --> 00:10:44,659
+The notify button's listener first updates
+the content text.
+
+148
+00:10:44,659 --> 00:10:48,776
+To indicate the number of times the
+button's been pressed.
+
+149
+00:10:48,776 --> 00:10:52,976
+Then it constructs the actual notification
+using
+
+150
+00:10:52,976 --> 00:10:57,807
+the notification.builder class.
+The code makes a new
+
+151
+00:10:57,807 --> 00:11:03,315
+notification.builder object, and then it
+sets the ticker
+
+152
+00:11:03,315 --> 00:11:09,390
+text, sets the small icon, and then sets
+auto-cancel to true.
+
+153
+00:11:09,390 --> 00:11:12,640
+Now this tells Android to cancel the
+notification
+
+154
+00:11:12,640 --> 00:11:14,430
+if the user clicks on the drawer view.
+
+155
+00:11:15,430 --> 00:11:18,670
+Next, it sets the content intent, and
+
+156
+00:11:18,670 --> 00:11:21,660
+this is the pending intent that defines
+the action
+
+157
+00:11:21,660 --> 00:11:24,720
+to take when the user clicks on the drawer
+view.
+
+158
+00:11:25,740 --> 00:11:28,740
+Next, it sets the sound and vibration
+
+159
+00:11:28,740 --> 00:11:32,520
+patterns that should play when the
+notification arrives.
+
+160
+00:11:33,690 --> 00:11:38,960
+And lastly, it sets the custom view that
+should be displayed when the user
+
+161
+00:11:38,960 --> 00:11:43,720
+pulls down on the notification drawer.
+Now, the notification is set up,
+
+162
+00:11:44,770 --> 00:11:49,885
+the code then gets a reference to the
+notification manager by calling
+
+163
+00:11:49,885 --> 00:11:56,710
+getSystemService passing in the ID of the
+notification service.
+
+164
+00:11:56,710 --> 00:12:00,470
+And finally, the code calls notify on the
+
+165
+00:12:00,470 --> 00:12:04,350
+notification manager passing in the ID of
+the notification.
+
+166
+00:12:05,490 --> 00:12:09,930
+Which allows existing notifications to be
+updated, and it also
+
+167
+00:12:09,930 --> 00:12:17,787
+passes in the result of calling build on
+the notification.builder object.
+
+168
+00:12:17,787 --> 00:12:23,120
+And that build method is what actually
+generates the actual notification object.
+
+169
+00:12:23,120 --> 00:12:28,220
+So that's all for our lesson on user
+notifications.
+
+170
+00:12:28,220 --> 00:12:32,690
+Please join me next time when we'll
+discuss the BroadcastReceiver class.
+
+171
+00:12:32,690 --> 00:12:34,092
+See you then.
+
+172
+00:12:34,092 --> 00:12:38,350
+[BLANK_AUDIO]
+

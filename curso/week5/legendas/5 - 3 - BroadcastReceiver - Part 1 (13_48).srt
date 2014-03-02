@@ -1,0 +1,879 @@
+1
+00:00:00,000 --> 00:00:08,672
+[BLANK_AUDIO]
+
+2
+00:00:08,672 --> 00:00:09,670
+Hi.
+
+3
+00:00:09,670 --> 00:00:12,290
+I'm Adam Porter, and this is
+
+4
+00:00:12,290 --> 00:00:17,090
+Programming Mobile Applications for
+Android Handheld Systems.
+
+5
+00:00:19,280 --> 00:00:21,340
+In this lesson, we're going to talk about
+
+6
+00:00:21,340 --> 00:00:27,599
+another fundamental Android component: the
+BroadcastReceiver class.
+
+7
+00:00:27,599 --> 00:00:32,100
+I'll begin by discussing the
+BroadcastReceiver class, and the
+
+8
+00:00:32,100 --> 00:00:36,350
+basic workflow that you'll follow when
+you're using it.
+
+9
+00:00:36,350 --> 00:00:41,890
+Next, I'll discuss how broadcast receivers
+are registered with the Android system.
+
+10
+00:00:43,730 --> 00:00:44,590
+After that,
+
+11
+00:00:44,590 --> 00:00:46,010
+I'll talk about the different ways that
+
+12
+00:00:46,010 --> 00:00:49,580
+events can be broadcast to those broadcast
+receivers.
+
+13
+00:00:50,630 --> 00:00:53,970
+And lastly, I'll finish up with a short
+discussion of how
+
+14
+00:00:53,970 --> 00:01:00,090
+broadcast receivers are notified and how
+they handle the broadcasts they receive.
+
+15
+00:01:02,370 --> 00:01:08,250
+The BroadcastReceiver is a base class for
+components whose purpose is to wait for
+
+16
+00:01:08,250 --> 00:01:14,410
+certain events to occur, to receive those
+events, and then to react to them.
+
+17
+00:01:16,660 --> 00:01:19,950
+And the way this all works is that
+individual broadcast
+
+18
+00:01:19,950 --> 00:01:25,500
+receivers register to receive the specific
+events in which they're interested.
+
+19
+00:01:25,500 --> 00:01:29,170
+For example, there's a broadcast receiver
+in Android
+
+20
+00:01:29,170 --> 00:01:33,900
+whose job is to listen for outgoing MMS
+messages.
+
+21
+00:01:35,240 --> 00:01:38,550
+Now, somewhere else at a later time, a
+component
+
+22
+00:01:38,550 --> 00:01:43,280
+does something that it wants to inform
+broadcast receivers about.
+
+23
+00:01:43,280 --> 00:01:48,000
+So it creates an intent that represents
+that event, and then it
+
+24
+00:01:48,000 --> 00:01:53,730
+broadcasts that intent.
+So, there are other components in android
+
+25
+00:01:53,730 --> 00:01:58,770
+that prepare MMS messages so that they can
+be later sent out over the network.
+
+26
+00:01:59,840 --> 00:02:03,330
+Once the MMS message is ready, then
+there's
+
+27
+00:02:03,330 --> 00:02:09,420
+a component that creates an
+action_send_message intent, and
+
+28
+00:02:09,420 --> 00:02:10,910
+then broadcasts that intent.
+
+29
+00:02:12,090 --> 00:02:14,170
+Android then takes the intent that was
+
+30
+00:02:14,170 --> 00:02:18,080
+just broadcast and delivers it to that
+component
+
+31
+00:02:18,080 --> 00:02:20,780
+we talked about before that has registered
+
+32
+00:02:20,780 --> 00:02:25,100
+to receive action underscore send
+underscore message intents.
+
+33
+00:02:26,170 --> 00:02:30,130
+And that component finally receives the
+intent by getting
+
+34
+00:02:30,130 --> 00:02:34,770
+a call to its onReceive method, with that
+intent as
+
+35
+00:02:34,770 --> 00:02:40,308
+one of the parameters to the method.
+Now for our MMS example, the
+
+36
+00:02:40,308 --> 00:02:46,158
+component receives the action_send_message
+intent and
+
+37
+00:02:46,158 --> 00:02:51,935
+eventually sets off a service to deliver
+the MMS message.
+
+38
+00:02:51,935 --> 00:02:55,009
+So to recap, the basic workflow is
+
+39
+00:02:55,009 --> 00:03:01,850
+one, broadcast receivers register to
+receive specific intents.
+
+40
+00:03:01,850 --> 00:03:08,400
+Two, some component generates an intent
+and then broadcasts it to the system.
+
+41
+00:03:08,400 --> 00:03:12,030
+Three, Android delivers that intent to the
+
+42
+00:03:12,030 --> 00:03:16,020
+broadcast receivers that registered to
+receive it.
+
+43
+00:03:16,020 --> 00:03:22,220
+And four, the broadcast receivers then get
+a call to their onReceive method during
+
+44
+00:03:22,220 --> 00:03:26,950
+which they handle the incoming event.
+So, let's talk about
+
+45
+00:03:26,950 --> 00:03:28,900
+each of these steps one at a time.
+
+46
+00:03:31,150 --> 00:03:35,865
+So in order to register a broadcast
+receiver developers have two options.
+
+47
+00:03:35,865 --> 00:03:38,550
+One, they can register the broadcast
+
+48
+00:03:38,550 --> 00:03:42,190
+receiver statically by putting some
+information
+
+49
+00:03:42,190 --> 00:03:45,450
+in the AndroidManifest.XML file of the
+
+50
+00:03:45,450 --> 00:03:48,620
+application to which the broadcast
+receiver belongs.
+
+51
+00:03:49,920 --> 00:03:53,210
+Or two, they can register the broadcast
+receiver
+
+52
+00:03:53,210 --> 00:03:57,070
+dynamically by in invoking some methods at
+run time.
+
+53
+00:03:59,340 --> 00:04:05,010
+So to register a broadcast receiver
+statically you add a receiver tag
+
+54
+00:04:05,010 --> 00:04:10,130
+in your applications AndroidManifest.XML
+file, and then
+
+55
+00:04:10,130 --> 00:04:15,320
+within that receiver tag you put at least
+one intent filter tag.
+
+56
+00:04:15,320 --> 00:04:19,824
+And the information there tells Android
+that when
+
+57
+00:04:19,824 --> 00:04:24,460
+an intent matching this intent filter is
+broadcast,
+
+58
+00:04:24,460 --> 00:04:27,370
+this broadcast receiver wants to know
+about it.
+
+59
+00:04:29,680 --> 00:04:32,980
+And the format for a receiver tag looks
+something like this.
+
+60
+00:04:35,910 --> 00:04:37,690
+You start with the receiver keyword, and
+
+61
+00:04:38,710 --> 00:04:41,830
+then you add some of the following
+attributes.
+
+62
+00:04:41,830 --> 00:04:45,630
+And some of those attributes, include
+Android enabled, which
+
+63
+00:04:45,630 --> 00:04:50,400
+allows you to enable or disable a
+particular receiver.
+
+64
+00:04:50,400 --> 00:04:53,230
+Another is android:exported.
+
+65
+00:04:53,230 --> 00:04:55,280
+If set to true, then this receiver
+
+66
+00:04:55,280 --> 00:05:00,050
+can receive broadcasts from outside its
+application.
+
+67
+00:05:00,050 --> 00:05:02,050
+While if it's set to false,
+
+68
+00:05:02,050 --> 00:05:07,110
+then the receiver can only receive intents
+that are broadcast by other components
+
+69
+00:05:07,110 --> 00:05:12,930
+within this application.
+Another attribute in android:name.
+
+70
+00:05:13,990 --> 00:05:18,270
+Which gives the name of the class that
+implements this receiver.
+
+71
+00:05:19,290 --> 00:05:21,610
+There's also android:permission.
+
+72
+00:05:21,610 --> 00:05:27,160
+Which defines a permission string that the
+sender of an intent must have in
+
+73
+00:05:27,160 --> 00:05:31,400
+order for this receiver to receive an
+intent from them.
+
+74
+00:05:32,670 --> 00:05:35,840
+And as I said, you'll also have to specify
+at least one
+
+75
+00:05:35,840 --> 00:05:40,500
+intent filter tag, which we covered back
+in our lesson on intents.
+
+76
+00:05:42,800 --> 00:05:47,470
+Now, once you've created the receiver tag,
+you insert an intent filter
+
+77
+00:05:47,470 --> 00:05:52,680
+tag as one of its children, and just like
+with intent filters that are used to start
+
+78
+00:05:52,680 --> 00:05:57,590
+activities these intent filter tags can
+specify things like an
+
+79
+00:05:57,590 --> 00:06:03,080
+action, data, and categories.
+
+80
+00:06:03,080 --> 00:06:04,740
+Now if you do register a receiver
+
+81
+00:06:04,740 --> 00:06:08,040
+statically, that information will be read
+and
+
+82
+00:06:08,040 --> 00:06:10,370
+processed when the system boots up.
+
+83
+00:06:11,520 --> 00:06:14,580
+Or, when the application package is added
+
+84
+00:06:14,580 --> 00:06:17,630
+if that happens while the system is
+running.
+
+85
+00:06:17,630 --> 00:06:24,196
+So, let's take a look at an application
+that's statically registers a single
+
+86
+00:06:24,196 --> 00:06:28,018
+broadcast receiver to receive a custom
+intent
+
+87
+00:06:28,018 --> 00:06:31,308
+that I'll call the show toast intent.
+
+88
+00:06:31,308 --> 00:06:33,350
+Here's my device.
+And
+
+89
+00:06:33,350 --> 00:06:37,930
+I'll start up the single broadcast static
+registration
+
+90
+00:06:37,930 --> 00:06:43,770
+application.
+This application displays a single button
+
+91
+00:06:43,770 --> 00:06:48,860
+labeled Broadcast Intent.
+Pressing this button causes an
+
+92
+00:06:48,860 --> 00:06:53,930
+intent to be broadcast and then routed to
+and received by
+
+93
+00:06:53,930 --> 00:06:58,760
+a broadcast receiver, which then displays
+a toast message.
+
+94
+00:06:59,870 --> 00:07:00,830
+Now I'll press the button.
+
+95
+00:07:02,870 --> 00:07:05,270
+And there you see the toast message
+
+96
+00:07:05,270 --> 00:07:08,350
+indicating that the receiver got the
+intent.
+
+97
+00:07:11,350 --> 00:07:14,530
+Now here I've opened up the application in
+the IDE.
+
+98
+00:07:16,190 --> 00:07:20,509
+Now I'll open the main activity.
+
+99
+00:07:20,509 --> 00:07:25,332
+And this code first defines an intent
+action string that will be
+
+100
+00:07:25,332 --> 00:07:30,400
+used to identify this intent.
+And scrolling down
+
+101
+00:07:32,250 --> 00:07:37,111
+there's a button listener that calls the
+context.send
+
+102
+00:07:37,111 --> 00:07:43,740
+broadcast method, passing in an intent and
+a permission string.
+
+103
+00:07:44,950 --> 00:07:48,490
+The intent will be matched against
+registered intent filters.
+
+104
+00:07:49,930 --> 00:07:53,960
+While the permission string indicates that
+this intent can only
+
+105
+00:07:53,960 --> 00:07:58,370
+be delivered to broadcast receivers that
+have this particular permission.
+
+106
+00:08:01,080 --> 00:08:05,940
+You can also register broadcast receivers
+programmatically at run time.
+
+107
+00:08:05,940 --> 00:08:10,770
+For instance, if you want your broadcast
+receiver to respond
+
+108
+00:08:10,770 --> 00:08:13,910
+to intents only while your activity is in
+the foreground,
+
+109
+00:08:14,920 --> 00:08:19,050
+well then you can dynamically register and
+unregister them in
+
+110
+00:08:19,050 --> 00:08:24,120
+your activities on resume and on pause
+methods for example.
+
+111
+00:08:24,120 --> 00:08:26,160
+And to do this, you'll first create an
+
+112
+00:08:26,160 --> 00:08:30,910
+intent filter object, specify the intents
+that you want to register for.
+
+113
+00:08:32,020 --> 00:08:35,506
+Next, you create the BroadcastReceiver and
+then
+
+114
+00:08:35,506 --> 00:08:39,460
+you register it by calling a
+registerReceiver method.
+
+115
+00:08:41,190 --> 00:08:44,380
+And there are different implementations of
+this method.
+
+116
+00:08:44,380 --> 00:08:51,970
+One is in the LocalBroadcastManager class.
+And this one is for broadcasts
+
+117
+00:08:51,970 --> 00:08:54,490
+that are meant only for this application.
+
+118
+00:08:55,500 --> 00:08:58,890
+And therefore, they don't need to be
+broadcast system wide.
+
+119
+00:08:59,900 --> 00:09:02,740
+The other implementation is in the Context
+
+120
+00:09:02,740 --> 00:09:07,240
+class and this one broadcasts intents
+system
+
+121
+00:09:07,240 --> 00:09:09,900
+wide so these intents can potentially be
+
+122
+00:09:09,900 --> 00:09:14,080
+received by any application on your
+device.
+
+123
+00:09:15,360 --> 00:09:17,180
+And finally, as necessary,
+
+124
+00:09:17,180 --> 00:09:21,770
+you can call an unRegisterReceiver method
+to unregister these
+
+125
+00:09:21,770 --> 00:09:25,550
+broadcast receivers.
+Let's look at the source code for the
+
+126
+00:09:25,550 --> 00:09:29,550
+single broadcast dynamic registration
+application.
+
+127
+00:09:31,430 --> 00:09:35,150
+This application looks exactly like the
+previous application.
+
+128
+00:09:36,450 --> 00:09:42,650
+There's a broadcast intent button, and
+when you press it an intent is broadcast,
+
+129
+00:09:42,650 --> 00:09:49,680
+a broadcast receiver receives the intent,
+and then displays a toast message.
+
+130
+00:09:49,680 --> 00:09:54,040
+Internally however, its implementation is
+a little bit different.
+
+131
+00:09:54,040 --> 00:09:59,800
+So, this code starts off by creating an
+intent action string, and next
+
+132
+00:09:59,800 --> 00:10:05,170
+it creates an intent filter object with
+the just created action string.
+
+133
+00:10:05,170 --> 00:10:07,750
+After that, it creates a broadcast
+
+134
+00:10:07,750 --> 00:10:11,840
+receiver instance called receiver.
+
+135
+00:10:11,840 --> 00:10:17,140
+And then, down in the on create method,
+the code gets and instance
+
+136
+00:10:17,140 --> 00:10:22,160
+of the localBroadcastManager, which as I
+said is used to
+
+137
+00:10:22,160 --> 00:10:27,540
+broadcast and receive intents only within
+this application.
+
+138
+00:10:28,930 --> 00:10:33,020
+Next, the code uses the
+localBroadcastManager
+
+139
+00:10:33,020 --> 00:10:36,988
+to register the receiver object for the
+show toast intent.
+
+140
+00:10:36,988 --> 00:10:44,290
+And after that if the broadcast intent
+button is pressed, the listener
+
+141
+00:10:44,290 --> 00:10:50,820
+calls localBroadcastManager.sendBroadcast
+passing in the intent.
+
+142
+00:10:52,210 --> 00:10:56,020
+When the button is pushed, the
+localBroadcastManger
+
+143
+00:10:56,020 --> 00:10:58,050
+will send the intent to the receiver
+
+144
+00:10:58,050 --> 00:11:01,210
+object which operates just as it did in
+
+145
+00:11:01,210 --> 00:11:05,550
+the last application, creating and
+displaying a toast message.
+
+146
+00:11:05,550 --> 00:11:12,420
+Now in my example so far, simply broadcast
+a single intent to a single receiver, but
+
+147
+00:11:12,420 --> 00:11:17,880
+Android supports a variety of different
+ways in which intents can be broadcast.
+
+148
+00:11:17,880 --> 00:11:23,390
+For example, intents can be broadcast
+normally or in order.
+
+149
+00:11:23,390 --> 00:11:26,620
+Normal broadcasts are delivered to
+subscribed
+
+150
+00:11:26,620 --> 00:11:30,330
+broadcast receivers in an undefined order.
+
+151
+00:11:31,540 --> 00:11:37,100
+So if you have two broadcast receivers
+that should receive a single intent it's
+
+152
+00:11:37,100 --> 00:11:40,520
+possible that both broadcast receivers
+could be
+
+153
+00:11:40,520 --> 00:11:43,080
+processing the intent at the same time.
+
+154
+00:11:44,440 --> 00:11:48,790
+Ordered broadcasts on the other hand
+deliver the intent to multiple
+
+155
+00:11:48,790 --> 00:11:53,310
+broadcast receivers one at a time in
+priority order,
+
+156
+00:11:54,330 --> 00:11:59,551
+and broadcasts can also be sticky or
+non-sticky.
+
+157
+00:11:59,551 --> 00:12:04,910
+A sticky intent sticks around after its
+initial broadcast,
+
+158
+00:12:04,910 --> 00:12:10,000
+so a broadcast receiver that is registered
+after the initial broadcast
+
+159
+00:12:10,000 --> 00:12:14,840
+of an intent, may still be able to receive
+it even
+
+160
+00:12:14,840 --> 00:12:19,110
+though it wasn't around when the intent
+was actually broadcast.
+
+161
+00:12:19,110 --> 00:12:23,840
+And this feature is useful, for example,
+to record system state
+
+162
+00:12:23,840 --> 00:12:28,890
+changes such as changes in the battery
+level or charging status.
+
+163
+00:12:28,890 --> 00:12:33,800
+In these cases it doesn't matter to the
+receiver when the state changed.
+
+164
+00:12:34,930 --> 00:12:35,150
+Right?
+
+165
+00:12:35,150 --> 00:12:37,915
+They just want to know what the current
+state is.
+
+166
+00:12:37,915 --> 00:12:40,590
+Non-sticky broadcasts
+
+167
+00:12:40,590 --> 00:12:46,040
+in contrast are discarded after their
+initial broadcast.
+
+168
+00:12:46,040 --> 00:12:49,030
+And these broadcasts are more suited,
+therefore,
+
+169
+00:12:49,030 --> 00:12:51,470
+to reporting that a certain event has
+occurred.
+
+170
+00:12:52,510 --> 00:12:56,320
+In these cases, if the receiver isn't
+registered to receive
+
+171
+00:12:56,320 --> 00:13:00,550
+the broadcast when it happens, then they
+won't get it.
+
+172
+00:13:01,930 --> 00:13:05,690
+And lastly, as we saw in the examples,
+some broadcast
+
+173
+00:13:05,690 --> 00:13:09,610
+methods also take a permission string,
+which limits the
+
+174
+00:13:09,610 --> 00:13:14,830
+broadcast to those broadcast receivers
+that have the specified permission.
+
+175
+00:13:16,540 --> 00:13:20,870
+Now, if you find yourself having trouble
+getting broadcasts to the
+
+176
+00:13:20,870 --> 00:13:24,650
+right broadcast receivers, there are a few
+things that you can do.
+
+177
+00:13:26,000 --> 00:13:30,710
+One, is to have Android log extra
+information about its
+
+178
+00:13:30,710 --> 00:13:34,745
+intent resolution process.
+And you can do this by setting the
+
+179
+00:13:34,745 --> 00:13:44,140
+flag_debug_log_resolution flag in the
+intent that you're going to broadcast.
+
+180
+00:13:45,410 --> 00:13:48,350
+Another is to use the ADB tool to
+
+181
+00:13:48,350 --> 00:13:51,160
+find out what broadcast receivers have
+been registered.
+
+182
+00:13:52,640 --> 00:13:56,620
+And you can use the dumpsys command, like
+this,
+
+183
+00:13:56,620 --> 00:14:01,030
+to show broadcast receivers that are
+dynamically registered, and you can
+
+184
+00:14:01,030 --> 00:14:05,450
+use it like this to show those that are
+statically registered.
+
