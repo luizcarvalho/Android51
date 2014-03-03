@@ -194,6 +194,7 @@ public class MainActivity extends Activity implements SelectionListener {
 
 	@Override
 	protected void onPause() {
+		super.onPause();
 
 		// TODO:
 		// Unregister the BroadcastReceiver
@@ -202,7 +203,7 @@ public class MainActivity extends Activity implements SelectionListener {
 
 		
 		
-		super.onPause();
+		
 
 	}
 
