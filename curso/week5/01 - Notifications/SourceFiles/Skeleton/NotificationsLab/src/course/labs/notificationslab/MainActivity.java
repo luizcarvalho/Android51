@@ -193,7 +193,11 @@ public class MainActivity extends Activity implements SelectionListener {
 
 		// TODO:
 		// Unregister the BroadcastReceiver
-		this.unregisterReceiver(mRefreshReceiver);
+		if(mRefreshReceiver!=null){
+			this.unregisterReceiver(mRefreshReceiver);
+			mRefreshReceiver=null;
+		}
+			
 
 	}
 
