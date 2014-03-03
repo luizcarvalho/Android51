@@ -25,15 +25,15 @@ public class MainActivity extends Activity implements SelectionListener {
 
 	public static final String TWEET_FILENAME = "tweets.txt";
 	public static final String[] FRIENDS = { "taylorswift13", "msrebeccablack",
-			"ladygaga" };
+	"ladygaga" };
 	public static final String DATA_REFRESHED_ACTION = "course.labs.notificationslab.DATA_REFRESHED";
-	
+
 	private static final int NUM_FRIENDS = 3;
 	private static final String URL_LGAGA = "https://d396qusza40orc.cloudfront.net/android%2FLabs%2FUserNotifications%2Fladygaga.txt";
 	private static final String URL_RBLACK = "https://d396qusza40orc.cloudfront.net/android%2FLabs%2FUserNotifications%2Frebeccablack.txt";
 	private static final String URL_TSWIFT = "https://d396qusza40orc.cloudfront.net/android%2FLabs%2FUserNotifications%2Ftaylorswift.txt";
 	private static final String TAG = "Lab-Notifications";
-	private static final long TWO_MIN = 2 * 60 * 100;
+	private static final long TWO_MIN = 2 * 60 * 1000;
 	private static final int UNSELECTED = -1;
 
 	private FragmentManager mFragmentManager;
@@ -85,18 +85,16 @@ public class MainActivity extends Activity implements SelectionListener {
 			// Show a Toast Notification to inform user that 
 			// the app is "Downloading Tweets from Network"
 			log ("Issuing Toast Message");
-			Toast.makeText(this, "Downloading Tweets from Network", Toast.LENGTH_LONG).show();
 
-			
-			
+			Toast.makeText(getBaseContext(), "Downloading Tweets from Network", Toast.LENGTH_LONG).show();
+
+
 			// TODO:
 			// Start new AsyncTask to download Tweets from network
-			DownloaderTask downloadTask = new DownloaderTask(this);
-			downloadTask.execute(URL_LGAGA, URL_RBLACK, URL_TSWIFT);
+			DownloaderTask downloaderTask = new DownloaderTask(this);
+			downloaderTask.execute(new String[] {URL_TSWIFT, URL_RBLACK, URL_LGAGA});
 
 
-
-			
 			// Set up a BroadcastReceiver to receive an Intent when download
 			// finishes. 
 			mRefreshReceiver = new BroadcastReceiver() {
@@ -112,7 +110,6 @@ public class MainActivity extends Activity implements SelectionListener {
 					if(isOrderedBroadcast()) {
 						setResultCode(RESULT_OK);
 					}
-
 
 				}
 			};
@@ -153,7 +150,7 @@ public class MainActivity extends Activity implements SelectionListener {
 
 	// Calls FeedFragement.update, passing in the 
 	// the tweets for the currently selected friend
- 
+
 	void updateFeed() {
 
 		if (null != mFeedFragment)
@@ -187,23 +184,16 @@ public class MainActivity extends Activity implements SelectionListener {
 		// Register the BroadcastReceiver to receive a 
 		// DATA_REFRESHED_ACTION broadcast
 		registerReceiver(mRefreshReceiver, new IntentFilter(DATA_REFRESHED_ACTION));
-
-
-		
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 
+
 		// TODO:
 		// Unregister the BroadcastReceiver
 		this.unregisterReceiver(mRefreshReceiver);
-
-
-		
-		
-		
 
 	}
 
@@ -215,6 +205,7 @@ public class MainActivity extends Activity implements SelectionListener {
 
 		for (int i = 0; i < NUM_FRIENDS; i++) {
 			try {
+				Log.i("debug", mRawFeeds[i]);
 				JSONFeeds[i] = new JSONArray(mRawFeeds[i]);
 			} catch (JSONException e) {
 				e.printStackTrace();
