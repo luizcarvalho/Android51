@@ -1,0 +1,78 @@
+Dispositivos portáteis de hoje vêm com processadores poderosos e brilhantes, telas de alta densidade e aplicativos podem usar esses recursos para apresentar elementos gráficos ricos para o usuário, além de animar estes elementos e dar ao usuário uma experiência visual fluida e dinâmica.
+
+Nesta artigo, vamos falar sobre como os aplicativos podem fazer isso através do uso cuidadoso de animações gráficas em 2D. Vou começar esta lição, discutindo o suporte do Android para gráficos 2D.
+
+Eu vou falar sobre como os aplicativos podem chamar , tanto estaticamente quanto dinamicamente, estes elementos em sua tela utilizando a classe imageView ImageView e a classe Canvas. Em seguida, vou falar sobre as várias maneiras que você pode utilizar para animar facilmente as views e proporcionar efeitos simples como mudar o tamanho e a posição das views, e ainda efeitos fade-in e fade out.
+
+E, por último, eu vou terminar com uma discussão mais geral da animação propriedade, que fornece aos aplicativos um quadro geral para animar não só os simples propriedades da vista, mas, essencialmente, quaisquer outras propriedades também.
+
+Quando seu aplicativo quer colocar gráficos 2D na tela, ele pode fazer isso de diferentes maneiras. Em particular, ele pode desenhar o gráfico de uma vista, ou pode chamar de uma tela. Desenho de um ponto de vista é mais simples, mas menos flexíveis. Você vai usar esta opção quando os gráficos que você deseja desenhar são simples, e quando você não pretende atualizá-los, muitas vezes, se em tudo.
+
+Desenho de uma tela é mais complicado, mas também mais poderoso e mais flexível. E você vai seguir esse caminho quando os gráficos que você deseja desenhar são mais complexas e quando você espera para atualizar os gráficos com bastante frequência. Há muitas maneiras de desenhar com vistas. Mas nesta lição eu vou focar no desenho usando a classe drawable.
+
+A drawable representa algo que pode ser desenhado. Coisas como bitmaps, cores, formas e muito mais. Alguns drawables simples incluem a classe ShapeDrawable, que representa uma forma, como um retângulo ou um oval.
+
+A classe BitmapDrawable, o que representa uma matriz de pixels. E a classe ColorDrawable, o que representa uma cor sólida. Em nossas aplicações exemplo para esta lição, vamos muitas vezes criar um objeto drawable e anexá-lo a uma visão de imagem, e então vamos deixar o ponto de vista de imagem lidar com todo o desenho real para nós.
+
+Tal como acontece com recursos de interface de usuário do Android que já vimos, você pode fazer isso através de arquivos XML, ou você pode fazê-lo através de instruções explícitas do programa. Nossas aplicações primeiro exemplo são chamados GraphicsBubble Programa GraphicsBubble XML e.
+
+Estas aplicações simples tanto exibir uma única imagem vista, e que vista imagem tem uma imagem bitmap de uma bolha de sabão. Vamos dar uma olhada.   Então aqui está o meu dispositivo. Agora, vou começar uma das aplicações, GraphicsBubbleXML.  
+
+E lá você pode ver a imagem bolha simples. Ok, então vamos olhar para o código-fonte para esses dois aplicativos começando com o código para GraphicsBubbleXML. Então aqui está o aplicativo aberto no IDE. Eu agora vou abrir a atividade principal para esta aplicação. Como você pode ver, é muito simples.
+
+Tudo que faz é chamar setContentView usando o arquivo de layout main.xml. Vamos abrir esse arquivo. Aqui está o arquivo XML. E especifica que todo o layout é um layout relativo. E aninhado dentro do esquema relativo é uma visão da imagem.
+
+Esta visão imagem tem uma largura de layout e uma altura de 250 pixels de layout independentes de densidade, ou DP. O ponto de vista de imagem também é centrada dentro de seu pai, o layout relativo. E, finalmente, o bitmap real para a bolha está em um dos diretórios drawable e é chamado B128 Vamos também olhar para um aplicativo que faz a mesma coisa, mas que constrói sua interface de programação.
+
+
+Então aqui está a aplicação GraphicsBubbleProgram aberto no IDE. Eu agora vou abrir a atividade principal para esta aplicação. E este aplicativo chama também setContentView usando o principal.Arquivo de layout XML. Mas, neste caso, que o layout inclui apenas o layout em relação externa com nada dentro dela.
+
+Vamos abrir esse arquivo. Então aqui está o arquivo XML, e como eu disse, apenas especifica que todo o layout é um layout familiar, mas não tem nenhum visualizações criança dentro dele. Então, voltando à atividade principal, este código continua criando uma visualização da imagem.
+
+Em seguida, ele define o bitmap como o B128 drawable imagem para a exibição de imagem. Depois disso, o código continua por definir todas as propriedades de layout que vimos antes na versão XML. Primeiro, ele define a altura e largura da imagem vista.
+
+Esses valores são armazenados em outro arquivo chamado dimens.xml que está armazenado nos res \ valoriza diretório. Em seguida, o código cria um objeto relativelayout.layoutparams com a altura ea largura correta. Depois que o código adiciona uma regra para o objeto LayoutParams que diz Android para centralizar essa visão imagem dentro do pai disposição relativa.
+
+Em seguida, o código define esses parâmetros de layout ou propriedades de layout na visão da imagem. E, finalmente, ele adiciona o ponto de vista de imagem como uma criança do layout relativo. Então, vamos falar sobre alguns outros tipos de drawables. Um tipo de drawable é a forma drawable.
+
+Drawables Forma são usados ​​para desenhar formas simples. Diferentes formas são representadas por diferentes subclasses da classe forma, incluindo PathShape para segmentos de linha e curvas, RectShape para retângulos e OvalShape para ovais e anéis.
+
+Nossas aplicações próximo exemplo são chamados GraphicsShapeDrawXML e GraphicsShapeDrawProgram. Estas aplicações exibir dois ovais na estrutura de um parente. As duas formas têm diferentes cores, se sobrepõem parcialmente uns aos outros, e estão semitransparente.
+
+Vamos executar esses aplicativos.   Então aqui está o meu dispositivo, e agora eu vou começar uma das aplicações, GraphicsShapeDrawXML. E lá você pode ver as duas ovais. O da esquerda é ciano colorido. E o da direita é magenta colorido.
+
+Como você também pode ver, as ovais sobrepõem uns aos outros. E onde elas se sobrepõem, as cores foram misturadas para formar uma espécie de cor violeta. Vamos olhar para o código-fonte para essas aplicações. Então aqui está a aplicação GraphicsShapeDrawXML aberto no IDE.
+
+Eu agora vou abrir a atividade principal para esta aplicação. Mais uma vez o aplicativo só chama setContentView usando o principal.Arquivo de layout XML. Vamos abrir esse arquivo. Aqui está o arquivo XML, e especifica que todo o layout é um layout relativo.
+
+E aninhada que o layout relativa são dois pontos de vista de imagem. Ambas as visões de imagem têm larguras e alturas de layout de layout de 250 DP. Ambos adicionar algum espaço, ou estofamento, em torno de seus conteúdos. E ambos estão centradas verticalmente dentro do layout em relação pai.
+
+A primeira exibição da imagem, no entanto, está alinhado com o lado esquerdo do pai, enquanto a segunda exibição da imagem é alinhado à direita. E, finalmente, o conteúdo real visualização da imagem é definida usando o Android: fonte atributo. Pela primeira vista de imagem, essa fonte refere-se a um chamado cyan_shape drawable. Vamos abrir esse arquivo.
+
+Está nas res \ diretório drawable. Este arquivo especifica que esta é susceptível de ser estirado de uma forma, que a sua forma específica é uma forma oval, e que a sua cor é determinada por este valor hexadecimal. Claro, há um arquivo semelhante para a forma magenta.
+
+E, como antes, podemos fazer exatamente as mesmas coisas de forma programática. Vamos dar uma olhada no aplicativo GraphicsShapeDrawProgram, que eu também tenho aberto no IDE. Eu agora vou abrir a atividade principal para esta aplicação.
+
+Mais uma vez, o aplicativo só chama setContentView usando o principal.Arquivo de layout XML. Esse arquivo apenas especifica que todo o layout é um layout relativo. Agora, o código encontra as larguras de layout, alturas de layout e estofamento.
+
+Em seguida, o código obtém uma referência para o layout em relação pai e, depois disso, ele cria uma nova forma drawable que tem uma forma oval. Ele continua definindo a cor da forma, sua altura e largura, e sua transparência.
+
+Em seguida, o código cria uma visualização de imagem e coloca a nova forma para ele. Ele também define o preenchimento na visão da imagem. Em continuando, o código define alguns parâmetros de layout para a visualização da imagem. Especificamente, ele centraliza a exibição da imagem na vertical no layout relativa, e alinha este ponto de vista de imagem para o lado esquerdo do pai.
+
+O código, em seguida, termina-se fazendo coisas semelhantes para a vista magenta. Agora, se você quer fazer o desenho mais complexo, você também pode desenhar com uma lona. E para fazer isso, você precisa de quatro coisas: um bitmap, que é essencialmente a matriz de pixels que deseja aproveitar, uma lona, ​​que recebe as chamadas de desenho que irá atualizar o bitmap subjacente; uma primitiva de desenho, que representa o específico desenho operação que pretende emitir, e um objeto de tinta, que permite que você defina várias cores e estilos para a operação de desenho que você quer fazer.
+
+Nós vamos entrar em mais detalhes sobre a classe Canvas em apenas um pouco, mas telas oferecem uma variedade de métodos de desenho. Por exemplo, você pode desenhar texto, pontos, cores, ovais e bitmaps usando esses métodos.
+
+Quando você desenha, você pode usar a classe Paint para definir os parâmetros de estilo. Por exemplo, você pode especificar coisas como a espessura das linhas, o tamanho do texto, a cor do que você está desenhando, e se deve ou não aplicar várias otimizações, como a suavização.
+
+Que é usado para suavizar as bordas recortadas de uma imagem. Vamos olhar para uma aplicação simples que atrai várias caixas, cada uma das quais possuem algum texto. Mas ele faz isso usando diferentes configurações de pintura para cada uma das caixas. Então aqui está o meu dispositivo. Agora vou iniciar a aplicação GraphicsPaint.
+
+O aplicativo é iniciado e exibe quatro retângulos dispostos um sobre o outro. Cada um destes rectângulos tem algum texto, cada um dos quais é de um tamanho diferente. Cada retângulo também tem uma largura de borda diferente e estilo de borda, e tem uma cor de fundo diferente.
+
+Vamos olhar para o código-fonte para essas aplicações. Vamos escolher alguns desses parâmetros de estilo e ver como eles são especificados. Então aqui está a aplicação GraphicsPaint aberto no IDE. Como alguns dos que vimos antes, o método OnCreate desta aplicação só chama setContentView, passando uma referência a um principal.Arquivo de layout XML.
+
+Vamos abrir esse arquivo. Aqui está o arquivo XML. E especifica que todo o layout é um layout linear, e que o layout linear tem quatro filhos, cada um dos quais é uma exibição de texto. Se olharmos para o primeiro desses pontos de vista de texto, podemos ver que ele define vários atributos de estilo de texto.
+
+Por exemplo, este define sua cor de texto a este valor hexadecimal. O tamanho do texto para 32 pixels independentes de escala, ou SP. Tem estilo para negrito e itálico, e sua fonte ao normal. Se você olhar para esses outros, os outros pontos de vista de texto, você verá que eles fazem diferentes escolhas estilísticas. Esta visão texto também especifica um fundo, que está em um arquivo chamado SQ1.xml, que é a res \ diretório drawable.
+
+Vamos abrir esse arquivo. Então aqui está o arquivo SQ1.xml, e como você pode ver, este arquivo define uma forma. Essa forma é um retângulo, e tem uma cor sólida. Neste caso, a cor branca, que passa a ser definido por Android. E, finalmente, a forma tem uma fronteira com uma largura de três pixels, e tem uma cor de fundo. Que neste caso é um preto totalmente opaco.    

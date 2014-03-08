@@ -1,0 +1,63 @@
+ Android fornece um Detector Gesto classe chamada, que os aplicativos podem usar para reconhecer gestos de toque comuns. Esta classe é capaz de reconhecer gestos, como uma torneira único confirmado, um duplo toque. Qual é, essencialmente, duas torneiras de solteiro em rápida sucessão.
+
+E um caso. Que é uma prensa, seguida de um arrastar e soltar movimento que tem uma razoavelmente alta velocidade. Para usar um detector de gesto, sua atividade terá que criar uma instância da classe GestureDetector e terá de dar-lhe um objeto que implementa a GestureDetector.Interface OnGestureListener.
+
+E, em seguida, a atividade terá que substituí-lo é método onTouchEvent, que é o método que é chamado quando a atividade recebe um evento de toque. E este método, então, delegar o evento de movimento ao detectores gesto método onTouchEvent.
+
+Vejamos um exemplo de aplicação que utiliza um detector de gesto para reconhecer um gesto de arremessar. Esta aplicação é chamado TouchGestureViewFlipper e quando ele começa, ele apresenta uma visão de texto que exibe um número.
+
+Se o usuário executa um gesto de arremessar direito a esquerda, em seguida, a exibição de texto irá rolar para fora do lado esquerdo da tela. E enquanto ele faz isso, uma nova exibição de texto, exibindo um novo número vai rolar na por trás, da direita.
+
+Vamos ver o que a aplicação em ação. Então aqui está o meu dispositivo. Agora vou iniciar o gesto de toque, ver aplicação flipper. Quando ele inicia, a tela mostra uma vista de texto que apresenta o número zero.
+
+Agora, se eu executar um gesto aventura que é se eu pressionar e segurar a vista. E, em seguida, passe rapidamente para o lado esquerdo da tela e, finalmente, levantar o dedo para fora da tela. Então vamos ver a animação que eu mencionei anteriormente.
+
+Deixe-me fazer isso agora. E como você pode ver a vista de texto com o número zero deslizou para fora da tela. Indo para a esquerda, ea nova exibição de texto, mostrando o número 1, deslizou na tela da direita. Deixe-me fazer mais que algumas vezes. E note que este gesto só funciona se eu roubar, da direita para a esquerda.
+
+Se eu experimentá-lo em outra direção, nada vai acontecer. Vamos dar uma olhada no código fonte para esta aplicação. Então aqui está o aplicativo aberto no IDE. Agora, eu vou abrir a atividade principal. Primeiro de tudo, este aplicativo usa a classe vista flipper para lidar com as animações.
+
+Agora eu não vou entrar em que muito aqui, mas fique à vontade para estudar o código, depois que terminar o segmento. Por enquanto, vamos nos concentrar em como esse aplicativo detecta o gesto aventura. Assim, ao criar, você pode ver que o código cria um novo detector de gesto.
+
+E no construtor para o objeto, o código passa em um novo gesto simples em ouvinte. E este objeto define um método de aventura. Quando um GestureDetector detecta um gesto aventura, este método será chamado.
+
+E nós vamos voltar a isso, a esse método em poucos segundos. Agora, vamos olhar para o método de evento OnTouch para esta atividade. Este método é chamado quando ocorre um evento de toque. E não vista na atividade lida com ele.
+
+Quando este método é chamado, ele simplesmente delegar a chamada, para o detector gesto, se o detector gesto finalmente decide que ele tem visto um gesto aventura completa. O método on aventura que eu mostrei você será chamado.
+
+E este método em arremessar recebe um parâmetro. Neste caso, ele é chamado de velocidade x, que conta como rápido, e em que direção o gesto de furto foi realizado. Neste exemplo, se o golpe estava se movendo da direita para a esquerda, a uma velocidade de mais de dez pixels por segundo, em seguida, o código chama um método chamado de detector de estado disposição dois.
+
+Que faz com que a animação dos pontos de vista de texto para começar. Se a velocidade não atender a esses critérios, por exemplo, se é um arrastar lento em vez de um caso, ou se ele está viajando na direção errada, da esquerda para a direita, em vez de direita para a esquerda, então o gesto aventura é ignorado.
+
+Para reconhecer gestos mais complexos, você pode usar o aplicativo Gesture Builder do Android para criar e salvar, em seguida, gestos personalizados. Esta aplicação vem com o SDK. Em tempo de execução, você pode usar a classe bibliotecas gesto para carregar seus gestos personalizados e reconhecer quando um usuário executa um desses gestos.
+
+Para fazer este trabalho, você incluir um GestureOverlayView em sua aplicação. E esta visão intercepta essencialmente gestos do usuário. E, em seguida, ele chama o código do aplicativo para lidar com esses gestos. Aqui está uma imagem do aplicativo construtor gesto. Como você pode ver, eu criei quatro gestos personalizados.
+
+Em seguida, o que é um golpe horizontal, da esquerda para a direita, não, o que parece um pouco com um, um X que você faz com um único golpe. Prev, ou anterior, que é um golpe horizontal da direita para a esquerda, e sim, que se parece com uma marca de verificação.
+
+No emulador, GestureBuilder salva seus gestos personalizados para um arquivo chamado / mnt / sdcard / gestos. Para usar esses gestos que você precisa para copiar este arquivo para o diretório / raw aplicações / res. Vejamos a aplicação TouchGestures.
+
+Este aplicativo exibe uma pequena tela com uma cor candidato para toda a aplicações de fundo. A cor de fundo para toda a aplicação é definido inicialmente para o cinza, eo usuário pode usar estes quatro gestos personalizados que eu mostrei anteriormente para interagir com esta aplicação.
+
+Por exemplo, se o usuário executa o próximo gesto a cor de fundo do ciclo vontade para a frente. Se o usuário executa o gesto anterior, os ciclos de cor de fundo. Se o usuário executa o gesto sim, o aplicativo define fundo de toda a aplicação para a cor atual.
+
+E se o usuário executa a nenhum gesto, cor de fundo do aplicativo é reiniciado para cinza. Vamos ver o aplicativo em execução. Então aqui está o meu dispositivo. Agora vou iniciar a aplicação TouchGestures.
+
+E quando se inicia, fundo do aplicativo é geralmente cinza. Mas há um quadrado colorido no meio da tela. Se eu roubar a tela da esquerda para a direita. A cor desse quadrado nas mudanças do meio.
+
+E se eu fizer isso de novo, a cor muda de novo. E eu posso voltar para a cor anterior, passando, desta vez, da direita para a esquerda, em vez da esquerda para a direita. Se eu decidir que eu gosto da cor atual, eu posso realizar o gesto sim.
+
+Assim como. E como você vê a aplicação inteira agora tem um fundo dessa cor, mas se eu mudar de idéia eu possa realizar a nenhum gesto, assim. E, como você pode ver, o fundo do aplicativo vai voltar ao seu cinza inicial.
+
+O quadrado de cor reaparece no meio do layout e eu possa manter esta gestos emissão de olhar para novas cores candidatos. Vamos dar uma olhada no código fonte para esta aplicação. Aqui está o aplicativo aberto no IDE e agora eu vou abrir a atividade principal.
+
+E você percebe que esta atividade implementa o gesto realizado na interface de escuta, o que significa que ele fornece um gesto do método executado. Em em criar, o código obtém uma referência para o layout da estrutura, que ele armazena em uma variável chamada m quadro.
+
+E é aí que as cores de fundo candidato aparecer. O código também obtém uma referência a um esquema de relação, que ele armazena em uma variável chamada m layout. E este é o layout para o aplicativo inteiro. Ora aqui está o código que lê o arquivo de gestos do diretório / matéria-res. Usando as bibliotecas gesto de método recurso cru.
+
+Este método retorna um objeto de biblioteca gesto, eo código de então passa a chamar o método de carga para a biblioteca gesto. Depois disso, o código encontra o ponto de vista gesto de sobreposição. Que é no layout, e adiciona a atividade atual como um ouvinte para gestos que são interceptadas pela vista gesto de sobreposição.
+
+Quando a exibição gesto sobreposição detecta um gesto, ele chama o método onGesturePerformed, mostrado aqui. E este método primeiro chama o método de reconhecer, que analisa o gesto detectado, e em seguida, os escores de cada gesto costume a respeito de quanto o gesto detectado lembra os gestos personalizados gravados no arquivo gesto.
+
+E ao lado o código obtém a previsão mais alta classificação. E então, se essa previsão tem uma pontuação alta o suficiente, o código executa a ação que está associada a esse gesto. Por exemplo, se o gesto foi o gesto sim, então o código define a cor de fundo do layout para a cor atual candidato.  
+
+Então, isso é tudo por nossa lição sobre multi-touch e gestos. Junte-se a mim na próxima vez, quando vamos discutir multimídia. Obrigado.   

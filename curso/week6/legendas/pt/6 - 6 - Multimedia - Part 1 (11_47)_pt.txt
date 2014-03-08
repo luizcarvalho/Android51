@@ -1,0 +1,59 @@
+Os dispositivos portáteis permitem aos usuários criar e consumir grandes quantidades de conteúdo multimídia. E este conteúdo inclui conteúdo de áudio, como quando você ouvir música ou gravar notas de voz. Conteúdo da imagem, como quando você toma e ver fotos.
+
+E conteúdo de vídeo, como quando você toma e ver filmes. Nesta lição, vamos falar sobre as aulas multimídia que o Android oferece, e vamos percorrer as APIs e exemplos de aplicações que reproduzir áudio, que permitem assistir áudio, permitem-lhe gravar áudio, e, finalmente, que permitem que você use a câmera para capturar imagens.
+
+Então, vamos começar. Android fornece um número de classes e recursos para apoiar a codificação e decodificação de formatos de mídia comuns. O aplicativo pode usá-los para jogar e gravar áudio, imagens estáticas e vídeo.
+
+Algumas das classes que vamos falar hoje serão as aulas Audiomanager e SOUNDPOOL, que permitem que aplicativos para jogar efeitos sonoros e arquivos de áudio e controlar hardware relacionados com o áudio de um dispositivo, tal como os seus alto-falantes e fone de ouvido sem fio. Vamos falar sobre o RingtoneManager e Toques.
+
+E estes são os sons que você ouve frequentemente quando um telefonema chega, quando a notificação for recebida, e quando os alarmes sair. E o MediaPlayer, que permite que aplicações reproduzir arquivos de áudio e vídeo.
+
+O MediaRecorder, que permite que os aplicativos para gravar áudio e vídeo. E, finalmente, vamos terminar, olhando para a classe Camera, que permite que aplicações de controle difícil, as câmeras de hardware em um dispositivo.
+
+A primeira aula eu vou falar é sobre o AudioManager. Essa classe gerencia recursos básicos de áudio, como manipular o volume do dispositivo, jogar efeitos sonoros do sistema e alterar o modo de toque do dispositivo.
+
+Aplicações adquirir uma referência ao AudioManager chamando Context.getSystemService, passando o valor de contexto.AUDIO_SERVICE. E uma vez que tem uma referência para o AudioManager, um aplicativo pode carregar e, em seguida, jogar efeitos sonoros, ajustar o volume do dispositivo e controlar o hardware do dispositivo, por exemplo, silenciar o microfone, ou ligando o fone de ouvido Bluetooth.
+
+Outra classe relacionada que pode ser utilizado para reproduzir áudio complexo é a classe SOUNDPOOL. A SOUNDPOOL representa uma coleção de amostras de áudio ou córregos. E o SOUNDPOOL permite que você misturar e jogar várias amostras ao mesmo tempo.
+
+Vamos dar uma olhada no nosso primeiro exemplo de aplicação para esta lição. Esse pedido é chamado AudioVideoAudioManager. E quando ele é executado, esta aplicação apresenta dois botões rotulados cima e para baixo que são usados ​​para aumentar e diminuir o volume do dispositivo.
+
+O aplicativo também exibe um botão rotulado jogo que, quando pressionado, desempenha uma bolha estalo no nível de volume atual. Vamos executar o aplicativo agora. Então, aqui está o meu dispositivo, e agora vou iniciar a aplicação AudioVideoAudioManager.
+
+E, como prometido, exibe três botões. Para cima, para baixo, e jogo. O aplicativo também mostra o nível de volume atual em uma escala de zero a dez. Neste momento, o nível do volume está definido para seis. Deixe-me pressione o botão play, para que você possa ouvir o som bolha de estalo.
+
+Aqui vai. [SOUND] E agora, eu vou pressionar o botão algumas vezes, para ir para o volume máximo. E agora eu vou pressionar o botão play novamente. >> [SOUND] Agora, eu vou pressionar o botão para baixo, eo botão de jogar algumas vezes, e você deve ouvir a bolha pop em volumes cada vez menores. Aqui vai. [Som] Vamos analisar o código-fonte para esta aplicação.
+
+Aqui está a aplicação AudioVideoAudioManager aberto no IDE. Agora vou abrir a atividade principal. Aqui, o método onCreate obtém uma referência para o AudioManager. Em seguida, ele começa a configurar sua interface de usuário.
+
+Primeiro, há a exibição de texto para exibir o nível de volume atual. Em seguida, há o botão para cima. E quando clicado, esse código reproduz um som tecla clicando, em seguida, tenta aumentar o nível do volume e atualizar o indicador de nível.
+
+Em seguida, vemos o botão pressionado. E este é quase o mesmo que o código do botão acima. Mas ele diminui em vez de aumentar o nível de volume. Em seguida, o código obtém uma referência para o botão play, e, em seguida, desativa o botão para agora.
+
+Depois disso, o código cria um objeto SOUNDPOOL, que ele vai usar para reproduzir o som bolha de estalo. Os parâmetros para essa lógica SOUNDPOOL indicam que ele terá apenas um fluxo de áudio, e que o fluxo é jogado sobre o fluxo de música de áudio.
+
+Em seguida, o código carrega o som pop da bolha. Carregando o som é uma operação assíncrona, para que o código define um ouvinte onLoadComplete, que será chamado quando o som é finalmente carregado. E quando o método onLoadComplete é chamado, o código verifica se a operação foi bem sucedida.
+
+E se assim for, ele permite que o botão play. Anteriormente o código desabilitado o botão play, e ele fez isso para se certificar de que ele não tentou jogar este som até que o som foi carregado corretamente. Em seguida, o código define um ouvinte sobre o botão play.
+
+Quando pressionado, este código reproduz o som de estalo bolha no nível de volume atual. E, depois disso, o código pede foco de áudio, o que significa que essencialmente quer estar no comando do áudio que está sendo reproduzido pelo dispositivo.
+
+Há também algum código nos métodos onResume e OnPause. O método onResume transforma no viva-voz do aparelho e, em seguida, carrega os efeitos de som do sistema, como a chave de efeito som de clique que usamos acima.
+
+O método onPause começa por descarregar o SOUNDPOOL e liberá-lo de recursos. E, em seguida, desliga-se viva-voz do aparelho, e descarrega os efeitos sonoros do sistema. As próximas aulas falaremos são toque eo RingtoneManager.
+
+O RingtoneManager fornece acesso aos clipes de áudio que você ouve, por exemplo, quando um telefonema chega, quando você recebe uma nova mensagem de e-mail, ou quando um alarme dispara. E através da RingtoneManager, os aplicativos podem obter e definir vários toques, e eles podem jogar e parar de jogá-los.
+
+Vamos ver um exemplo de aplicação que utiliza o RingtoneManager. Agora, esta aplicação é chamado AudioVideoRingtoneManager. E esta aplicação apresenta três botões, toque respectivamente rotulado, notificação e alarme.
+
+Pressionando um destes botões faz com que o toque padrão associado a jogar. Vamos dar-lhe uma tentativa. Então, aqui está o meu dispositivo. Agora vou iniciar a aplicação AudioVideoRingtoneManager. Como você pode ver, ele exibe os três botões: Ringtone, Notificação, e Alarme.
+
+Deixe-me pressionar alguns desses botões. Primeiro, vamos ouvir o toque padrão como eu pressionar o botão de toque. [Som] Agora, vamos experimentar o toque de notificação padrão. [Som] E, finalmente, vamos tentar o toque de alarme padrão.
+
+[SOUND] Após este segmento é longo, tente fazer o download, instalar e executar este aplicativo em seu dispositivo e, em seguida, vá para o seu aplicativo de configurações e alterar seus toques padrão. Quando você, em seguida, re-executar este aplicativo, você deve ver que ela desempenha seus novos toques, não seus velhos.
+
+Então, vamos olhar para o código-fonte para esta aplicação. Aqui está a aplicação AudioVideoRingtoneManager aberto no IDE. Agora, eu vou abrir a atividade principal. No método onCreate, o código cria três botões.
+
+Vamos olhar para o botão de toque como um exemplo. Agora, aqui, vemos que quando este botão é clicado, o código usa o RingtoneManager para obter o URI para o telefone toque ringtone padrão. Em seguida, o código obtém o toque associado a esse URI, chamando o método ringtoneManager.getRingtone, passando o URI.
+
+O resultado de tudo isso é passado para um método chamado playRingtone. Vamos rolar para esse método. Agora, esse método verifica para ver se o ringtone está jogando atualmente. E se é, então, que ringtone está parado chamando o método de parada da classe ringtone. Um ringtone atual é então definida na variável mCurrentRingtone, e se o toque atual não é nulo, então o código irá começar jogando.    

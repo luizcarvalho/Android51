@@ -1,0 +1,84 @@
+Se você usar aplicativos comuns que exibem mapas ou páginas da web, então você provavelmente usado gestos como passando para rolar um ponto de vista, ou avançando e un-apertando o polegar eo dedo indicador para aumentar ou diminuir o zoom. Nesta lição, eu vou começar por discutir MotionEvents.
+
+Android usa essa classe para representar o movimento em vários dispositivos de entrada. Coisas como um mouse, um trackball, e mais comum de todos, o seu dedo. Em seguida vou discutir como Android leva esses eventos de movimento e os entrega aos pontos de vista e outros objetos, de modo que seu aplicativo pode responder a elas.
+
+E, finalmente, eu vou terminar com uma discussão de como Android reconhece padrões de movimentos complexos ou gestos, coisas como a pitada de zoom que eu mencionei anteriormente. Android usa a classe MotionEvent para representar movimentos em um dispositivo de entrada.
+
+Tais como uma caneta, um trackball, um mouse ou o dedo. Um evento movimento individual contém várias informações. Tem um código de ação, o que indica o tipo de movimento que ocorreu.
+
+Ele também contém uma variedade de dados associados com esse movimento. Por exemplo, ele tem a informação sobre o tempo em que o evento ocorreu, o dispositivo que o evento veio, a localização do evento.
+
+E se for o caso, o quão duro o dispositivo foi pressionado e muito mais. E, como eu disse, esta informação irá variar dependendo do tipo de dispositivo de entrada envolvidos. No resto desta lição, eu vou focar particularmente em eventos dedo toque que são lidos por pressionar uma tela sensível ao toque.
+
+Muitos dispositivos de tela de toque de hoje são dispositivos multi-toque. Isso significa que eles podem se registrar e controlar vários toques tudo ao mesmo tempo No Android, os dispositivos multi toque emite um rastro movimento por fonte toque.
+
+E cada uma destas fontes de toque é referido como um indicador. Quando Android encontra um novo ponteiro, ele gera uma identificação única que permanecerá constante durante o tempo que esse ponteiro está ativo.
+
+
+Em alguns casos, o Android irá agrupar vários ponteiros dentro de um único evento de movimento. E, nesse caso, cada um ponteiro dentro do evento de movimento pode ser acessado por seu índice. Mas lembre-se, que esse índice não é o mesmo que o ID do ponteiro. O ID do ponteiro é constante durante o tempo que o ponteiro é activa.
+
+
+O índice no qual os dados de um ponteiro é armazenado no entanto, pode não ser. Então, vamos falar sobre os eventos de movimento de forma mais detalhada. Agora, como eu disse anteriormente eventos de movimento tem um código de ação. Quando um gesto começa, será criado eventos de movimento, e eles vão conter alguns dos seguintes códigos de ação.
+
+ACTION_DOWN, o que indica que um primeiro dedo tem sido, já começou a tocar a tela. ACTION_POINTER_DOWN, isso significa que já tivemos um ACTION_DOWN, e agora temos outro dedo que começou a tocar na tela. ACTION_POINTER_UP.
+
+Nós tivemos uma ACTION_POINTER e um ACTION_POINTER_DOWN, e agora um dos dedos parou de tocar na tela. ACTION_MOVE. Alguns dos dedos que estão tocando a tela mudaram sua posição. ACTION_UP. O último dos dedos que estava tocando a tela agora parou de tocá-lo. E ACTION_CANCEL.
+
+Algo prematuramente cancelada o gesto atual. Enquanto o gesto está jogando fora Android vai tentar garantir que é eventos de movimento obedecer as seguintes regras. Toques vai descer um de cada vez. Eles vão se mover como um grupo.
+
+Assim, um único evento de movimento pode se referir a vários ponteiros, e eles vão vir para cima um de cada vez ou ser cancelado. Quando você precisa para processar eventos de movimento, você pode usar alguns dos seguintes métodos, getActionMasked que retorna o código de ação associada ao evento de movimento getActionIndex, que retorna o índice do ponteiro associado a este código de ação.
+
+Por exemplo, se o código de ação é ação ponteiro para baixo, então você pode usar este método para encontrar o índice do ponteiro especial que é apenas tocou para baixo, getPointerId. Dado um índice, esse método retorna o ID estável do ponteiro associado a esse índice.
+
+GetPointerCount, que retorna o número de ponteiros associados ao evento de movimento. GetX e getY, que retornam as coordenadas X e Y do ponteiro armazenado no índice atual. E findPointerIndex, que retorna o índice associado a um determinado ID ponteiro.
+
+
+Quando um toque ocorre em um ponto de vista, Android gera um evento de movimento, em seguida, tenta entregar esse evento para vários objetos, um dos quais é o próprio ponto de vista. Android oferece o evento de movimento através do método onTouchEvent.
+
+Este método pode processar o evento de movimento, e deve terminar, retornando true se o evento de movimento foi consumido, e false se não é. Objetos interessados ​​em receber eventos de movimento que ocorrem em uma determinada visão, pode se cadastrar para receber esses eventos através da implementação dos pontos de vista sobre toque interface de escuta, e registrando o objeto com a vista.
+
+método setontouchlistener. Método OnTouch do ouvinte, então, ser chamado quando um evento como pressionar, liberar ou arrastando, ocorre. E este método será chamado antes do toque para ver tem a chance de lidar com aquele toque. E, novamente, OnTouch deve retornar true se ele consome o evento de movimento. Ou FALSE se não.
+
+No caso mais simples, você pode processar cada evento de toque de forma independente. Mas muitas vezes as aplicações precisam ou querem processar vários toques que fazem parte de um gesto mais complexo. Para fazer isso, o código terá de identificar e processar determinada combinação de toques, por exemplo, um toque duplo envolverá um ACTION_DOWN.
+
+E então e ACTION_UP e depois outro ACTION_DOWN e finalmente um ACTION_UP tudo em rápida sucessão. Para dar alguns exemplos, suponha que você iniciar um gesto, colocando um dedo para baixo na tela. Isto vai gerar um evento ACTION_DOWN.
+
+E pode atribuir um ID ponteiro de zero para esse ponteiro. Se você mantiver o dedo para baixo e movê-lo na tela, você pode ter vários eventos ação de movimento associados ponteiro ID zero. Suponha agora que você colocou um segundo dedo para baixo. Nesse caso, você vai ter um ponteiro de ação para baixo o evento, e este novo ponteiro pode ter um ID, dizer de um.
+
+Se você mantiver os dedos para baixo e você movê-los, você pode obter, em seguida, vários eventos ação de movimento associados aos IDs ponteiro zero e um. E se você agora levantar o primeiro dedo, então você vai ter um ponteiro de ação se evento, associado com o ponteiro zero.
+
+E então, se você finalmente levantar o último dedo, você vai ter um evento de ação se associado com o ponteiro ID 1. No próximo exemplo, vamos começar como antes, colocando para baixo o primeiro dedo. Movendo-lo, colocando-se um segundo dedo, em seguida, movendo os dedos novamente. Mas, desta vez, no entanto, vamos levantar o segundo dedo primeiro.
+
+Neste caso, temos uma ação ação ponteiro-se associado com o ponteiro ID 1. E então, finalmente, quando levantar o último dedo, temos a ação ação se associado com o ponteiro ID 0. Para um último exemplo, vamos usar três dedos. Vamos colocar o primeiro dedo, depois o segundo, e depois uma terceira.
+
+E então nós vamos mover os dedos, e depois vamos levantá-los. Primeiro o levantamento do segundo dedo, em seguida, o primeiro dedo e, em seguida, finalmente, levantando o terceiro dedo. Nosso primeiro exemplo de aplicação desta lição é chamado touchindicatetouchlocation.
+
+E este aplicativo desenha um círculo onde quer que o usuário toca a tela. A cor do círculo é selecionado aleatoriamente, e, em seguida, o aplicativo também redesenha o círculo, seguindo o dedo do usuário, se ele se move pela tela. E, finalmente, quando o utilizador toca no ecrã, em múltiplas localizações.
+
+O tamanho dos círculos que são desenhadas, será alterado para refletir o número de toques ativos no momento. Vamos dar uma olhada neste aplicativo em ação. Então aqui está o meu dispositivo.   E agora eu vou arrancar o toque indicam aplicação localização toque.
+
+Quando ele começa, a tela fica em branco, porque eu não estou tocando a tela agora. Agora eu vou colocar um dedo na tela e que faz com que um único círculo a ser desenhado no lugar onde eu toquei na tela.
+
+Como eu deslizar o dedo ao longo da tela, você pode ver que o círculo é redesenhado, para acompanhar meus movimentos dos dedos. Agora, eu vou colocar um segundo dedo na tela. E isso faz com que o segundo círculo a ser desenhado sob o dedo. E como você pode ver, o tamanho dos dois círculos, é agora cerca de metade do que você viu quando havia apenas um único círculo.
+
+Agora, aqui eu vou tirar o segundo dedo, eo primeiro círculo volta ao seu tamanho original. Agora, eu vou colocar o segundo dedo de volta, e novamente os dois círculos aparecem na metade do tamanho. E, posso arrastar esses dois dedos ao redor da tela, e os círculos vão seguir meus movimentos, e, finalmente, aqui eu vou colocar mais dedos quatro, seis, oito, dez.
+
+Eu estou fora de dedos agora. Então agora eu vou movê-los, e agora vou começar a tirar alguns dedos. Oito, seis, quatro, dois, um. Agora, vamos dar uma olhada no código fonte para esta aplicação. Aqui está o aplicativo aberto no IDE.
+
+Agora vou abrir a atividade principal. Esta costa, este código primeiro cria um conjunto de pontos de vista personalizados chamados visualizações marcador. Vistas marcador irá ser usado para marcar a localização de um único toque. Em seguida, o código define um conjunto que contém os MarkerViews que estão atualmente disponíveis no visor.
+
+  E agora no onCreate, o código obtém o FrameLayout que representa a vista principal desta atividade. E, em seguida, ele cria um OnTouchListener e define este como o destinatário de OnTouch callback que ouvinte. Vamos olhar para esse método.
+
+  Quando o usuário toca a tela, método OnTouch deste ouvinte é chamado, e esse método começa verificando o código de ação para o novo evento de movimento. Se o código de ação é ACTION_DOWN ou ACTION_POINTER_DOWN, em seguida, houve um novo toque.
+
+  Assim, o código cria e exibe uma nova visão do marcador. O código faz isso gravando o ponteiro do ID, e índice de ponteiro para este evento. Em seguida, ele tem uma visão marcador da lista inativa. E, em seguida, acrescenta que vista marcador para o conjunto ativo, utilizando a sua ID ponteiro como a chave para esta visão.
+
+  Em seguida, define o local dessa visão marcador, em seguida, ele atualiza o número total de toques para cada vista marcador atualmente disponíveis. E então ele acrescenta a visão marcador para vista principal da atividade. Agora, se, em vez disso, o código de ação foi ACTION_UP ou ACTION_POINTER_UP. Então, isso significa que um dedo foi levantado para fora da tela.
+
+  Assim, o código essencialmente desfaz o que nós acabamos de falar. Agora, como antes, o código começa a gravar o ID de índice ponteiro e ponteiro para este evento. Em seguida, ele remove a vista marcador que foi associado com o dedo que acabou de ser levantada a partir do conjunto ativo.
+
+  Em seguida, ele acrescenta que a visão marcador de volta para a lista inativa. E no próximo, ele atualiza o número total de toques para cada vista marcador atualmente disponíveis. E então ele remove o ponto de vista marcador de vista principal da atividade.
+
+  E, finalmente, se o código de ação é ACTION_MOVE. Em seguida, o código ajusta a localização dos pontos de vista do marcador afectadas, e inicia a sua reformulação. O código faz isso por um loop sobre os ponteiros em caso de movimento.
+
+  Para cada um, torna-se o ponto de vista marcador para esse ponteiro, então ele verifica se o ponteiro do viajou uma distância mínima. Se assim for, ele define um novo local para que a visão do marcador, e, em seguida, chamadas invalidar na MarkerView que indica que o MarkerView quer ser redesenhado.  

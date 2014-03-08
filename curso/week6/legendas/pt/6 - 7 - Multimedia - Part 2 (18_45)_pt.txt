@@ -1,0 +1,97 @@
+A próxima aula é o MediaPlayer. MediaPlayer controla a reprodução de áudio e vídeo e arquivos. E isso permite que você incorporar áudio e vídeo em suas aplicações, e para permitir que os aplicativos e usuários que controlar a reprodução.
+
+Esta classe funciona de acordo com uma máquina de estado complexo, que eu não vou entrar aqui nesta lição, por isso, dar uma olhada no seguinte site para mais informações o. Alguns dos métodos que é provável que você usa quando você usa o MediaPlayer incluem setDataSource, que informa o media player que flui para jogar.
+
+Prepare, que inicializa o media player e carrega os fluxos necessários. O método de preparar é síncrono, e você normalmente vai usá-lo quando o conteúdo de mídia são armazenados em um arquivo no dispositivo. E há também uma versão assíncrona do método. Que pode ser usado, por exemplo, quando a mídia é transmitido a partir da internet.
+
+Há também um método de início, para iniciar ou retomar a reprodução. Um método pause, parar de jogar temporariamente. Um método seekTo, para se deslocar para uma posição particular no córrego. Um método stop, parar de jogar a mídia.
+
+E o método de liberação, que libera os recursos usados ​​pelo atual media player. Outra classe que pode ser usado para visualizar o conteúdo de vídeo é a classe VideoView. E esta classe é uma sub-classe de SurfaceView e faz internamente uso do media player que acabamos de falar.
+
+Esta classe pode carregar o conteúdo de vídeo a partir de diferentes fontes, e inclui uma série de métodos e controles para torná-lo mais fácil de visualizar o conteúdo do vídeo. Nosso próximo exemplo de aplicação é chamado AudioVideoVideoPlay, e esta aplicação apresenta uma visão simples, com controles de reprodução de vídeo, e permite ao usuário reproduzir um arquivo de vídeo.
+
+Neste caso, o filme é um clipe do filme 1902, Uma Viagem à Lua, de Georges Méliès. Vamos dar uma olhada. Então aqui está o meu dispositivo. E agora eu vou iniciar a aplicação AudioVideoVideoPlay. Se eu agora toque no visor, você pode ver que um conjunto de controles de reprodução aparecem.
+
+E agora eu vou acertar o único triângulo eo vídeo vai começar a jogar. Aqui vamos nós    Vamos dar uma olhada no código fonte para esta aplicação.   Aqui está a aplicação AudioVideoVideoPlay aberto no IDE. E agora eu vou abrir a atividade principal. Em OnCreate, o código primeiro obtém uma referência a um vídeo que é vista em layout do atividade.
+
+Em seguida, ele cria um controlador de mídia, que é uma visão que contém controles para controlar o media player. O código continua desativando os controles de mídia e, em seguida, anexando este controlador de mídia para a exibição de vídeo, com uma chamada ao método setMediaController da visualização de vídeo.
+
+Em seguida, o código identifica o arquivo de mídia para jogar, passando um URI que aponta para um arquivo armazenado no diretório / matéria-res. Depois disso, o código define uma OnPreparedListener na vista de vídeo. Este código será chamado, uma vez que a mídia está carregada e pronta para jogar.
+
+E quando isso acontece, o código permitirá que o controlador de mídia, de modo que o usuário pode iniciar a reprodução do filme. E, finalmente, para baixo no método onPause, o código fecha o ponto de vista de vídeo. A próxima aula vamos discutir é o MediaRecorder. Agora, esta classe pode ser usado para gravar áudio e vídeo.
+
+A classe opera de acordo com uma máquina de estado, que você pode ler mais sobre, neste URL.   Agora, alguns dos métodos gravador de mídia que você provavelmente vai usar incluem setAudioSource e setVideoSource.
+
+Que defina a fonte de insumo, como o microfone para áudio, ou uma câmara de vídeo. SetOutputFormat, que define o formato de saída para a gravação. Por exemplo, mp4. Prepare, que prepara o gravador para iniciar a captura e codificação de dados.
+
+Start, que inicia o processo de gravação. Pare, que interrompe o processo de gravação. E liberar, que libera os recursos mantidos por este MediaRecorder. Nosso próximo exemplo de aplicação é AudioVideoAudioRecording.
+
+Agora esta aplicação registros de áudio do usuário e pode jogar o áudio gravado de volta para o usuário. Vamos usar esse aplicativo para capturar minha voz. Então aqui está o meu dispositivo.   E agora eu vou iniciar a aplicação AudioVideoAudioRecording.
+
+Este aplicativo exibe dois botões de alternância, um rotulado de início e um rotulado Playback Start. Ao pressionar o botão Start Recording o aplicativo irá iniciar a gravação.
+
+Etiqueta do botão mudará para parar a gravação, eo botão de reprodução será desativado.   Ao pressionar novamente o botão iniciar a gravação, a gravação pára. Etiqueta do botão mudará para trás, e o botão de reprodução será ativado novamente.
+
+Vamos testá-lo. Agora eu vou pressionar o botão Iniciar Gravação.   Teste, teste, um, dois, três, ensaios. E agora que eu tenha pressionado o botão novamente, a gravação é concluída, e salvo, e no botão Iniciar reprodução agora está ativado.
+
+Permitam-me que pressione um agora. Teste, teste, um, dois, três, ensaios. E agora eu vou pressionar o botão novamente. E estamos de volta ao ponto de partida. Vamos olhar para o código-fonte para esta aplicação.
+
+Aqui está a aplicação AudioVideoAudioRecording aberto no IDE. Agora vou abrir a atividade principal. No onCreate o código primeiro recebe referências aos dois botões de alternância. Em seguida, ele cria um onCheckChangeListener, em cada um dos botões de alternância.
+
+Este código é chamado quando o estado de seleção de um botão de alternância mudanças. Vamos olhar para o primeiro botão de alternância que é o botão de gravação.   Quando verificados mudanças de estado deste botão, digamos, de desligado para ligado, este código vai primeiro desativar o botão play, e, em seguida, irá chamar o método onRecordPressed.
+
+O botão de reprodução faz algo semelhante. O primeiro altera o estado de habilitado o botão de gravação, desativá-lo se o usuário deseja iniciar a reprodução. Ou que lhe permite, se o usuário quiser parar a reprodução.
+
+Depois disso, ele chama o método onPlayPressed. Vamos olhar para o método onRecordPressed primeiro. Como você pode ver, este método tem um valor booleano como parâmetro chamado shouldStartRecording.
+
+Se shouldStartRecording é verdade, então o código chama o método startRecording. Caso contrário, ele chama o método stoprecording. O método de gravação start primeiro cria um novo gravador de mídia e, em seguida, define a sua fonte como microfone.
+
+Em seguida, ele define o formato de saída. E, em seguida, o arquivo de saída onde a gravação será salva. E, em seguida, ele define o codificador para o arquivo de áudio. Agora continuando, as chamadas de código preparar para obter o gravador pronto, e então, finalmente, ele chama o método start para iniciar a gravação.  
+
+O método de gravação parada em vez disso, pára o gravador de mídia e, em seguida, libera seus recursos.   Se o usuário em vez tivesse pressionado o botão de reprodução, então onPlayPressed teria sido chamado. Se o botão foi marcada, então o parâmetro shouldStartPlaying seria verdade.
+
+Se assim for, o método start playing é chamado, caso contrário, o método de parar de jogar é chamado. O método start playing começa criando um media player. E em seguida, segue-se, definindo sua fonte de dados, em seguida, chamando preparar no media player, e em seguida, chamando o método start.
+
+O método de parar de jogar vai parar o media player e, em seguida, liberar os recursos do media player.   A última aula vamos falar sobre, nesta lição, é a classe câmera. Esta classe permite que os aplicativos para acessar o serviço de câmera. O código de baixo nível que gerencia o hardware da câmera real no seu dispositivo.
+
+Agora, através desta classe o aplicativo pode gerenciar as configurações para a captura de imagens. Iniciar e parar uma função de visualização, que permite que você use a tela de dispositivos como uma espécie de visão da câmera finder. E o mais importante, ele permite que você tire fotos e vídeos. Para usar os recursos da câmera que você precisa definir algumas permissões e recursos.
+
+Você vai precisar de pelo menos a permissão de câmera, e você provavelmente vai querer incluir uma tag de usos de recursos no seu manifesto Android arquivo xml. Que especifica a necessidade de uma câmera. E você pode querer especificar que seu aplicativo requer outros sub-recursos, como foco automático ou um flash.
+
+Embora você possa facilmente usar o construída em aplicativo de câmera para tirar fotos, você pode querer adicionar algumas funções para um aplicativo de câmera tradicional. Ou, você pode querer usar a câmera para outros fins.
+
+Nesse caso, você pode seguir os seguintes passos. Primeiro, você tem uma instância câmera. Em seguida, você pode definir os parâmetros da câmera que você pode precisar. Depois disso, você vai querer configurar a tela de visualização, para que o usuário pode ver o que a câmera vê.
+
+Em seguida, você vai começar a pré-visualização, e você vai mantê-lo funcionando, até que o usuário tira uma foto. E uma vez que o usuário tira uma foto, o aplicativo irá receber e processar a imagem da imagem. E então, finalmente, o aplicativo vai liberar a câmera para que outras aplicações podem ter acesso a ele.
+
+O último exemplo de aplicação para esta lição é chamado AudioVideoCamera. Esta aplicação ainda tira fotos e usa o visor do dispositivo como visor da câmera. Vamos dar-lhe uma tentativa. Então aqui está o meu dispositivo. E agora, vou iniciar a aplicação AudioVideoCamera.
+
+Como você pode ver, o aplicativo exibe a imagem atualmente disponíveis através da lente da câmera. E se você mover a câmera, a imagem muda. Se o usuário estiver satisfeito com a imagem, então ele ou ela pode simplesmente toque na tela para tirar uma foto.
+
+E, quando ele ou ela faz isso, a câmera tira a foto e, em seguida, congelar a janela de pré-visualização por cerca de dois segundos. Assim, o usuário pode ver a imagem que apenas estalou. Deixe-me fazer isso. Eu vou tocar a tela, para tirar a foto, e agora a visualização congela por cerca de dois segundos. E agora a câmera está pronta para tirar outra foto.
+
+Vamos olhar para o código-fonte para esta aplicação. Aqui está a aplicação AudioVideoCamera aberto no IDE. Agora, eu vou abrir a atividade principal. E vamos rolar para o método onCreate.   E uma das coisas que vemos aqui é o código chama o método getCamera, para obter uma referência para o objeto da câmera.
+
+Vamos rolar para esse método.   Este método chama as classes câmera método Open. Que retorna uma referência, para a primeira câmera virada para trás neste dispositivo. Se o dispositivo tem várias câmeras, você pode usar outras versões do método aberto de obter câmeras particulares.
+
+Agora a rolagem de volta até onCreate, o código agora estabelece um ouvinte toque na tela principal. E quando o usuário toca a tela, método OnTouch deste ouvinte será chamado. E este método irá chamar o método takePicture da câmera para tirar uma foto.
+
+Agora vamos voltar a este método em poucos segundos. Em seguida, o código define uma visão superficial que é usado para exibir a visualização, que mostra ao usuário o que a câmera está vendo atualmente.
+
+E estas medidas são apenas o que falamos em nossa lição anterior sobre gráficos. Primeiro, o código obtém o suporte de superfície para a vista de superfície, e, em seguida, adiciona um objeto de retorno de chamada para o titular da superfície. E esse objeto de retorno de chamada é definido abaixo. Vamos rolar para baixo.   Agora, como você se lembra, o SurfaceHolder.Interface callback define três métodos.
+
+SurfaceCreated, surfaceChanged, e surfaceDestroyed. O método surfaceCreated começa por definir o titular da superfície em que a câmera irá mostrar a sua pré-visualização. E depois disso, o código começa a pré-visualização da câmera.
+
+Quando a superfície muda a sua estrutura ou o formato, o método é chamado de surfaceChanged. E este método desativa toques no layout, e depois pára de visualização da câmera. Em seguida, o código muda os parâmetros da câmera. E, neste caso, o código encontra um tamanho adequado para a previsão da câmara.
+
+E, em seguida, define o tamanho da visualização, em seguida, passa os parâmetros atualizados objeto de volta para a câmera. Agora que os parâmetros são definidos, o código reinicia o preview, chamando o método startPreview.
+
+Então, finalmente, o código permite re-toques no layout. Portanto, agora que já sabemos como configurar e gerenciar a exibição de visualização, vamos voltar e olhar para tirar uma foto real. Assim, a rolagem de volta até o onTouchListener, Quando o usuário toca a tela, o método é chamado takePicture.
+
+Nesse método, o código aqui passa em dois objetos CameraCallback. Um deles é o ShutterCallback, e o outro é o CameraCallback. O ShutterCallback é chamado na época em que o usuário tira a foto, basicamente para que o usuário saiba que a câmara está a tirar uma foto.
+
+O CameraCallback usada aqui, é chamado após a foto foi tirada e quando a imagem compactada está disponível. Quando isto acontece, o método onPictureTaken do CameraCallback é chamado. Neste exemplo, o código simplesmente dorme por dois segundos e reinicia a visualização.
+
+E você pode notar que esta aplicação em particular realmente não guardar a imagem. Mas, claro, você normalmente iria querer fazer isso, e se assim for, você normalmente fazê-lo aqui mesmo neste método.   O último método que eu vou falar é sobre onPause.
+
+Aqui o código desativa toques na tela, desligar a pré-visualização, e então libera a câmera para que outras aplicações podem usá-lo. Então, isso é tudo por nossa lição sobre multimídia. Junte-se a mim na próxima vez, quando nós vamos falar sobre sensores. Obrigado.   

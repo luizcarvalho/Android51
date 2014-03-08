@@ -1,0 +1,93 @@
+Nos exemplos vista bolha que acabamos de ver, eu demonstrei um tipo simples de animação. Tomei um único ponto de vista, e eu mudei algumas de suas propriedades. Especificamente, a sua localização e orientação, e eu fiz isso durante um período de tempo.
+
+Animações como essa são bastante comuns. Os aplicativos geralmente animar alterações a coisa para as propriedades de uma vista como o seu tamanho, a sua posição, que é a transparência, é orientação, e muito mais.
+
+Para fazer a animação mais fácil Android fornece várias classes diferentes de apoio vista animação e três que vamos falar agora são a classe Transition Drawable para animar uma transição entre duas visões, a animação Drawable para a criação de animações quadro-a-quadro, ea classe de Animação para a criação de animações de interpolação, onde você especificar determinados quadros ou momentos de animação e Android interpola ou preenche os pontos entre os dois.
+
+Vejamos cada um deles. A primeira turma de animação que vamos discutir é a Drawable Transição. Essa classe especifica uma camada drawable dois, e quando ele é exibido, o usuário vê a primeira camada, em seguida, um pouco mais tarde, vê a segunda camada.
+
+Nossa aplicação de exemplo é chamado Gráficos Transição Drawable, e esta aplicação nos leva de volta aos gráficos Forma aplicações empate que vimos anteriormente. Mas desta vez, em vez de mostrar as duas formas ao mesmo tempo, esta aplicação apresenta pela primeira vez a forma colorida ciano mais à esquerda, que depois se desvanece em uma exibição da forma de cor magenta mais à direita. Vamos ver como isso funciona.
+
+Então aqui está o meu dispositivo, e quando eu iniciar a aplicação Gráficos Transição Drawable você verá a primeira forma sumindo na segunda. Então, vamos lá. Aqui está a primeira forma, e aqui está o segundo. Então, vamos dar uma olhada no código fonte. Então aqui está a aplicação Gráficos Transição Drawable, aberto no IDE.
+
+Agora vou abrir a atividade principal. Em OnCreate, este aplicativo carrega um drawable transição de um arquivo chamado shape_transition.xml. Vamos abrir esse arquivo. Este arquivo define um recurso de transição. Recursos desse tipo pode ter até duas marcas de item, e cada tag artigo descreve um drawable.
+
+Neste caso, os drawables são as nossas formas de ciano e magenta familiares. Agora, de volta na atividade principal, o código chama conjunto crossfade habilitado com o parâmetro de verdade, e isso faz com que o primeiro drawable visualmente desaparecer no segundo drawable.
+
+Em seguida, o código define a transição, como o drawable para a vista da imagem, chamando imagem Jogo drawable, e, finalmente, ele chama início da transição, passando de um valor de 5000 para a duração da animação. O próximo tipo de animação que vamos falar é a Animação Drawable.
+
+Este desenhável anima uma série de outros drawables, mostrando cada uma, por algum período de tempo. Nosso próximo exemplo de aplicação é chamado Gráficos Animation Frame. Este aplicativo usa uma animação Drawable para exibir um tipo de tela de abertura, que se apresenta uma série de imagens em contagem regressiva para o início da aplicação principal.
+
+Vamos ver o que isso faz.   Então aqui está o meu dispositivo. Quando eu começar a gráficos quadro do aplicativo de animação, você verá uma série de imagens, contagem regressiva para a imagem final. Ok, vamos começar. Nove, oito, sete, seis, cinco, quatro, três, dois, um, e, finalmente, a imagem que todos nós temos estado à espera.
+
+Então vamos ao código-fonte para esta aplicação. Então aqui está a aplicação de Animação Quadro de gráfico aberto no IDE. Agora vou abrir a atividade principal e no OnCreate este aplicativo carrega um Drawable Animação de um arquivo chamado view_animation.xml.
+
+E, em seguida, ele define que drawable animação como plano de fundo em uma visão de imagem. Este código, em seguida, as lojas que Drawable em uma variável chamada Manim. E antes de ir para a frente, vamos dar uma olhada no arquivo view_animation.xml.
+
+Então aqui está o arquivo view_animation.xml e este arquivo define um recurso lista animação. Este recurso contém uma lista de marcas de itens, onde cada marca representa um drawable, e neste caso, o primeiro drawable é apenas uma tela preta, e que exibe por um segundo, e isso é seguido por outros nove imagens, cada uma das quais é exibida também por um segundo.
+
+Agora, de volta na atividade principal, o código de espera até que a janela em foco mudou método é chamado, e este método é chamado quando as aplicações ganhos janela ou perde o foco. Neste método, o código primeiro verifica se a janela está ganhando foco e se for isso, então começa a animação.
+
+Próximo classe é a classe de animação, e esta classe é usada para criar animações em que as transformações são aplicadas para o conteúdo de um ponto de vista. Os aplicativos podem jogar com o timing dessas transformações a seqüência e combinar diferentes transformações para fazer animações mais complexas.
+
+A aplicação gráfica Tween Animação demonstra a utilização da classe de animação. Quando esse aplicativo é executado, ele exibe uma visão bolha e então começa a animar uma série de mudanças para essa bolha. Vamos vê-lo em ação.
+
+Então aqui está o meu dispositivo. Quando iniciar a aplicação Gráficos Tween animação você verá a bolha, e então você verá uma série de transformações aplicadas a essa bolha. Você vai vê-lo desaparecer em, girar, mover, alterar seu tamanho, e, finalmente, desaparecer, e você também vai ver que o momento dessas transformações nem sempre é linear.
+
+  Ou seja, algumas transformações que acontecerá em um ritmo uniforme, alguns vão começar devagar e aumentar a velocidade, alguns vão começar rápido e, em seguida, reduzir a velocidade, alguns vão tanto acelerar e desacelerar em diferentes pontos na animação.
+
+  Agora, eu vou desacelerar o vídeo aqui um pouco, assim você pode ver esses efeitos de forma mais clara. Então, aqui vamos nós, primeiro a bolha desaparece dentro e próximo a bolha gira duas vezes, ficando mais rápido como ele vai. Agora, a bolha vai se mover, ultrapassar a sua posição final e em seguida, puxe um pouco para trás.
+
+  Depois disso, a bolha vai encolher um pouco antes de rapidamente dobrar de tamanho e, finalmente, a bolha desaparece de vista, de forma rápida no início, e depois mais lentamente perto do fim. Vamos dar uma olhada no código fonte para esta aplicação.
+
+  Então aqui está a aplicação Gráficos Tween Animação aberto no IDE. Agora, eu vou abrir a atividade principal. E este aplicativo define o, chama setContentView, passando o arquivo main.xml.
+
+  E, em seguida, ele encontra uma visão imagem nesse layout. E depois que ele lê uma animação a partir do arquivo view_animation.xml que é armazenado no diretório res / Anim. Aqui está o recurso e aninhada dentro da tag conjunto existem várias outras marcas, cada uma das quais indica uma transformação específica para ser aplicada à vista.
+
+  A primeira é uma transformação alfa, a duração da animação é de três segundos. Vai desde um alfa igual a zero, ou completamente transparente, de um alfa de um, completamente opaca. A transformação também usa o interpolador linear, de modo que o efeito é aplicado uniformemente em toda a animação.
+
+  A etiqueta a seguir é uma transformação de rotação. A duração está definida a quatro segundos, mas ele também está definido para iniciar somente após três segundos se passaram. Assim, a primeira transformação ocorrerá e acabamento, e então este será iniciado.
+
+  Esta animação vai de 0 a 720 graus, ou duas voltas completas, e seu interpolador acelera, ou velocidades, como a animação prossegue e você pode olhar para todas as outras tags em seu próprio país quando nós fazer uma pausa.
+
+  Voltando agora para a atividade principal, vamos para o foco na janela método alterado. Mais uma vez, este código verifica para ver se a janela está ganhando foco, e se assim for, ele começa a animação.   O último conceito que eu vou falar é sobre animação propriedade.
+
+  Os exemplos anteriores mostraram classes que são projetados para animar um conjunto de alterações de propriedade simples de pontos de vista. Mas às vezes, você deseja animar mais do que apenas aquelas coisas e apoiar que, Android desenvolveu um sistema para a mudança geral, propriedades de objetos genéricos durante um determinado período de tempo, e este sistema de animação de propriedades tem vários componentes.
+
+  Em primeiro lugar, existe um valor de desenhos animados, e esta é a principal classe que controla a animação. O Valor de desenhos animados contém um interpolador de tempo que determina como os valores variam como uma função do tempo.
+
+  Por exemplo, ao longo do tempo é que as mudanças acontecem de maneira uniforme, eles acelerar, desacelerar, ou usar uma combinação dos dois? Valor Animator também define uma interface ouvinte chamado Animator Atualização Listener, e esta interface define o método de atualização de animação em que é chamado sempre que um novo quadro de animação é criado.
+
+  E, finalmente, enquanto o Android sabe como animar os valores de tipos comuns, como geradores de imagens ou carros alegóricos, que não sabe como animar tipos personalizados que você criar. Então, se você precisa para animar seus próprios tipos, ou animar os tipos existentes de novas maneiras que você pode implementar o tipo de avaliador de Interface.
+
+   Esta interface define um método de avaliar que é chamada para definir os valores de animação em um determinado ponto na animação. A última peça de animação propriedade é o Animator Set Classe.
+
+   Esta classe permite que você combine objetos animação, como o valor animador que acabamos de discutir, em animações mais complexas. Então, vamos olhar para alguns exemplos de aplicações que fazem uso de animação propriedade.
+
+   A primeira dessas aplicações é chamada Graphics Value Animator, e este aplicativo usa um valor animador para animar uma mudança na cor de uma visão imagem de fundo. Vamos assistir a esta aplicação.
+
+   Então aqui está o meu dispositivo. Vou agora iniciar a aplicação animador valor gráficos. E como você pode ver, apresenta um único botão rotulado Animar. Ao pressionar esse botão, um retângulo vermelho irá aparecer no meio da tela, e durante um período de cerca de dez segundos, esse retângulo muda de cor até que seja finalmente azul. Vou pressionar o botão agora.
+
+   Há o retângulo vermelho. E agora vamos ver como ele lentamente se torna azul. Vamos abrir o código-fonte e ver como nós fizemos isso. Então aqui está a aplicação animador valor gráficos aberto no IDE. Agora vou abrir a atividade principal.
+
+   Este aplicativo é iniciado, definindo dois valores inteiros, que representam os pontos inicial e final para a animação. O primeiro valor é a representação inteira de cor vermelha. O segundo valor é a representação inteiro da cor azul.
+
+   Em OnCreate, o código cria um botão que vai iniciar a animação, e como você pode ver aqui, quando o botão é clicado, o método de animação de início é executado. Vamos olhar para esse método. Aqui, o método de animação início cria um valor animado objeto chamado anim, e ele criou esse objeto chamando os animadores valor do método do objeto.
+
+   O primeiro parâmetro para este método é um avaliador tipo, neste caso, o tipo de avaliador é, na verdade, um, um avaliador ARGB objecto, e esta classe sabe como interpolar as representações inteiros de cores. O segundo eo terceiro parâmetros para o método de objeto são os pontos inicial e final para a animação, as cores vermelho e azul.
+
+   Em seguida, o código adiciona um animador Atualização Listener e que vai ser chamado de volta cada vez que novos quadros de animação são criados e que o código chama o método Get animado valor para recuperar o valor da cor atual, e então ele faz com que a cor a cor do fundo visualização da imagem, o que é mostrado no layout.
+
+   E, por último este código define a duração de dez segundos para a animação, e depois começa a animação em execução. Vamos também olhar para uma segunda aplicação animação propriedade, chamada Gráficos Propriedade Vista Animator.
+
+   Esta aplicação irá implementar o mesmo aplicativo que criamos para a aplicação Gráficos Tween animação. Você vai ver uma bolha que se desvanece em, gira, move-se, redimensiona, e depois desaparece. E esta versão do aplicativo, no entanto, vai usar a exibição de propriedade animador classe, que é uma espécie de animador simplificada para apenas exibir as propriedades. Vamos ver o que a aplicação em ação.
+
+   Então aqui está o meu dispositivo. E eu vou iniciar a aplicação Gráficos Propriedade Vista Animator. E vamos ver como a bolha passa por uma série de transformações. Aqui vamos nós    Vamos abrir o código-fonte para esta aplicação.
+
+   Então aqui está a vista de gráficos aplicação Propriedade Animator aberto no IDE. Agora vou abrir a atividade principal. E vamos rolar até a janela em foco método alterado. Quando este método é chamado, o aplicativo garante que a janela de atividade está ganhando foco e se assim for, ele chama o método run do fade in objeto, e que fade in objeto é um executável.
+
+    Agora dentro de seu método de execução, as suas ligações com código animar a visualização da imagem, que retorna um objeto de exibição de propriedade de animação. Este objeto, ou esta classe, usa uma interface fluente, como o que vimos com as notificações da área de notificação. E assim você pode construir uma animação por aderência em vários chamadas de método.
+
+    Neste caso, a próxima chamada está definido para duração de três segundos, em seguida, definir interpolador ao interpolater linear, em seguida, uma chamada para o método alfa para alterar a transparência para totalmente opaco e, em seguida, uma chamada final que conta a Propriedade Vista Animator que quando esta animação termina ele deve invocar o método de execução de outro chamado rotação executável.
+
+    E, como você provavelmente pode adivinhar, esta rotação executável cria o passo de rotação da animação, e então ele acaba chamando a etapa de movimento da animação, e isso continua até que todas as etapas foram concluídas. Então, isso é tudo por nossa lição em gráficos e animação. Vejo você na próxima vez para uma lição sobre multi-toque e gestos. Vejo você, então.    
