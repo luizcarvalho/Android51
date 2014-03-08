@@ -1,0 +1,254 @@
+<html><head>
+<meta charset="UTF-8">
+</head> <body>
+<p>Se você quiser desenhar gráficos mais complexos e você deseja atualizar os gráficos com freqüência, então você pode fazer o seu desenho com uma lona. Agora, como eu disse anteriormente, uma tela é uma espécie de contexto ou mecanismo para a elaboração de um bitmap subjacente.
+</p>
+<blockquote style="font-family:'Courier';" >If you want to draw more complex graphics and you want to update those graphics frequently, then you can do your drawing with a canvas. Now as I said earlier, a canvas is a kind of context or mechanism for drawing to an underlying bitmap. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E você pode acessar uma tela ou através de uma visão objeto genérico ou através de uma subclasse vista especial chamado SurfaceView. Normalmente, você vai desenhar através de uma visão genérica quando as atualizações são menos freqüentes, e se você tomar essa atitude, o aplicativo deve criar uma exibição personalizada subclasse.
+</p>
+<blockquote style="font-family:'Courier';" >And you can access a canvas either through a generic view object or through a special view subclass called SurfaceView. Usually, you'll draw through a generic view when your updates are less frequent, and if you take this approach, your application should create a custom view subclass. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E, em seguida, o sistema fornecerá a tela para a visualização através de uma chamada ao seu método onDraw. Se, em vez disso, seu aplicativo precisa atualizar com freqüência seus gráficos, então você pode considerar desenho através de um SurfaceView. Com essa abordagem, o aplicativo cria um costume, SurfaceView subclasse.
+</p>
+<blockquote style="font-family:'Courier';" >And then the system will provide the canvas to your view through a call to its onDraw method. If, instead, your application needs to frequently update its graphics, then you might consider drawing through a SurfaceView. With this approach, the application creates a custom, SurfaceView subclass. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E que também irá criar um thread secundário com que as operações de desenho em que SurfaceView, será realizada. Em tempo de execução, o aplicativo pode então adquirir a sua própria tela, E, portanto, exercer mais controle sobre como e quando ocorre desenho.
+</p>
+<blockquote style="font-family:'Courier';" >And it will also create a secondary thread with which drawing operations on that SurfaceView, will be performed. At run time, the application can then acquire its own canvas, And therefore, exercise more control over how and when drawing occurs. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O próximo exemplo de aplicação é chamado GraphicsCanvasBubble. E a idéia por trás deste aplicativo é que ele vai chamar um ponto de vista e, em seguida, atualizar essa visão. Mas as atualizações são um pouco freqüentes, a cada segundo ou assim.
+</p>
+<blockquote style="font-family:'Courier';" >This next example application is called GraphicsCanvasBubble. And the idea behind this application is that it will draw a view and then update that view. But the updates are somewhat infrequent, about every second or so. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Assim, esta aplicação tem uma rosca interna que acorda uma vez a cada segundo ou assim, e move a vista. E, em seguida, usa uma tela como se redesenha a vista em sua nova localização. Vamos ver isso em ação. Então aqui está o meu dispositivo.
+</p>
+<blockquote style="font-family:'Courier';" >So this application has an internal thread that wakes up once every second or so, and moves the view. And then uses a canvas as it redraws the view in its new location. Let's see that in action. So here's my device. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E agora, vou iniciar a aplicação GraphicsCanvasBubble. O aplicativo é iniciado com uma bolha tirada em um local selecionado de forma aleatória. E cada segundo ou assim, você pode ver que a bolha está apagado, movido e, em seguida, redesenhado em sua nova localização.
+</p>
+<blockquote style="font-family:'Courier';" >And now, I'll start up the GraphicsCanvasBubble application. The application starts up with a bubble drawn at a randomly selected location. And every second or so, you can see that the bubble is erased, moved and then redrawn in it's new location. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos olhar para o código-fonte para esta aplicação. Então aqui está a aplicação GraphicsCanvasBubble aberto no IDE. Agora, eu vou abrir a atividade principal. Aqui você pode ver que a aplicação carrega um bitmap a partir do diretório de recursos.
+</p>
+<blockquote style="font-family:'Courier';" >Let's look at the source code for this application. So here's the GraphicsCanvasBubble application open in the IDE. Now, I'll open the main activity. Here you can see that the application loads a bitmap from the resources directory. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E então ele usa esse bitmap para criar uma instância de uma classe de exibição personalizada chamado BubbleView. Em seguida, o código adiciona a instância BubbleView ao layout. E em seguida, ele cria e inicia um novo segmento. E esse segmento entra em um loop e em cada iteração, ele chama o método move da BubbleView.
+</p>
+<blockquote style="font-family:'Courier';" >And then it uses that bitmap to create an instance of a custom view class called the BubbleView. Next, the code adds the BubbleView instance to the layout. And then it creates and starts a new thread. And that thread goes into a loop and on each iteration, it calls the BubbleView's move method. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Agora, como veremos em um segundo, este método altera o local BubbleViews. E então, retorna verdadeiro ou falso, dependendo se o BubbleViews nova localização é ou não é ainda visível no ecrã. Em seguida, o código chama o ponto de vista aulas postar método invalidar.
+</p>
+<blockquote style="font-family:'Courier';" >Now as we'll see in a second, this method changes the BubbleViews location. And then, returns true or false depending on whether the BubbleViews new location is or is not still visible on the display. Next the code calls the view classes post invalidate method. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Esta mensagem informa android para redesenhar esse ponto de vista e depois que o segmento vai dormir por um segundo antes de acordar e começar o processo mais uma vez. Agora eu vou passar por cima a maioria dos detalhes de como o BubbleView se move.
+</p>
+<blockquote style="font-family:'Courier';" >This message tells android to redraw this view and after that the thread goes to sleep for a second before waking up and starting the process one more time. Now I'll skip over most of the details of how the BubbleView moves itself. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E eu vou concentrar-se em como ele é redesenhado. Assim, quando o fio de desenho chama o método pós invalidar, este diz que o Android BubbleView acha que precisa ser redesenhado. Se sim, então Android acabará por chamar o método BubbleViews onDraw.
+</p>
+<blockquote style="font-family:'Courier';" >And I'll focus instead on how it gets redrawn. So when the drawing thread calls the post invalidate method, this tells Android that the BubbleView thinks it needs to be redrawn. If so, then Android will eventually call BubbleViews onDraw method. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Passando na tela, com o qual o BubbleView é desenhado. Vamos olhar para esse método. E como você pode ver, este método leva a tela passou para ele e chama seu método DrawBitmap, passando o bitmap para desenhar.
+</p>
+<blockquote style="font-family:'Courier';" >Passing in the canvas, with which the BubbleView is drawn. Let's look at that method. And as you can see, this method takes the canvas passed into it and calls its DrawBitmap method, passing in the bitmap to draw. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Passando nas coordenadas superior e esquerda da posição na qual desenhar o mapa de bits. E, finalmente, passar em um objeto de pintura que define os parâmetros de estilo para esta operação de desenho. Agora, se nós gostaríamos de realmente aumentar a frequência.
+</p>
+<blockquote style="font-family:'Courier';" >Passing in the top and left coordinates of the position at which to draw the bit map. And finally, passing in a paint object that defines style parameters for this drawing operation. Now, if we'd like to really increase the frequency. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Com o que estamos redesenhando a bolha para torná-lo mais suave deslizar da tela. Então, nós pode querer usar uma tela e um SurfaceView, a fim de fazer isso. E como já referi anteriormente, SurfaceViews precisa, um fio não-UI separada na qual para fazer o seu trabalho.
+</p>
+<blockquote style="font-family:'Courier';" >With which we're redrawing the bubble to make it more smoothly glide across the display. Then, we might want to use a canvas and a SurfaceView in order to do that. And as I mentioned earlier, SurfaceViews need a separate, non-UI thread in which to do their work. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Assim que as operações SurfaceView não vai interferir com as operações de segmento. Então, vamos falar mais sobre a classe SurfaceView. A SurfaceView administra uma área de desenho de baixo nível chamado de Surface. E esta superfície é uma área de desenho dedicado, que é posicionado dentro da hierarquia de vista aplicações.
+</p>
+<blockquote style="font-family:'Courier';" >So that SurfaceView operations won't interfere with UI thread operations. So, let's talk more about the SurfaceView class. A SurfaceView manages a low-level drawing area called a Surface. And this Surface is a dedicated drawing area, that is positioned within the applications view hierarchy. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Para definir um SurfaceView, você precisa criar uma classe personalizada, que é uma subclasse de SurfaceView. E esta classe personalizada deve, também deve implementar a SurfaceHolder.Interface de retorno de chamada. Para utilizar este novo SurfaceView, você precisa fazer duas coisas. Um, você precisa configurar o SurfaceView.
+</p>
+<blockquote style="font-family:'Courier';" >To define a SurfaceView, you need to create a custom class, which is a subclass of SurfaceView. And this custom class must, must also implement the SurfaceHolder.Callback interface. To use this new SurfaceView, you need to do two things. One, you need to setup the SurfaceView. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E dois, você precisa chamar a SurfaceView que você acabou de configuração. Vamos falar sobre cada uma dessas etapas, uma de cada vez. Para configurar o SurfaceView, primeiro você usa o método SurfaceViews getHolder adquirir SurfaceHolder do SurfaceView.
+</p>
+<blockquote style="font-family:'Courier';" >And two, you need to draw to the SurfaceView that you just setup. Let's talk about each of those steps, one at a time. To set up the SurfaceView, you first use the SurfaceViews getHolder method to acquire the SurfaceView's SurfaceHolder. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, você registrar o SurfaceView para retornos de chamada SurfaceHolder. Ao chamar o método addCallback do SurfaceHolder. Agora estes métodos são uma, surfaceCreated que é chamado, quando a superfície da SurfaceView foi criado.
+</p>
+<blockquote style="font-family:'Courier';" >Next, you register the SurfaceView for SurfaceHolder callbacks. By calling the SurfaceHolder's addCallback method. Now these methods are one, surfaceCreated which is called when the SurfaceView's surface has been created. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Até que este método é chamado você não pode desenhar na superfície. Ele não está pronto. Dois, surfaceChanged. Este método é chamado sempre que mudanças estruturais, como alterar o tamanho da superfície, ocorre.
+</p>
+<blockquote style="font-family:'Courier';" >Until this method is called you can't draw on the surface. It's not ready. Two, surfaceChanged. This method is called whenever structural changes, such as changing the surface's size, occurs. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E três, surfaceDestroyed. E este método é chamado logo antes de uma superfície é destruída. Uma vez que esse método retorna, você não pode mais chamar de operações que vai chamar na superfície. E a última etapa de configuração é criar a linha que será usada para a execução de operações de desenho neste SurfaceView.
+</p>
+<blockquote style="font-family:'Courier';" >And three, surfaceDestroyed. And this method is called right before a surface is destroyed. Once this method returns, you can no longer call operations that will draw on the surface. And the last setup step is to create the thread that will be used for executing drawing operations on this SurfaceView. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E lembre-se de que os métodos de retorno de chamada SurfaceHolder geralmente será chamado a partir do thread principal não a partir de fios do SurfaceView. Então você tem que ter certeza que você sincronizar o acesso a todos os dados que é necessário para ambas as threads. Então, uma vez que você tenha configurado o SurfaceView você pode começar a desenhar nele.
+</p>
+<blockquote style="font-family:'Courier';" >And remember, that the SurfaceHolder callback methods will usually be called from the main thread not from the SurfaceView's thread. So you'll have to make sure that you synchronize access to any data that is needed by both threads. So once you've setup the SurfaceView you can start drawing on it. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Para desenhar, você primeiro adquirir um bloqueio na tela, chamando o método lockCanvas. Em seguida, você fazer o que desenhar operações que você quer fazer na tela. Por exemplo, chamando um método tela, como DrawBitmap. E por último, você desbloquear a tela, permitindo Android para atualizar a exibição.
+</p>
+<blockquote style="font-family:'Courier';" >To draw, you'll first acquire a lock on the canvas by calling the lockCanvas method. Next, you do whatever drawing operations that you want to do on the canvas. For example, by calling a canvas method, such as drawBitmap. And last, you unlock the canvas, allowing Android to update the display. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E você vai fazer isso chamando o método unlockCanvasAndPost do SurfaceHolder. Então, vamos olhar para uma implementação diferente do nosso último exemplo de aplicação, chamada GraphicsBubbleCanvas Superfície View.   Então aqui está o meu dispositivo. E, em um momento, vou iniciar a aplicação GraphicsCanvasBubbleSurfaceView.
+</p>
+<blockquote style="font-family:'Courier';" >And you'll do this by calling the SurfaceHolder's unlockCanvasAndPost method. So let's look at a different implementation of our last example application, called GraphicsBubbleCanvas Surface View.   So here's my device. And in a moment, I'll start up the GraphicsCanvasBubbleSurfaceView application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E quando o fizer, a aplicação irá iniciar e desenhar a bolha em um local selecionado aleatoriamente na tela. Mas desta vez, em vez de atualizar a cada segundo ou assim, esta aplicação irá tentar fazer o maior número de atualizações, uma vez que pode.
+</p>
+<blockquote style="font-family:'Courier';" >And when I do, the application will start up and draw the bubble at a randomly selected location on the display. But this time, instead of updating every second or so, this application will try to do as many updates as it can. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Além disso, o aplicativo também vai rodar a vista bolha para dar a aparência de que a bolha está girando através do espaço. Então aqui vai. E como você pode ver, a bolha é bem animar tanto movendo e girando enquanto flutua junto. Vamos olhar para o código-fonte para esta aplicação.
+</p>
+<blockquote style="font-family:'Courier';" >In addition, the application will also rotate the bubble view to give the appearance that the bubble is twirling through space. So here goes. And as you can see, the bubble is smoothly animating both moving and rotating as it floats along. Let's look at the source code for this application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Então aqui está a aplicação GraphicsCanvasBubbleSurfaceView aberto no IDE. Agora vou abrir a atividade principal. E no onCreate, este código novamente carrega um bitmap do diretório de recursos. E, em seguida, usa esse bitmap para criar uma instância de uma classe de exibição personalizada chamado BubbleView. Vamos olhar para a classe BubbleView.
+</p>
+<blockquote style="font-family:'Courier';" >So here's the GraphicsCanvasBubbleSurfaceView application open in the IDE. Now I'll open the main activity. And in onCreate, this code again loads a bitmap from the resources directory. And then uses that bitmap to create an instance of a custom view class called BubbleView. Let's look at the BubbleView class. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>A classe BubbleView estende SurfaceView e implementa a SurfaceHolder.Interface de retorno de chamada. O construtivo para esta classe faz um monte de tarefas domésticas. E, em seguida, para baixo, para o final do método, há uma chamada para o método getHolder, que devolve uma SurfaceHolder.
+</p>
+<blockquote style="font-family:'Courier';" >The BubbleView class extends SurfaceView and implements the SurfaceHolder.Callback interface. The constructive for this class does a lot of housekeeping. And then down at the end of the method, there's a call to the getHolder method, which returns a SurfaceHolder. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O código tem que SurfaceHolder e registra este BubbleView para retornos de chamada. Vejamos o que acontece quando esses retornos finalmente chegar. Primeiro, vemos que, quando a superfície para a SurfaceView é criado, este código cria um novo tópico, e depois começa-lo. E o método de execução que thread depois entra em um loop.
+</p>
+<blockquote style="font-family:'Courier';" >The code takes that SurfaceHolder and then registers this BubbleView for callbacks. Let's look at what happens when these callbacks finally arrive. First, we see that when the surface for the SurfaceView is created, this code creates a new thread, and then starts it. And that thread's run method then goes into a loop. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E em cada iteração do loop, ele verifica se o segmento foi interrompido. E se não, em seguida, chama o método de movimento, que como antes move a opinião da bolha e retorna um booleano que indica se ou não o BubbleView deixou a tela.
+</p>
+<blockquote style="font-family:'Courier';" >And on each iteration of the loop, it checks to see whether the thread's been interrupted. And if not, it then calls the move method, which like before moves the bubble view and returns a Boolean indicating whether or not the BubbleView has left the screen. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Se estas verificações avaliar a verdade, o código tenta bloquear tela do SurfaceHolder. E se for bem sucedido, o código chama o método de passagem drawBubble na tela bloqueada. E então, finalmente, a aplicação desbloqueia a tela e permite Android para atualizar a exibição.
+</p>
+<blockquote style="font-family:'Courier';" >If these checks evaluate to true, then the code attempts to lock the SurfaceHolder's canvas. And if successful, the code then calls the drawBubble method passing in the locked canvas. And then finally, the application unlocks the canvas and allows Android to update the display. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos voltar para um segundo e olhar para o método drawBubble. Agora, este método, primeiro redesenha o fundo da tela, em seguida, ele gira a tela e, em seguida, ele redesenha a bolha na tela. .  </p>
+<blockquote style="font-family:'Courier';" >Let's go back for one second and look at the drawBubble method. Now, this method, first redraws the canvas's background, then it rotates the canvas and then it redraws the bubble on the canvas.  .  </blockquote>
+</body></html>

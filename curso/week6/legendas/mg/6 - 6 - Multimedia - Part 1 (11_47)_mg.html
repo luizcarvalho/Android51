@@ -1,0 +1,238 @@
+<html><head>
+<meta charset="UTF-8">
+</head> <body>
+<p>Os dispositivos portáteis permitem aos usuários criar e consumir grandes quantidades de conteúdo multimídia. E este conteúdo inclui conteúdo de áudio, como quando você ouvir música ou gravar notas de voz. Conteúdo da imagem, como quando você toma e ver fotos.
+</p>
+<blockquote style="font-family:'Courier';" >Handheld devices allow users to create and consume large amounts of rich multimedia content. And this content includes audio content, like when you listen to music or record voice notes. Image content, like when you take and view photos. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E conteúdo de vídeo, como quando você toma e ver filmes. Nesta lição, vamos falar sobre as aulas multimídia que o Android oferece, e vamos percorrer as APIs e exemplos de aplicações que reproduzir áudio, que permitem assistir áudio, permitem-lhe gravar áudio, e, finalmente, que permitem que você use a câmera para capturar imagens.
+</p>
+<blockquote style="font-family:'Courier';" >And video content, like when you take and view movies. In this lesson, we'll talk about the multimedia classes that Android provides, and we'll walk through the APIs and example applications that play audio, that let you watch audio, let you record audio, and, finally, that let you use the camera to capture images. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Então, vamos começar. Android fornece um número de classes e recursos para apoiar a codificação e decodificação de formatos de mídia comuns. O aplicativo pode usá-los para jogar e gravar áudio, imagens estáticas e vídeo.
+</p>
+<blockquote style="font-family:'Courier';" >So, let's get started. Android provides a number of classes and capabilities to support the encoding and decoding of common media formats. Your application can use these to play and record audio, still images, and video. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Algumas das classes que vamos falar hoje serão as aulas Audiomanager e SOUNDPOOL, que permitem que aplicativos para jogar efeitos sonoros e arquivos de áudio e controlar hardware relacionados com o áudio de um dispositivo, tal como os seus alto-falantes e fone de ouvido sem fio. Vamos falar sobre o RingtoneManager e Toques.
+</p>
+<blockquote style="font-family:'Courier';" >Some of the classes we'll talk about today will be the AudioManager and SoundPool classes, which allow applications to play sound effects and audio files, and to control a device's audio-related hardware, such as its speakers and wireless headset. We'll talk about the RingtoneManager and Ringtones. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E estes são os sons que você ouve frequentemente quando um telefonema chega, quando a notificação for recebida, e quando os alarmes sair. E o MediaPlayer, que permite que aplicações reproduzir arquivos de áudio e vídeo.
+</p>
+<blockquote style="font-family:'Courier';" >And these are the sounds that you often hear when a phone call arrives, when a notification is received, and when alarms go off. And the MediaPlayer, which lets applications play audio and video files. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O MediaRecorder, que permite que os aplicativos para gravar áudio e vídeo. E, finalmente, vamos terminar, olhando para a classe Camera, que permite que aplicações de controle difícil, as câmeras de hardware em um dispositivo.
+</p>
+<blockquote style="font-family:'Courier';" >The MediaRecorder, which allows applications to record audio and video. And, finally, we'll finish up by looking at the Camera class, which lets applications control hard, the hardware cameras on a device. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>A primeira aula eu vou falar é sobre o AudioManager. Essa classe gerencia recursos básicos de áudio, como manipular o volume do dispositivo, jogar efeitos sonoros do sistema e alterar o modo de toque do dispositivo.
+</p>
+<blockquote style="font-family:'Courier';" >The first class I'll talk about is the AudioManager. This class manages basic audio capabilities, like manipulating the device's volume, playing system sound effects, and changing the device's ringer mode. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Aplicações adquirir uma referência ao AudioManager chamando Context.getSystemService, passando o valor de contexto.AUDIO_SERVICE. E uma vez que tem uma referência para o AudioManager, um aplicativo pode carregar e, em seguida, jogar efeitos sonoros, ajustar o volume do dispositivo e controlar o hardware do dispositivo, por exemplo, silenciar o microfone, ou ligando o fone de ouvido Bluetooth.
+</p>
+<blockquote style="font-family:'Courier';" >Applications acquire a reference to the AudioManager by calling Context.getSystemService, passing in the value Context.AUDIO_SERVICE. And once it has a reference to the AudioManager, an application can load and then play sound effects, adjust the device's volume, and control device hardware, for instance, by muting the microphone, or by turning on the Bluetooth headset. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Outra classe relacionada que pode ser utilizado para reproduzir áudio complexo é a classe SOUNDPOOL. A SOUNDPOOL representa uma coleção de amostras de áudio ou córregos. E o SOUNDPOOL permite que você misturar e jogar várias amostras ao mesmo tempo.
+</p>
+<blockquote style="font-family:'Courier';" >Another related class that can be used to play complex audio is the SoundPool class. A SoundPool represents a collection of audio samples or streams. And the SoundPool allows you to mix together and play multiple samples at the same time. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos dar uma olhada no nosso primeiro exemplo de aplicação para esta lição. Esse pedido é chamado AudioVideoAudioManager. E quando ele é executado, esta aplicação apresenta dois botões rotulados cima e para baixo que são usados ​​para aumentar e diminuir o volume do dispositivo.
+</p>
+<blockquote style="font-family:'Courier';" >Let's take a look at our first example application for this lesson. That application is called AudioVideoAudioManager. And when it runs, this application presents two buttons labeled Up and Down that are used to increase and decrease the device's volume. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O aplicativo também exibe um botão rotulado jogo que, quando pressionado, desempenha uma bolha estalo no nível de volume atual. Vamos executar o aplicativo agora. Então, aqui está o meu dispositivo, e agora vou iniciar a aplicação AudioVideoAudioManager.
+</p>
+<blockquote style="font-family:'Courier';" >The application also displays a button labeled Play that, when pressed, plays a bubble popping sound at the current volume level. Let's run the application now. So, here's my device, and now I'll start up the AudioVideoAudioManager application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E, como prometido, exibe três botões. Para cima, para baixo, e jogo. O aplicativo também mostra o nível de volume atual em uma escala de zero a dez. Neste momento, o nível do volume está definido para seis. Deixe-me pressione o botão play, para que você possa ouvir o som bolha de estalo.
+</p>
+<blockquote style="font-family:'Courier';" >And, as promised, displays three buttons. Up, down, and play. The application also shows the current volume level on a scale from zero to ten. Right now, the volume level is set to six. Let me press the play button, so you can hear the bubble popping sound. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Aqui vai. [SOUND] E agora, eu vou pressionar o botão algumas vezes, para ir para o volume máximo. E agora eu vou pressionar o botão play novamente. >> [SOUND] Agora, eu vou pressionar o botão para baixo, eo botão de jogar algumas vezes, e você deve ouvir a bolha pop em volumes cada vez menores. Aqui vai. [Som] Vamos analisar o código-fonte para esta aplicação.
+</p>
+<blockquote style="font-family:'Courier';" >Here goes. [SOUND] And now, I'll press the up button a few times, to go to maximum volume. And now I'll press the play button again. >> [SOUND] Now, I'll press the down button, and play button a few times, and you should hear the bubble pop at increasingly lower volumes. Here goes. [SOUND] Let's look at the source code for this application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Aqui está a aplicação AudioVideoAudioManager aberto no IDE. Agora vou abrir a atividade principal. Aqui, o método onCreate obtém uma referência para o AudioManager. Em seguida, ele começa a configurar sua interface de usuário.
+</p>
+<blockquote style="font-family:'Courier';" >Here's the AudioVideoAudioManager application open in the IDE. Now I'll open the Main Activity. Here, the onCreate method gets a reference to the AudioManager. Next, it begins to set up its user interface. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Primeiro, há a exibição de texto para exibir o nível de volume atual. Em seguida, há o botão para cima. E quando clicado, esse código reproduz um som tecla clicando, em seguida, tenta aumentar o nível do volume e atualizar o indicador de nível.
+</p>
+<blockquote style="font-family:'Courier';" >First, there's the text view for displaying the current volume level. Next, there's the up button. And when clicked, this code plays a key clicking sound, and then tries to increase the volume level and update the level display. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, vemos o botão pressionado. E este é quase o mesmo que o código do botão acima. Mas ele diminui em vez de aumentar o nível de volume. Em seguida, o código obtém uma referência para o botão play, e, em seguida, desativa o botão para agora.
+</p>
+<blockquote style="font-family:'Courier';" >Next, we see the down button. And this is almost the same as the code for the up button. But it decreases rather than increases the volume level. Next, the code gets a reference to the play button, and then disables the button for now. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Depois disso, o código cria um objeto SOUNDPOOL, que ele vai usar para reproduzir o som bolha de estalo. Os parâmetros para essa lógica SOUNDPOOL indicam que ele terá apenas um fluxo de áudio, e que o fluxo é jogado sobre o fluxo de música de áudio.
+</p>
+<blockquote style="font-family:'Courier';" >After that, the code creates a SoundPool object, which it will use to play the bubble popping sound. The parameters for this SoundPool logic indicate that it will have only one audio stream, and that the stream is played on the audio music stream. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, o código carrega o som pop da bolha. Carregando o som é uma operação assíncrona, para que o código define um ouvinte onLoadComplete, que será chamado quando o som é finalmente carregado. E quando o método onLoadComplete é chamado, o código verifica se a operação foi bem sucedida.
+</p>
+<blockquote style="font-family:'Courier';" >Next, the code loads the bubble pop sound. Loading the sound is an asynchronous operation, so the code sets an onLoadComplete listener, which will be called when the sound is finally loaded. And when the onLoadComplete method is called, the code checks whether the operation was successful. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E se assim for, ele permite que o botão play. Anteriormente o código desabilitado o botão play, e ele fez isso para se certificar de que ele não tentou jogar este som até que o som foi carregado corretamente. Em seguida, o código define um ouvinte sobre o botão play.
+</p>
+<blockquote style="font-family:'Courier';" >And if so, it enables the play button. Earlier the code disabled the play button, and it did it to make sure that it didn't try to play this sound until the sound was properly loaded. Next, the code sets a listener on the play button. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Quando pressionado, este código reproduz o som de estalo bolha no nível de volume atual. E, depois disso, o código pede foco de áudio, o que significa que essencialmente quer estar no comando do áudio que está sendo reproduzido pelo dispositivo.
+</p>
+<blockquote style="font-family:'Courier';" >When pressed, this code plays the bubble popping sound at the current volume level. And, after that, the code requests audio focus, which means that it essentially wants to be in charge of the audio being played by the device. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Há também algum código nos métodos onResume e OnPause. O método onResume transforma no viva-voz do aparelho e, em seguida, carrega os efeitos de som do sistema, como a chave de efeito som de clique que usamos acima.
+</p>
+<blockquote style="font-family:'Courier';" >There's also some code in the onResume and onPause methods. The onResume method turns on the device's speakerphone and then loads the system's sound effects, like the key click sound effect that we used above. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O método onPause começa por descarregar o SOUNDPOOL e liberá-lo de recursos. E, em seguida, desliga-se viva-voz do aparelho, e descarrega os efeitos sonoros do sistema. As próximas aulas falaremos são toque eo RingtoneManager.
+</p>
+<blockquote style="font-family:'Courier';" >The onPause method begins by unloading the SoundPool and releasing it's resources. And then it turns off the device's speakerphone, and unloads the system sound effects. The next classes we'll talk about are Ringtone and the RingtoneManager. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O RingtoneManager fornece acesso aos clipes de áudio que você ouve, por exemplo, quando um telefonema chega, quando você recebe uma nova mensagem de e-mail, ou quando um alarme dispara. E através da RingtoneManager, os aplicativos podem obter e definir vários toques, e eles podem jogar e parar de jogá-los.
+</p>
+<blockquote style="font-family:'Courier';" >The RingtoneManager provides access to the audio clips that you hear, for example, when a phone call arrives, when you receive a new email message, or when an alarm goes off. And through the RingtoneManager, applications can get and set various ringtones, and they can play and stop playing them. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos ver um exemplo de aplicação que utiliza o RingtoneManager. Agora, esta aplicação é chamado AudioVideoRingtoneManager. E esta aplicação apresenta três botões, toque respectivamente rotulado, notificação e alarme.
+</p>
+<blockquote style="font-family:'Courier';" >Let's see an example application that uses the RingtoneManager. Now, this application is called AudioVideoRingtoneManager. And this application presents three buttons, respectively labeled Ringtone, Notification, and Alarm. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Pressionando um destes botões faz com que o toque padrão associado a jogar. Vamos dar-lhe uma tentativa. Então, aqui está o meu dispositivo. Agora vou iniciar a aplicação AudioVideoRingtoneManager. Como você pode ver, ele exibe os três botões: Ringtone, Notificação, e Alarme.
+</p>
+<blockquote style="font-family:'Courier';" >Pressing one of these buttons causes the associated default ringtone to play. Let's give it a try. So, here's my device. Now I'll start up the AudioVideoRingtoneManager application. As you can see, it displays the three buttons: Ringtone, Notification, and Alarm. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Deixe-me pressionar alguns desses botões. Primeiro, vamos ouvir o toque padrão como eu pressionar o botão de toque. [Som] Agora, vamos experimentar o toque de notificação padrão. [Som] E, finalmente, vamos tentar o toque de alarme padrão.
+</p>
+<blockquote style="font-family:'Courier';" >Let me press some of these buttons. First, let's listen to the default ringtone as I press the ringtone button. [SOUND] Now, let's try the default notification ringtone. [SOUND] And finally, let's try the default alarm ringtone. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>[SOUND] Após este segmento é longo, tente fazer o download, instalar e executar este aplicativo em seu dispositivo e, em seguida, vá para o seu aplicativo de configurações e alterar seus toques padrão. Quando você, em seguida, re-executar este aplicativo, você deve ver que ela desempenha seus novos toques, não seus velhos.
+</p>
+<blockquote style="font-family:'Courier';" >[SOUND] After this segment is over, try downloading, installing, and running this application on your device, and then go to your settings application and change your default ringtones. When you then re-run this application, you should see that it plays your new ringtones, not your old ones. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Então, vamos olhar para o código-fonte para esta aplicação. Aqui está a aplicação AudioVideoRingtoneManager aberto no IDE. Agora, eu vou abrir a atividade principal. No método onCreate, o código cria três botões.
+</p>
+<blockquote style="font-family:'Courier';" >So, let's look at the source code for this application. Here's the AudioVideoRingtoneManager application open in the IDE. Now, I'll open the main activity. In the onCreate method, the code creates three buttons. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos olhar para o botão de toque como um exemplo. Agora, aqui, vemos que quando este botão é clicado, o código usa o RingtoneManager para obter o URI para o telefone toque ringtone padrão. Em seguida, o código obtém o toque associado a esse URI, chamando o método ringtoneManager.getRingtone, passando o URI.
+</p>
+<blockquote style="font-family:'Courier';" >Let's look at the ringtone button as an example. Now here, we see that when this button is clicked, the code uses the RingtoneManager to get the URI for the default phone ringer ringtone. Next, the code gets the ringtone associated with that URI by calling the ringtoneManager.getRingtone method, passing in the URI. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O resultado de tudo isso é passado para um método chamado playRingtone. Vamos rolar para esse método. Agora, esse método verifica para ver se o ringtone está jogando atualmente. E se é, então, que ringtone está parado chamando o método de parada da classe ringtone. Um ringtone atual é então definida na variável mCurrentRingtone, e se o toque atual não é nulo, então o código irá começar jogando.    </p>
+<blockquote style="font-family:'Courier';" >The result of all this is then passed into a method called playRingtone. Let's scroll down to that method. Now, this method checks to see whether the ringtone is currently playing. And if one is, then that ringtone is stopped by calling the ringtone class's stop method. A current ringtone is then set in the mCurrentRingtone variable, and if the current ringtone is not null then the code will start playing it.    </blockquote>
+</body></html>

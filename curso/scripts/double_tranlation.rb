@@ -1,27 +1,27 @@
 @week = "6"
 @path = "../week#{6}/legendas/"
 
-	dir = Dir.entries(@path)
+	dir = Dir.entries(@path+"en/")
 	dir = dir - [".",".."]
 	dir.each do |file|
-		merge(file)
-	end
-
-
-def merge(file)
-		file1 = File.open(@path+"en/"+file,"w+").split("\.\r")
-		file2 = File.open(@path+"pt/"+file.gsub(".txt","")+"_pt2.txt","w+").split("\.\r")
-		out = File.new(@path+"mg/"+file.gsub(".txt","")+"_pt2.txt","w+")
-
-		file1.length do |i|
-			out.puts file1[i]
-			out.puts file2[i]
-		end
+		puts file
+		file1 = File.readlines(@path+"en/"+file)
+		file2 = File.readlines(@path+"pt/"+file.gsub(".txt","")+"_pt.txt")
+		out = File.new(@path+"mg/"+file.gsub(".txt","")+"_mg.html","w+:UTF-8")
+		out.puts "<html><head>
+<meta charset=\"UTF-8\">
+</head> <body>"
 		
-		file1.close
-		file2.close
+		file1.length.times do |i|			
+			out.puts "<p>#{file2[i]}</p>"
+			out.puts "<blockquote style=\"font-family:'Courier';\" \>#{file1[i]}</blockquote>"
+		end
+		out.puts "</body></html>"
+
 		out.close
-end
+
+		
+	end
 
 
 def duplicate(file)

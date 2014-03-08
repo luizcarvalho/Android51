@@ -1,0 +1,314 @@
+<html><head>
+<meta charset="UTF-8">
+</head> <body>
+<p>Dispositivos portáteis de hoje vêm com processadores poderosos e brilhantes, telas de alta densidade e aplicativos podem usar esses recursos para apresentar elementos gráficos ricos para o usuário, além de animar estes elementos e dar ao usuário uma experiência visual fluida e dinâmica.
+</p>
+<blockquote style="font-family:'Courier';" >Today's handheld devices come with powerful CPUs and bright, high density displays, and applications can use these capabilities to present rich graphical elements to the user, and to animate those elements to give the user a fluid and dynamic visual experience. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Nesta artigo, vamos falar sobre como os aplicativos podem fazer isso através do uso cuidadoso de animações gráficas em 2D. Vou começar esta lição, discutindo o suporte do Android para gráficos 2D.
+</p>
+<blockquote style="font-family:'Courier';" >In this lesson, we'll talk about how applications do this through the careful use of two dimensional graphics and animation. I'll start this lesson by discussing Android support for two dimensional, or 2D, graphics. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Eu vou falar sobre como os aplicativos podem chamar , tanto estaticamente quanto dinamicamente, estes elementos em sua tela utilizando a classe imageView ImageView e a classe Canvas. Em seguida, vou falar sobre as várias maneiras que você pode utilizar para animar facilmente as views e proporcionar efeitos simples como mudar o tamanho e a posição das views, e ainda efeitos fade-in e fade out.
+</p>
+<blockquote style="font-family:'Courier';" >I'll talk about how applications can draw both static and dynamically changing elements to their displays using the ImageView class and using the Canvas class. Next, I'll talk about the various ways with which you an easily animate views to provide simple effects like changing a view size and position, and fading a view in and out. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E, por último, eu vou terminar com uma discussão mais geral da animação propriedade, que fornece aos aplicativos um quadro geral para animar não só os simples propriedades da vista, mas, essencialmente, quaisquer outras propriedades também.
+</p>
+<blockquote style="font-family:'Courier';" >And lastly, I'll finish up with a more general discussion of property animation, which gives applications a general framework for animating not only simple view properties, but essentially any other properties as well. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Quando seu aplicativo quer colocar gráficos 2D na tela, ele pode fazer isso de diferentes maneiras. Em particular, ele pode desenhar o gráfico de uma vista, ou pode chamar de uma tela. Desenho de um ponto de vista é mais simples, mas menos flexíveis. Você vai usar esta opção quando os gráficos que você deseja desenhar são simples, e quando você não pretende atualizá-los, muitas vezes, se em tudo.
+</p>
+<blockquote style="font-family:'Courier';" >When your application wants to put 2D graphics on the display, it can do that in different ways. In particular, it can draw the graphic to a view, or it can draw to a canvas. Drawing to a view is simpler, but less flexible. You'll use this option when the graphics you want to draw are simple, and when you don't plan to update them too often, if at all. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Desenho de uma tela é mais complicado, mas também mais poderoso e mais flexível. E você vai seguir esse caminho quando os gráficos que você deseja desenhar são mais complexas e quando você espera para atualizar os gráficos com bastante frequência. Há muitas maneiras de desenhar com vistas. Mas nesta lição eu vou focar no desenho usando a classe drawable.
+</p>
+<blockquote style="font-family:'Courier';" >Drawing to a canvas is more complicated, but also more powerful and more flexible. And you'll go this route when the graphics you want to draw are more complex and when you expect to update those graphics fairly frequently. There are many ways to draw with views. But in this lesson I'll focus on drawing using the drawable class. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>A drawable representa algo que pode ser desenhado. Coisas como bitmaps, cores, formas e muito mais. Alguns drawables simples incluem a classe ShapeDrawable, que representa uma forma, como um retângulo ou um oval.
+</p>
+<blockquote style="font-family:'Courier';" >A drawable represents something that can be drawn. Things like bitmaps, colors, shapes, and much more. Some simple drawables include the ShapeDrawable class, which represents a shape such as a rectangle or an oval. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>A classe BitmapDrawable, o que representa uma matriz de pixels. E a classe ColorDrawable, o que representa uma cor sólida. Em nossas aplicações exemplo para esta lição, vamos muitas vezes criar um objeto drawable e anexá-lo a uma visão de imagem, e então vamos deixar o ponto de vista de imagem lidar com todo o desenho real para nós.
+</p>
+<blockquote style="font-family:'Courier';" >The BitmapDrawable class, which represents a matrix of pixels. And the ColorDrawable class, which represents a solid color. In our example applications for this lesson, we'll often create a drawable object and attach it to an image view, and then we'll let the image view handle all the actual drawing for us. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Tal como acontece com recursos de interface de usuário do Android que já vimos, você pode fazer isso através de arquivos XML, ou você pode fazê-lo através de instruções explícitas do programa. Nossas aplicações primeiro exemplo são chamados GraphicsBubble Programa GraphicsBubble XML e.
+</p>
+<blockquote style="font-family:'Courier';" >As with Android user interface features we've already seen, you can do this via XML files, or you can do it via explicit program instructions. Our first example applications are called GraphicsBubble XML and GraphicsBubble Program. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Estas aplicações simples tanto exibir uma única imagem vista, e que vista imagem tem uma imagem bitmap de uma bolha de sabão. Vamos dar uma olhada.   Então aqui está o meu dispositivo. Agora, vou começar uma das aplicações, GraphicsBubbleXML.  
+</p>
+<blockquote style="font-family:'Courier';" >These simple applications both display a single image view, and that image view holds a bitmap image of a soap bubble. Let's take a look.   So here's my device. Now, I'll start one of the applications, GraphicsBubbleXML.   
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E lá você pode ver a imagem bolha simples. Ok, então vamos olhar para o código-fonte para esses dois aplicativos começando com o código para GraphicsBubbleXML. Então aqui está o aplicativo aberto no IDE. Eu agora vou abrir a atividade principal para esta aplicação. Como você pode ver, é muito simples.
+</p>
+<blockquote style="font-family:'Courier';" >And there you can see the simple bubble image. Okay, so let's look at the source code for both of these applications starting with the code for GraphicsBubbleXML. So here's the application open in the IDE. I'll now open the main activity for this application. As you can see, it's very simple. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Tudo que faz é chamar setContentView usando o arquivo de layout main.xml. Vamos abrir esse arquivo. Aqui está o arquivo XML. E especifica que todo o layout é um layout relativo. E aninhado dentro do esquema relativo é uma visão da imagem.
+</p>
+<blockquote style="font-family:'Courier';" >All it does is call setContentView using the main.xml layout file. Let's open that file. Here's the XML file. And it specifies that the entire layout is a relative layout. And nested inside the relative layout is an image view.
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Esta visão imagem tem uma largura de layout e uma altura de 250 pixels de layout independentes de densidade, ou DP. O ponto de vista de imagem também é centrada dentro de seu pai, o layout relativo. E, finalmente, o bitmap real para a bolha está em um dos diretórios drawable e é chamado B128 Vamos também olhar para um aplicativo que faz a mesma coisa, mas que constrói sua interface de programação.
+</p>
+<blockquote style="font-family:'Courier';" > This image view has a layout width and a layout height of 250 density independent pixels, or DP. The image view is also centered inside its parent, the relative layout. And finally, the actual bitmap for the bubble is in one of the drawable directories and it's called B128   Let's also look at an application that does the same thing but that builds its user interface programmatically. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Então aqui está a aplicação GraphicsBubbleProgram aberto no IDE. Eu agora vou abrir a atividade principal para esta aplicação. E este aplicativo chama também setContentView usando o principal.Arquivo de layout XML. Mas, neste caso, que o layout inclui apenas o layout em relação externa com nada dentro dela.
+</p>
+<blockquote style="font-family:'Courier';" > So here's the GraphicsBubbleProgram application open in the IDE. I'll now open the main activity for this application. And this application also calls setContentView using the main.XML layout file. But in this case, that layout includes only the outermost relative layout with nothing inside it. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos abrir esse arquivo. Então aqui está o arquivo XML, e como eu disse, apenas especifica que todo o layout é um layout familiar, mas não tem nenhum visualizações criança dentro dele. Então, voltando à atividade principal, este código continua criando uma visualização da imagem.
+</p>
+<blockquote style="font-family:'Courier';" > Let's open that file. So here's the XML file, and like I said it just specifies that the entire layout is a relative layout, but it doesn't have any child views inside of it. So going back to the main activity, this code continues by creating an image view. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, ele define o bitmap como o B128 drawable imagem para a exibição de imagem. Depois disso, o código continua por definir todas as propriedades de layout que vimos antes na versão XML. Primeiro, ele define a altura e largura da imagem vista.
+</p>
+<blockquote style="font-family:'Courier';" > Next, it sets the b128 bitmap as the image drawable for the image view. After that, the code continues by setting all the layout properties that we saw before in the XML version. First, it sets the height and width of the image view. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Esses valores são armazenados em outro arquivo chamado dimens.xml que está armazenado nos res \ valoriza diretório. Em seguida, o código cria um objeto relativelayout.layoutparams com a altura ea largura correta. Depois que o código adiciona uma regra para o objeto LayoutParams que diz Android para centralizar essa visão imagem dentro do pai disposição relativa.
+</p>
+<blockquote style="font-family:'Courier';" > These values are stored in another file called dimens.xml that's stored in the res\values directory. Next, the code creates a relativelayout.layoutparams object with the correct height and width. After that the code adds a rule to the layoutparams object which tells Android to center this image view inside the relative layout parent. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, o código define esses parâmetros de layout ou propriedades de layout na visão da imagem. E, finalmente, ele adiciona o ponto de vista de imagem como uma criança do layout relativo. Então, vamos falar sobre alguns outros tipos de drawables. Um tipo de drawable é a forma drawable.
+</p>
+<blockquote style="font-family:'Courier';" > Then the code sets these layout parameters or layout properties on the image view. And finally, it adds the image view as a child of the relative layout. So let's talk about some other kinds of drawables. One kind of drawable is the shape drawable. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Drawables Forma são usados ​​para desenhar formas simples. Diferentes formas são representadas por diferentes subclasses da classe forma, incluindo PathShape para segmentos de linha e curvas, RectShape para retângulos e OvalShape para ovais e anéis.
+</p>
+<blockquote style="font-family:'Courier';" > Shape drawables are used for drawing simple shapes. Different shapes are represented by different subclasses of the shape class, including PathShape for line segments and curves, RectShape for rectangles, and OvalShape for ovals and rings. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Nossas aplicações próximo exemplo são chamados GraphicsShapeDrawXML e GraphicsShapeDrawProgram. Estas aplicações exibir dois ovais na estrutura de um parente. As duas formas têm diferentes cores, se sobrepõem parcialmente uns aos outros, e estão semitransparente.
+</p>
+<blockquote style="font-family:'Courier';" > Our next example applications are called GraphicsShapeDrawXML, and GraphicsShapeDrawProgram. These applications display two ovals within a relative layout. The two shapes have different colors, partially overlap each other, and are semitransparent. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos executar esses aplicativos.   Então aqui está o meu dispositivo, e agora eu vou começar uma das aplicações, GraphicsShapeDrawXML. E lá você pode ver as duas ovais. O da esquerda é ciano colorido. E o da direita é magenta colorido.
+</p>
+<blockquote style="font-family:'Courier';" > Let's run those applications.   So here's my device, and now I'll start one of the applications, GraphicsShapeDrawXML. And there you can see the two ovals. The one on the left is cyan colored. And the one on the right is magenta colored. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Como você também pode ver, as ovais sobrepõem uns aos outros. E onde elas se sobrepõem, as cores foram misturadas para formar uma espécie de cor violeta. Vamos olhar para o código-fonte para essas aplicações. Então aqui está a aplicação GraphicsShapeDrawXML aberto no IDE.
+</p>
+<blockquote style="font-family:'Courier';" > As you can also see, the ovals overlap each other. And where they overlap, their colors have mixed to form a kind of violet color. Let's look at the source code for these applications. So here's the GraphicsShapeDrawXML application open in the IDE. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Eu agora vou abrir a atividade principal para esta aplicação. Mais uma vez o aplicativo só chama setContentView usando o principal.Arquivo de layout XML. Vamos abrir esse arquivo. Aqui está o arquivo XML, e especifica que todo o layout é um layout relativo.
+</p>
+<blockquote style="font-family:'Courier';" > I'll now open the main activity for this application. Again the application only calls setContentView using the main.XML layout file. Let's open that file. Here's the XML file, and it specifies that the entire layout is a relative layout. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E aninhada que o layout relativa são dois pontos de vista de imagem. Ambas as visões de imagem têm larguras e alturas de layout de layout de 250 DP. Ambos adicionar algum espaço, ou estofamento, em torno de seus conteúdos. E ambos estão centradas verticalmente dentro do layout em relação pai.
+</p>
+<blockquote style="font-family:'Courier';" > And nested inside that relative layout are two image views. Both image views have layout widths and layout heights of 250 DP. Both add some space, or padding, around their contents. And both are centered vertically inside the parent relative layout. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>A primeira exibição da imagem, no entanto, está alinhado com o lado esquerdo do pai, enquanto a segunda exibição da imagem é alinhado à direita. E, finalmente, o conteúdo real visualização da imagem é definida usando o Android: fonte atributo. Pela primeira vista de imagem, essa fonte refere-se a um chamado cyan_shape drawable. Vamos abrir esse arquivo.
+</p>
+<blockquote style="font-family:'Courier';" > The first image view, however, is aligned to the left side of the parent while the second image view is aligned to the right. And finally, the actual image view content is defined using the Android:source attribute. For the first image view, that source refers to a drawable called cyan_shape. Let's open that file. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Está nas res \ diretório drawable. Este arquivo especifica que esta é susceptível de ser estirado de uma forma, que a sua forma específica é uma forma oval, e que a sua cor é determinada por este valor hexadecimal. Claro, há um arquivo semelhante para a forma magenta.
+</p>
+<blockquote style="font-family:'Courier';" > It's in the res\drawable directory. This file specifies that this drawable is a shape, that its specific shape is an oval, and that its color is given by this hexadecimal value. Of course, there's a similar file for the magenta shape.
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E, como antes, podemos fazer exatamente as mesmas coisas de forma programática. Vamos dar uma olhada no aplicativo GraphicsShapeDrawProgram, que eu também tenho aberto no IDE. Eu agora vou abrir a atividade principal para esta aplicação.
+</p>
+<blockquote style="font-family:'Courier';" > And as before, we can do the exact same things programmatically. Let's take a look at the GraphicsShapeDrawProgram application, which I've also got open in the IDE. I'll now open the main activity for this application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Mais uma vez, o aplicativo só chama setContentView usando o principal.Arquivo de layout XML. Esse arquivo apenas especifica que todo o layout é um layout relativo. Agora, o código encontra as larguras de layout, alturas de layout e estofamento.
+</p>
+<blockquote style="font-family:'Courier';" > Again, the application only calls setContentView using the main.XML layout file. That file just specifies that the entire layout is a relative layout. Now, the code finds the layout widths, layout heights, and padding. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, o código obtém uma referência para o layout em relação pai e, depois disso, ele cria uma nova forma drawable que tem uma forma oval. Ele continua definindo a cor da forma, sua altura e largura, e sua transparência.
+</p>
+<blockquote style="font-family:'Courier';" > Next, the code gets a reference to the parent relative layout, and after that, it creates a new shape drawable that has an oval shape. It continues by setting the shape's color, its height and width, and its transparency. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, o código cria uma visualização de imagem e coloca a nova forma para ele. Ele também define o preenchimento na visão da imagem. Em continuando, o código define alguns parâmetros de layout para a visualização da imagem. Especificamente, ele centraliza a exibição da imagem na vertical no layout relativa, e alinha este ponto de vista de imagem para o lado esquerdo do pai.
+</p>
+<blockquote style="font-family:'Courier';" > Next, the code creates an image view and puts the new shape into it. It also sets the padding on the image view. In continuing on, the code sets some layout parameters for the image view. Specifically, it centers the image view vertically in the relative layout, and it aligns this image view to the left side of the parent. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O código, em seguida, termina-se fazendo coisas semelhantes para a vista magenta. Agora, se você quer fazer o desenho mais complexo, você também pode desenhar com uma lona. E para fazer isso, você precisa de quatro coisas: um bitmap, que é essencialmente a matriz de pixels que deseja aproveitar, uma lona, ​​que recebe as chamadas de desenho que irá atualizar o bitmap subjacente; uma primitiva de desenho, que representa o específico desenho operação que pretende emitir, e um objeto de tinta, que permite que você defina várias cores e estilos para a operação de desenho que você quer fazer.
+</p>
+<blockquote style="font-family:'Courier';" > The code then finishes up by doing similar things for the magenta view. Now, if you want to do more complex drawing, you can also draw with a canvas. And to do this, you need four things: a bitmap, which is essentially the matrix of pixels that you want to draw on; a canvas, which hosts the drawing calls that will update the underlying bitmap; a drawing primitive, which represents the specific drawing operation that you want to issue; and a paint object, which allows you to set various colors and styles for the draw operation you want to do. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Nós vamos entrar em mais detalhes sobre a classe Canvas em apenas um pouco, mas telas oferecem uma variedade de métodos de desenho. Por exemplo, você pode desenhar texto, pontos, cores, ovais e bitmaps usando esses métodos.
+</p>
+<blockquote style="font-family:'Courier';" > We'll go into more details about the Canvas class in just a bit, but canvases provide a variety of drawing methods. For example, you can draw text, points, colors, ovals, and bitmaps using these methods. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Quando você desenha, você pode usar a classe Paint para definir os parâmetros de estilo. Por exemplo, você pode especificar coisas como a espessura das linhas, o tamanho do texto, a cor do que você está desenhando, e se deve ou não aplicar várias otimizações, como a suavização.
+</p>
+<blockquote style="font-family:'Courier';" > When you draw, you can use the Paint class to set style parameters. For instance, you can specify things like the thickness of lines, the size of text, the color of what you're drawing, and whether or not to apply various optimizations such as antialiasing. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Que é usado para suavizar as bordas recortadas de uma imagem. Vamos olhar para uma aplicação simples que atrai várias caixas, cada uma das quais possuem algum texto. Mas ele faz isso usando diferentes configurações de pintura para cada uma das caixas. Então aqui está o meu dispositivo. Agora vou iniciar a aplicação GraphicsPaint.
+</p>
+<blockquote style="font-family:'Courier';" > Which is used to smooth out an image's jagged edges. Let's look at a simple application that draws several boxes, each of which hold some text. But it does so using different paint settings for each of the boxes. So here's my device. Now I'll start the GraphicsPaint application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O aplicativo é iniciado e exibe quatro retângulos dispostos um sobre o outro. Cada um destes rectângulos tem algum texto, cada um dos quais é de um tamanho diferente. Cada retângulo também tem uma largura de borda diferente e estilo de borda, e tem uma cor de fundo diferente.
+</p>
+<blockquote style="font-family:'Courier';" > The application starts up and displays four rectangles laid out one on top of the next. Each of these rectangles has some text, each of which is of a different size and style. Each rectangle also has a different border width, and border style, and has a different background color. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos olhar para o código-fonte para essas aplicações. Vamos escolher alguns desses parâmetros de estilo e ver como eles são especificados. Então aqui está a aplicação GraphicsPaint aberto no IDE. Como alguns dos que vimos antes, o método OnCreate desta aplicação só chama setContentView, passando uma referência a um principal.Arquivo de layout XML.
+</p>
+<blockquote style="font-family:'Courier';" > Let's look at the source code for these applications. We'll pick out a few of these style parameters and see how they're specified. So here's the GraphicsPaint application open in the IDE. Like some of those we saw before, this application's oncreate method only calls setContentView, passing in a reference to a main.XML layout file. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos abrir esse arquivo. Aqui está o arquivo XML. E especifica que todo o layout é um layout linear, e que o layout linear tem quatro filhos, cada um dos quais é uma exibição de texto. Se olharmos para o primeiro desses pontos de vista de texto, podemos ver que ele define vários atributos de estilo de texto.
+</p>
+<blockquote style="font-family:'Courier';" > Let's open up that file. Here's the XML file. And it specifies that the entire layout is a linear layout, and that linear layout has four children, each of which is a text view. If we look at the first of these text views, we can see that it sets several text style attributes. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Por exemplo, este define sua cor de texto a este valor hexadecimal. O tamanho do texto para 32 pixels independentes de escala, ou SP. Tem estilo para negrito e itálico, e sua fonte ao normal. Se você olhar para esses outros, os outros pontos de vista de texto, você verá que eles fazem diferentes escolhas estilísticas. Esta visão texto também especifica um fundo, que está em um arquivo chamado SQ1.xml, que é a res \ diretório drawable.
+</p>
+<blockquote style="font-family:'Courier';" > For instance, this one sets its text color to this hexadecimal value. The text size to 32 scale independent pixels, or SP. It's styled to bold and italic, and its typeface to normal. If you look at these other, the other text views, you'll see that they make different stylistic choices. This text view also specifies a background, which is in a file called SQ1.xml, which is the res\drawable directory. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos abrir esse arquivo. Então aqui está o arquivo SQ1.xml, e como você pode ver, este arquivo define uma forma. Essa forma é um retângulo, e tem uma cor sólida. Neste caso, a cor branca, que passa a ser definido por Android. E, finalmente, a forma tem uma fronteira com uma largura de três pixels, e tem uma cor de fundo. Que neste caso é um preto totalmente opaco.    </p>
+<blockquote style="font-family:'Courier';" > Let's open that file. So here's the SQ1.xml file, and as you can see, this file defines a shape. That shape is a rectangle, and it has a solid color. In this case, a white color, which happens to be defined by Android. And finally, the shape has a border with a three pixel width, and it has a background color. Which in this case is a fully opaque black.    </blockquote>
+</body></html>

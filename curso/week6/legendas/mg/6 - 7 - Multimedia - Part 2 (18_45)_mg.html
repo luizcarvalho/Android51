@@ -1,0 +1,390 @@
+<html><head>
+<meta charset="UTF-8">
+</head> <body>
+<p>A próxima aula é o MediaPlayer. MediaPlayer controla a reprodução de áudio e vídeo e arquivos. E isso permite que você incorporar áudio e vídeo em suas aplicações, e para permitir que os aplicativos e usuários que controlar a reprodução.
+</p>
+<blockquote style="font-family:'Courier';" >The next class is the MediaPlayer. MediaPlayer controls the playback of audio and video streams and files. And this allows you to incorporate audio and video into your applications, and to let the applications and users control that playback. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Esta classe funciona de acordo com uma máquina de estado complexo, que eu não vou entrar aqui nesta lição, por isso, dar uma olhada no seguinte site para mais informações o. Alguns dos métodos que é provável que você usa quando você usa o MediaPlayer incluem setDataSource, que informa o media player que flui para jogar.
+</p>
+<blockquote style="font-family:'Courier';" >This class operates according to a complex state machine, which I won't go over here in this lesson, so please take a look at the following website for more information. Some of the methods that you're likely to use when you use the MediaPlayer include SetDataSource, which tells the media player which streams to play. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Prepare, que inicializa o media player e carrega os fluxos necessários. O método de preparar é síncrono, e você normalmente vai usá-lo quando o conteúdo de mídia são armazenados em um arquivo no dispositivo. E há também uma versão assíncrona do método. Que pode ser usado, por exemplo, quando a mídia é transmitido a partir da internet.
+</p>
+<blockquote style="font-family:'Courier';" >Prepare, which initializes the media player and loads the necessary streams. The prepare method is synchronous, and you'll normally use it when the media content is stored in a file on the device. And there's also a asynchronous version of this method. Which can be used, for example, when the media is streamed from the internet. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Há também um método de início, para iniciar ou retomar a reprodução. Um método pause, parar de jogar temporariamente. Um método seekTo, para se deslocar para uma posição particular no córrego. Um método stop, parar de jogar a mídia.
+</p>
+<blockquote style="font-family:'Courier';" >There's also a start method, to start or resume playback. A pause method, to stop playing temporarily. A seekTo method, to move to a particular position in the stream. A stop method, to stop playing the media. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E o método de liberação, que libera os recursos usados ​​pelo atual media player. Outra classe que pode ser usado para visualizar o conteúdo de vídeo é a classe VideoView. E esta classe é uma sub-classe de SurfaceView e faz internamente uso do media player que acabamos de falar.
+</p>
+<blockquote style="font-family:'Courier';" >And the release method, which releases the resources used by the current media player. Another class that can be used to view video content is the VideoView class. And this class is a sub-class of SurfaceView and internally makes use of the media player we just talked about. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Esta classe pode carregar o conteúdo de vídeo a partir de diferentes fontes, e inclui uma série de métodos e controles para torná-lo mais fácil de visualizar o conteúdo do vídeo. Nosso próximo exemplo de aplicação é chamado AudioVideoVideoPlay, e esta aplicação apresenta uma visão simples, com controles de reprodução de vídeo, e permite ao usuário reproduzir um arquivo de vídeo.
+</p>
+<blockquote style="font-family:'Courier';" >This class can load video content from different sources, and it includes a number of methods and controls to make it easier to view video content. Our next example application is called AudioVideoVideoPlay, and this application displays a simple view with video playback controls, and allows the user to play a video file. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Neste caso, o filme é um clipe do filme 1902, Uma Viagem à Lua, de Georges Méliès. Vamos dar uma olhada. Então aqui está o meu dispositivo. E agora eu vou iniciar a aplicação AudioVideoVideoPlay. Se eu agora toque no visor, você pode ver que um conjunto de controles de reprodução aparecem.
+</p>
+<blockquote style="font-family:'Courier';" >In this case, the film is a clip from the 1902 film, A Trip to the Moon, by Georges Méliès. Let's take a look. So here's my device. And now I'll start up the AudioVideoVideoPlay application. If I now touch the display, you can see that a set of playback controls appear.
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E agora eu vou acertar o único triângulo eo vídeo vai começar a jogar. Aqui vamos nós    Vamos dar uma olhada no código fonte para esta aplicação.   Aqui está a aplicação AudioVideoVideoPlay aberto no IDE. E agora eu vou abrir a atividade principal. Em OnCreate, o código primeiro obtém uma referência a um vídeo que é vista em layout do atividade.
+</p>
+<blockquote style="font-family:'Courier';" > And now I'll hit the single triangle and the video will begin playing. Here we go.   Let's take a look at the source code for this application.   Here's the AudioVideoVideoPlay application open in the IDE. And now I'll open the main activity. In OnCreate, the code first gets a reference to a video view that's in this activity's layout. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, ele cria um controlador de mídia, que é uma visão que contém controles para controlar o media player. O código continua desativando os controles de mídia e, em seguida, anexando este controlador de mídia para a exibição de vídeo, com uma chamada ao método setMediaController da visualização de vídeo.
+</p>
+<blockquote style="font-family:'Courier';" > Next, it creates a media controller, which is a view that contains controls for controlling the media player. The code continues by disabling the media controls, and then by attaching this media controller to the video view, with a call to the video view's setMediaController method. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, o código identifica o arquivo de mídia para jogar, passando um URI que aponta para um arquivo armazenado no diretório / matéria-res. Depois disso, o código define uma OnPreparedListener na vista de vídeo. Este código será chamado, uma vez que a mídia está carregada e pronta para jogar.
+</p>
+<blockquote style="font-family:'Courier';" > Next, the code identifies the media file to play, passing in a URI that points to a file stored in the res/raw directory. After that, the code sets an OnPreparedListener on the video view. This code will be called, once the media is loaded and ready to play. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E quando isso acontece, o código permitirá que o controlador de mídia, de modo que o usuário pode iniciar a reprodução do filme. E, finalmente, para baixo no método onPause, o código fecha o ponto de vista de vídeo. A próxima aula vamos discutir é o MediaRecorder. Agora, esta classe pode ser usado para gravar áudio e vídeo.
+</p>
+<blockquote style="font-family:'Courier';" > And when that happens, the code will enable the media controller, so the user can start the film playing. And finally, down in the onPause method, the code shuts down the video view. The next class we'll discuss is the MediaRecorder. Now this class can be used to record both audio and video. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>A classe opera de acordo com uma máquina de estado, que você pode ler mais sobre, neste URL.   Agora, alguns dos métodos gravador de mídia que você provavelmente vai usar incluem setAudioSource e setVideoSource.
+</p>
+<blockquote style="font-family:'Courier';" > The class operates in accordance with a state machine, which you can read more about, at this URL.   Now some of the media recorder methods that you'll likely use include setAudioSource, and setVideoSource. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Que defina a fonte de insumo, como o microfone para áudio, ou uma câmara de vídeo. SetOutputFormat, que define o formato de saída para a gravação. Por exemplo, mp4. Prepare, que prepara o gravador para iniciar a captura e codificação de dados.
+</p>
+<blockquote style="font-family:'Courier';" > Which set the source of the input, such as the microphone for audio, or a camera for video. SetOutputFormat, which sets the output format for the recording. For instance, mp4. Prepare, which readies the recorder to begin capturing and encoding data. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Start, que inicia o processo de gravação. Pare, que interrompe o processo de gravação. E liberar, que libera os recursos mantidos por este MediaRecorder. Nosso próximo exemplo de aplicação é AudioVideoAudioRecording.
+</p>
+<blockquote style="font-family:'Courier';" > Start, which starts the actual recording process. Stop, which stops the recording process. And release, which releases the resources held by this MediaRecorder. Our next example application is AudioVideoAudioRecording. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Agora esta aplicação registros de áudio do usuário e pode jogar o áudio gravado de volta para o usuário. Vamos usar esse aplicativo para capturar minha voz. Então aqui está o meu dispositivo.   E agora eu vou iniciar a aplicação AudioVideoAudioRecording.
+</p>
+<blockquote style="font-family:'Courier';" > Now this application records audio from the user and can play the recorded audio back to the user. Let's use this application to capture my voice. So here's my device.   And now I'll start up the AudioVideoAudioRecording application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Este aplicativo exibe dois botões de alternância, um rotulado de início e um rotulado Playback Start. Ao pressionar o botão Start Recording o aplicativo irá iniciar a gravação.
+</p>
+<blockquote style="font-family:'Courier';" > This application displays two toggle buttons, one labeled Start Recording and one labeled Start Playback. When I press the Start Recording button the application will begin recording. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Etiqueta do botão mudará para parar a gravação, eo botão de reprodução será desativado.   Ao pressionar novamente o botão iniciar a gravação, a gravação pára. Etiqueta do botão mudará para trás, e o botão de reprodução será ativado novamente.
+</p>
+<blockquote style="font-family:'Courier';" > The button's label will change to Stop Recording, and the play back button will be disabled.   When I press the start recording button again, the recording will stop. The button's label will change back, and the playback button will be enabled again. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos testá-lo. Agora eu vou pressionar o botão Iniciar Gravação.   Teste, teste, um, dois, três, ensaios. E agora que eu tenha pressionado o botão novamente, a gravação é concluída, e salvo, e no botão Iniciar reprodução agora está ativado.
+</p>
+<blockquote style="font-family:'Courier';" > Let's try it out. Now I'll press the Start Recording button.   Testing, testing, one, two, three, testing. And now that I've pressed the button again, the recording is finished, and saved, and the Start Playback button is now enabled. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Permitam-me que pressione um agora. Teste, teste, um, dois, três, ensaios. E agora eu vou pressionar o botão novamente. E estamos de volta ao ponto de partida. Vamos olhar para o código-fonte para esta aplicação.
+</p>
+<blockquote style="font-family:'Courier';" > Let me press that one now. Testing, testing, one, two, three, testing. And now I'll press that button again. And we're back to where we started. Let's look at the source code for this application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Aqui está a aplicação AudioVideoAudioRecording aberto no IDE. Agora vou abrir a atividade principal. No onCreate o código primeiro recebe referências aos dois botões de alternância. Em seguida, ele cria um onCheckChangeListener, em cada um dos botões de alternância.
+</p>
+<blockquote style="font-family:'Courier';" > Here's the AudioVideoAudioRecording application open in the IDE. Now I'll open the main activity. In onCreate the code first gets references to the two toggle buttons. Next it sets up an onCheckChangeListener, on each of the toggle buttons. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Este código é chamado quando o estado de seleção de um botão de alternância mudanças. Vamos olhar para o primeiro botão de alternância que é o botão de gravação.   Quando verificados mudanças de estado deste botão, digamos, de desligado para ligado, este código vai primeiro desativar o botão play, e, em seguida, irá chamar o método onRecordPressed.
+</p>
+<blockquote style="font-family:'Courier';" > This code is called when the check state of a toggle button changes. Let's look at the first toggle button which is the recording button.   When this button's checked state changes, say from off to on, this code will first disable the play button, and then will call the onRecordPressed method. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O botão de reprodução faz algo semelhante. O primeiro altera o estado de habilitado o botão de gravação, desativá-lo se o usuário deseja iniciar a reprodução. Ou que lhe permite, se o usuário quiser parar a reprodução.
+</p>
+<blockquote style="font-family:'Courier';" > The playback button does something similar. It first changes the enabled state of the recording button, disabling it if the user wants to start playback. Or enabling it, if the user wants to stop playback. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Depois disso, ele chama o método onPlayPressed. Vamos olhar para o método onRecordPressed primeiro. Como você pode ver, este método tem um valor booleano como parâmetro chamado shouldStartRecording.
+</p>
+<blockquote style="font-family:'Courier';" > After that, it then calls the onPlayPressed method. Let's look at the onRecordPressed method first. As you can see, this method takes a Boolean as a parameter called shouldStartRecording. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Se shouldStartRecording é verdade, então o código chama o método startRecording. Caso contrário, ele chama o método stoprecording. O método de gravação start primeiro cria um novo gravador de mídia e, em seguida, define a sua fonte como microfone.
+</p>
+<blockquote style="font-family:'Courier';" > If shouldStartRecording is true, then the code calls the startRecording method. Otherwise, it calls the stopRecording method. The start recording method first creates a new media recorder and then sets its source as the microphone. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, ele define o formato de saída. E, em seguida, o arquivo de saída onde a gravação será salva. E, em seguida, ele define o codificador para o arquivo de áudio. Agora continuando, as chamadas de código preparar para obter o gravador pronto, e então, finalmente, ele chama o método start para iniciar a gravação.  
+</p>
+<blockquote style="font-family:'Courier';" > Then it sets the output format. And then the output file where the recording will be saved. And then it sets the encoder for the audio file. Now continuing on, the code calls prepare to get the recorder ready, and then finally it calls the start method to begin recording.   
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O método de gravação parada em vez disso, pára o gravador de mídia e, em seguida, libera seus recursos.   Se o usuário em vez tivesse pressionado o botão de reprodução, então onPlayPressed teria sido chamado. Se o botão foi marcada, então o parâmetro shouldStartPlaying seria verdade.
+</p>
+<blockquote style="font-family:'Courier';" > The stop recording method instead, stops the media recorder and then releases its resources.   If the user instead had pressed the playback button, then onPlayPressed would have been called. If the button was checked then the parameter shouldStartPlaying would be true. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Se assim for, o método start playing é chamado, caso contrário, o método de parar de jogar é chamado. O método start playing começa criando um media player. E em seguida, segue-se, definindo sua fonte de dados, em seguida, chamando preparar no media player, e em seguida, chamando o método start.
+</p>
+<blockquote style="font-family:'Courier';" > If so, the start playing method is called, otherwise the stop playing method is called. The start playing method starts by creating a media player. And then follows up by setting its data source, then by calling prepare on the media player, and then by calling the start method. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O método de parar de jogar vai parar o media player e, em seguida, liberar os recursos do media player.   A última aula vamos falar sobre, nesta lição, é a classe câmera. Esta classe permite que os aplicativos para acessar o serviço de câmera. O código de baixo nível que gerencia o hardware da câmera real no seu dispositivo.
+</p>
+<blockquote style="font-family:'Courier';" > The stop playing method will stop the media player, and then release the media player's resources.   The last class we'll talk about, in this lesson, is the camera class. This class allows applications to access the camera service. The low level code that manages the actual camera hardware on your device. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Agora, através desta classe o aplicativo pode gerenciar as configurações para a captura de imagens. Iniciar e parar uma função de visualização, que permite que você use a tela de dispositivos como uma espécie de visão da câmera finder. E o mais importante, ele permite que você tire fotos e vídeos. Para usar os recursos da câmera que você precisa definir algumas permissões e recursos.
+</p>
+<blockquote style="font-family:'Courier';" > Now, through this class your application can manage settings for capturing images. Start and stop a preview function, which allows you to use the devices display as a kind of camera view finder. And most importantly, it allows you to take pictures and video. To use the camera features you'll need to set some permissions, and features. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Você vai precisar de pelo menos a permissão de câmera, e você provavelmente vai querer incluir uma tag de usos de recursos no seu manifesto Android arquivo xml. Que especifica a necessidade de uma câmera. E você pode querer especificar que seu aplicativo requer outros sub-recursos, como foco automático ou um flash.
+</p>
+<blockquote style="font-family:'Courier';" > You'll need at least the camera permission, and you'll probably want to include a uses-feature tag in your Android manifest .xml file that specifies the need for a camera. And you may want to specify that your application requires other sub-features, such as autofocus or a flash. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Embora você possa facilmente usar o construída em aplicativo de câmera para tirar fotos, você pode querer adicionar algumas funções para um aplicativo de câmera tradicional. Ou, você pode querer usar a câmera para outros fins.
+</p>
+<blockquote style="font-family:'Courier';" > Although you can easily use the built in camera application to take pictures, you might want to add some features to a traditional camera application. Or, you might want to use the camera for other purposes. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Nesse caso, você pode seguir os seguintes passos. Primeiro, você tem uma instância câmera. Em seguida, você pode definir os parâmetros da câmera que você pode precisar. Depois disso, você vai querer configurar a tela de visualização, para que o usuário pode ver o que a câmera vê.
+</p>
+<blockquote style="font-family:'Courier';" > In that case, you can follow the following steps. First, you get a camera instance. Next, you can set any camera parameters that you might need. After that, you will want to setup the preview display, so the user can see what the camera sees. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Em seguida, você vai começar a pré-visualização, e você vai mantê-lo funcionando, até que o usuário tira uma foto. E uma vez que o usuário tira uma foto, o aplicativo irá receber e processar a imagem da imagem. E então, finalmente, o aplicativo vai liberar a câmera para que outras aplicações podem ter acesso a ele.
+</p>
+<blockquote style="font-family:'Courier';" > Next, you'll start the preview, and you'll keep it running, until the user takes a picture. And once the user takes a picture, your application will receive and process the picture image. And then eventually, your application will release the camera so that other applications can have access to it. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O último exemplo de aplicação para esta lição é chamado AudioVideoCamera. Esta aplicação ainda tira fotos e usa o visor do dispositivo como visor da câmera. Vamos dar-lhe uma tentativa. Então aqui está o meu dispositivo. E agora, vou iniciar a aplicação AudioVideoCamera.
+</p>
+<blockquote style="font-family:'Courier';" > The last example application for this lesson is called AudioVideoCamera. This application takes still photos and uses the device's display as the camera's viewfinder. Let's give it a try. So here's my device. And now, I'll start up the AudioVideoCamera application. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Como você pode ver, o aplicativo exibe a imagem atualmente disponíveis através da lente da câmera. E se você mover a câmera, a imagem muda. Se o usuário estiver satisfeito com a imagem, então ele ou ela pode simplesmente toque na tela para tirar uma foto.
+</p>
+<blockquote style="font-family:'Courier';" > As you can see, the application displays the image currently visible through the camera's lens. And if you move the camera, the image changes. If the user is satisfied with the image, then he or she can simply touch the screen to take a picture. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E, quando ele ou ela faz isso, a câmera tira a foto e, em seguida, congelar a janela de pré-visualização por cerca de dois segundos. Assim, o usuário pode ver a imagem que apenas estalou. Deixe-me fazer isso. Eu vou tocar a tela, para tirar a foto, e agora a visualização congela por cerca de dois segundos. E agora a câmera está pronta para tirar outra foto.
+</p>
+<blockquote style="font-family:'Courier';" > And when he or she does so, the camera will take the picture, and then freeze the preview window for about two seconds. So the user can see the picture they just snapped. Let me do that. I'll touch the display, to snap the picture, and now the preview freezes for about two seconds. And now the camera is ready to take another photo. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos olhar para o código-fonte para esta aplicação. Aqui está a aplicação AudioVideoCamera aberto no IDE. Agora, eu vou abrir a atividade principal. E vamos rolar para o método onCreate.   E uma das coisas que vemos aqui é o código chama o método getCamera, para obter uma referência para o objeto da câmera.
+</p>
+<blockquote style="font-family:'Courier';" > Let's look at the source code for this application. Here's the AudioVideoCamera application open in the IDE. Now, I'll open the main activity. And let's scroll down to the onCreate method.   And one of the things we see here is the code calls the getCamera method, to get a reference to the camera object. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Vamos rolar para esse método.   Este método chama as classes câmera método Open. Que retorna uma referência, para a primeira câmera virada para trás neste dispositivo. Se o dispositivo tem várias câmeras, você pode usar outras versões do método aberto de obter câmeras particulares.
+</p>
+<blockquote style="font-family:'Courier';" > Let's scroll down to that method.   This method calls the camera classes open method. Which returns a reference, to the first back facing camera on this device. If your device has several cameras, you can use other versions of the open method to get particular cameras.
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Agora a rolagem de volta até onCreate, o código agora estabelece um ouvinte toque na tela principal. E quando o usuário toca a tela, método OnTouch deste ouvinte será chamado. E este método irá chamar o método takePicture da câmera para tirar uma foto.
+</p>
+<blockquote style="font-family:'Courier';" >Now scrolling back up to onCreate, the code now sets up a touch listener on the main view. And when the user touches the screen, this listener's onTouch method will be called. And this method will call the camera's takePicture method to take a picture. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Agora vamos voltar a este método em poucos segundos. Em seguida, o código define uma visão superficial que é usado para exibir a visualização, que mostra ao usuário o que a câmera está vendo atualmente.
+</p>
+<blockquote style="font-family:'Courier';" >Now we'll come back to this method in a few seconds. Next, the code sets up a surface view that is used to display the preview, which shows the user what the camera is currently seeing. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E estas medidas são apenas o que falamos em nossa lição anterior sobre gráficos. Primeiro, o código obtém o suporte de superfície para a vista de superfície, e, em seguida, adiciona um objeto de retorno de chamada para o titular da superfície. E esse objeto de retorno de chamada é definido abaixo. Vamos rolar para baixo.   Agora, como você se lembra, o SurfaceHolder.Interface callback define três métodos.
+</p>
+<blockquote style="font-family:'Courier';" >And these steps are just what we talked about in our previous lesson on graphics. First, the code gets the surface holder for the surface view, and then it adds a callback object to the surface holder. And that callback object is defined below. Let's scroll down to it.   Now as you remember, the SurfaceHolder.Callback interface defines three methods. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>SurfaceCreated, surfaceChanged, e surfaceDestroyed. O método surfaceCreated começa por definir o titular da superfície em que a câmera irá mostrar a sua pré-visualização. E depois disso, o código começa a pré-visualização da câmera.
+</p>
+<blockquote style="font-family:'Courier';" >SurfaceCreated, surfaceChanged, and surfaceDestroyed. The surfaceCreated method starts by setting the surface holder on which the camera will show its preview. And after that, the code starts the camera's preview. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Quando a superfície muda a sua estrutura ou o formato, o método é chamado de surfaceChanged. E este método desativa toques no layout, e depois pára de visualização da câmera. Em seguida, o código muda os parâmetros da câmera. E, neste caso, o código encontra um tamanho adequado para a previsão da câmara.
+</p>
+<blockquote style="font-family:'Courier';" >When the surface changes its structure or format, the surfaceChanged method is called. And this method disables touches on the layout, and then stops the camera preview. Next, the code changes the camera parameters. And in this case, the code finds an appropriate size for the camera preview. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E, em seguida, define o tamanho da visualização, em seguida, passa os parâmetros atualizados objeto de volta para a câmera. Agora que os parâmetros são definidos, o código reinicia o preview, chamando o método startPreview.
+</p>
+<blockquote style="font-family:'Courier';" >And then sets the preview size, and then passes the updated parameters object back to the camera. Now that the parameters are set, the code restarts the preview, by calling the startPreview method. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Então, finalmente, o código permite re-toques no layout. Portanto, agora que já sabemos como configurar e gerenciar a exibição de visualização, vamos voltar e olhar para tirar uma foto real. Assim, a rolagem de volta até o onTouchListener, Quando o usuário toca a tela, o método é chamado takePicture.
+</p>
+<blockquote style="font-family:'Courier';" >Then, finally, the code re-enables touches on the layout. So now that we've gone over setting up and managing the preview display, let's go back and look at taking an actual picture. So scrolling back up to the onTouchListener, When the user touches the display, the takePicture method gets called. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Nesse método, o código aqui passa em dois objetos CameraCallback. Um deles é o ShutterCallback, e o outro é o CameraCallback. O ShutterCallback é chamado na época em que o usuário tira a foto, basicamente para que o usuário saiba que a câmara está a tirar uma foto.
+</p>
+<blockquote style="font-family:'Courier';" >In that method, the code here passes in two CameraCallback objects. One is the ShutterCallback, and the other is the CameraCallback. The ShutterCallback is called around the time that the user takes the picture, basically to let the user know that the camera is taking a picture. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>O CameraCallback usada aqui, é chamado após a foto foi tirada e quando a imagem compactada está disponível. Quando isto acontece, o método onPictureTaken do CameraCallback é chamado. Neste exemplo, o código simplesmente dorme por dois segundos e reinicia a visualização.
+</p>
+<blockquote style="font-family:'Courier';" >The CameraCallback used here, is called after the picture has been taken and when the compressed image is available. When this happens, the CameraCallback's onPictureTaken method is called. In this example, the code simply sleeps for two seconds, and then restarts the preview. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>E você pode notar que esta aplicação em particular realmente não guardar a imagem. Mas, claro, você normalmente iria querer fazer isso, e se assim for, você normalmente fazê-lo aqui mesmo neste método.   O último método que eu vou falar é sobre onPause.
+</p>
+<blockquote style="font-family:'Courier';" >And you might notice that this particular application doesn't actually save the image. But of course, you'd normally would want to do that, and if so, you'd typically do it right here in this method.   The last method I'll talk about is onPause. 
+</blockquote>
+<p>
+</p>
+<blockquote style="font-family:'Courier';" >
+</blockquote>
+<p>Aqui o código desativa toques na tela, desligar a pré-visualização, e então libera a câmera para que outras aplicações podem usá-lo. Então, isso é tudo por nossa lição sobre multimídia. Junte-se a mim na próxima vez, quando nós vamos falar sobre sensores. Obrigado.   </p>
+<blockquote style="font-family:'Courier';" >Here the code disables touches on the display, shuts down the preview, and then releases the camera so that other applications can use it. So that's all for our lesson on multimedia. Please join me next time, when we'll talk about sensors. Thanks.  </blockquote>
+</body></html>
