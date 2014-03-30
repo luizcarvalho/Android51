@@ -1,0 +1,271 @@
+= Gerenciamento de Dados
+
+== Shared Preferences
+- Pequena quantidade de dados primitivos
+
+== Internal Storage
+- Pequena pra media quantidade de dados primitivos
+
+== External Storage
+- Uma grande quantidade de dados não primitivos
+
+== Database
+- Armazena de pequenas a grandes quantidade de dados privados e estruturados
+
+
+
+== Shared preferences
+- Mapeamento persistente
+- mantem pares de chave-valor para simples tipos de dados
+- Automaticamente persistido atravez de sessão da aplicação
+- Frequentemente utilizando para armazenar dados a logo prazo em aplicativos customizáveis: Nomes de contas, redes WIFI favoritas, Customizações de usuário
+
+==  Activity SharedPreferences
+- Para obter um objeto SharedPreference associado a uma activity
+  Acvitity.getPreferences(int mode)
+  MODE_PRIVATE
+
+
+== SharedPreference nomeado
+  Context.getSharedPreference(String name, int mode)
+  name: nome do aquivo do SharedPreference
+  mode: MODE_PRIVATE
+
+== Escrevendo SharedPreferences
+- Chame SharedPreference.edit()
+- Return a SharedPreference.Editor instance
+- Adicione Valores para SharedPreferences usando a instância do SharedPreference.Editor
+  putString(String key, String value)
+  putInt(String key, int value)
+  remove(String key)
+- Envie os valores editados com SharedPreferences.Editor.commit()
+
+== Lendo SharedPreferences
+- Use o método SharedPreferences para ler os valores
+  getAll()
+  getBoolean(String key, ...)
+  getString(String key, ...)
+
+
+== [Ex] DataManagementSharedPreferences
+- Quando um usuário pressionar o botão Play, a aplicação ira mostrar um número randomico
+- A Aplicação mantera a faixa do maior número exibido até o momento
+
+== PreferenceFragment
+- Classe suporta a exibição e a modificação de preferências do usuário
+
+== DataManagement PreferenceFragment
+- Esta aplicação exibe um PreferenceFragment, que permite que o usuário entre e armazene um nome de usuário
+
+
+== File
+- Classe representa um sistema de arquivo indentificável pelo nome da pasta
+- Áreas de armazenamento são classificadas como interno e externo
+- Memória interna é comumente utilizada para pequenos conjuntos de dados privados da aplicação
+- Memória externa é mais utilizada para grandes quantidade de dados não privados
+
+== FileApi
+
+  FileOutputStream openFileOutput(String name, int mode)
+
+- Abre um arquivo provado para escrita, cria um arquivo se ele não existir
+
+FileInputStream openFileInput(String name)
+  
+- Abre um arquivo privado apenas para leitura
+
+
+== [Ex]DataManagementFileInternalMemory
+- Se um arquivo de texto já existir, o aplicativo irá escrever um texto neste aquivio.
+- O Aplicativo irá ler os dados di arquivo e exibi-los
+
+
+== Usando arquivos na Meória Externa
+- Mídias remóvíveis podem aparecer e desaparecer sem avisos
+
+  String Environment.getExternalStorageState()
+  MEDIA_MOUNTED - presente e montada para ler e escrever
+  MEDIA_MOUNTED_READ_ONLY - Present e montada somente para leitura
+  MEDIA_REMOVED - Não está presente
+
+- Permissões para ler dados na memória externa
+  
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+== [EX] DataManagementFileExternalMemory
+
+- Aplicação irá ler uma imagem do diretório de recursos
+- Copiar para o armazenamento externo
+- Ler a a imagem do arquivo que está no armazenamento externo
+- E exibirá a imagem
+
+== Arquivos de Cache
+- Arquivos temporários que podem ser deletados pelo sistema quando o armazenamento estiver escasso.
+- Arquivos removidos quando a aplicação é desinstalada
+- File Contex.getCacheDir()
+- Retorna o endereço absoluto para o diretório que pode ser utilizado para arquivos temporários
+
+== Salvando arquivos de cache
+- Context.getExternalCacheDir()
+- Retorna um arquivo representando o diretório de armazenamento externo para arquivos de cache
+
+== SQLite
+- SQLite disponibiliza uma base de dados in-memory
+- Projetado para operar com uma quantidade muito pequena de dados (<300kb)
+- Implementa a maior parte do SQL92
+- Suporta ACID transactions (Atomic, consistent, isolada e durável)
+
+== Usando Database
+- Recomentado utilizar o método baseado no helper chamado SQLiteOpenHelper
+
+- Subclasse SQLiteOpenhelper chama super() para o construtor da subclasse inicializar a base de dados subsequente
+
+- Subrescreve onCreate()
+- Sobrescreve onUpgrade()
+- Executa comando CREATE TABLE
+
+- Usa métodos SQLiteOPenHelper para abrir e retornar a base de dados
+- Executa operações na base de dados
+
+== [Ex] DataManagementSQL
+- Aplicação cria uma base de dados SQlite e insere registros, com alguns erros
+- Quando o usuário pressiona o botão corrigir, a aplicação delete as atualizações e re-exibe os dados corretos da base de dados
+
+== Examinando a base de dados remotamente
+- Base de dados é armazenada em 
+  /data/data/<pacote>/databases
+  adb -s emulator-5554 shell
+  sqlite3 /data/data...
+
+===============================================================================================
+
+= ContentProviders
+- ContentProvider e ContentResolver
+- Método ContentResolver 
+- CursorLoader
+- Implementando ContentProviders
+
+
+== ContentProvider
+- Representa um repositório estuturado de dados
+- Encapsula um conjunto de dados
+- Reforça permissões de acesso de dados
+- Projetado para compartilhar dados entre aplicações
+- Clientes tem acesso ao ContentProviders através de um ContentResolver
+
+
+== ContentResolver
+- Apresenta uma interface semelhante a de uma base de dados para ler e escrever dados (query, insertm updatem delete, etc)
+- Provê serviços adicionais como notificações de mudanças
+- Consegue-se uma referência para o ContentProvider chamando
+
+  Context.getContentResolver()
+
+  == ContentProvider e ContentResolver
+  - Juntas essas classes permitem que um código rodando em um processo tenha acesso aos dados de outro processo
+
+== Android ContentProviders
+- Browser - bookmarks, histórico
+- Registros de chamadas - usado pelo telefone
+- Contatos - Dados sobre os contatos
+- Mídia - Base de dados de mídias
+- UserDictionary - base de dados para pervisão ortográfica
+- e mais
+
+== URI
+- provedores de Conteúdos são referênciados por URI's
+- O Formato de uma URI identifica específicos conjuntos de dados gerenciados por ContentProviders específicos
+ 
+  content://authority/path/id
+
+- content- o esquema que indica como o dado é gerenciado pelo ContentProvider
+- Authority - ID para o ContentProvider
+- PATH - zero ou mais segmentos que indicam o tipo de dados a ser acessado
+- id - um específico registros requisitado
+
+== ContentResolver.query()
+
+  Cursor query(
+    Uri uri,              //ContentProvider Uri
+    String[] projection   //Colunas a serem buscadas
+    String selection      //padrão de seleção SQL
+    String[] selectionArgs//padrão de SQL args
+    String sortOrder      //ordem
+    )
+
+- Retorna um Cursos para interação sobre os resultados
+
+== [Ex] ContentProviderWithCursorAdapter
+- Informações adicionais para contatos do ContentProvider do Contatos do Android
+- Exibe cada um dos nomes dos contatos com fotos, se existente
+
+
+
+== CursorLoader
+- Conduz operações intensivas na Thread principal podem afertar a disponibilidade a resposta do aplicativo
+- CursorLoader usa um Asynctask para executar queries em uma thread em segundo plano
+
+
+== Usando um CursorLoader
+- Implementa um LoaderManager
+- intrface LoaderCallback
+- Cria e inicializar um CursorLoader
+
+== initLoader()
+- Inicializa e ativa um Loader
+  
+  Loader<D> initLoader(
+    int id,
+    Bundle args,
+    LoaderCallbacks<D> callback
+    )
+
+
+== LoaderCallbacks
+- Chamado para iniciar e retornar um novo Loader para um ID específico
+
+  Loader<D> onCreateLoader(
+    int id,
+    Bundle args
+  )
+
+== LoaderCallbacks
+- Chamado quando um anteriormente criado Loader é termina seu carregamento
+
+  void onLoadFinished(
+    Loader<D> loader,
+    D data
+  )
+
+
+
+== LoaderCallback
+- Chamado quando um ateriormente criado Loader é resetado
+  
+  void onLoaderReset(
+  Loader<D> loader
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

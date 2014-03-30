@@ -1,0 +1,147 @@
+Quando o chamamos o metodo postInvalidate() dizemos o android para redezenhar a view, ou seja chama o método onDraw da View.
+
+Para desenhar utilizando a surfaceView precisamos criar uma subclasse de SurfaceView e implementar o método chamado FurfaceHolder.Callback
+
+
+:: 6-3
+
+View Animation
+- Muda as propriedades da view durante um periodo de tempo (Size, Position, Transparency, Orientation)
+
+View Animation Classes
+- TransitionDrawble
+- AnimationDrawable
+- Animation
+
+TransitionDrawable
+- Um Drawable de duas camadas
+- Pode fazer um efeito fade entre a primeira e a segunda camada
+
+-- GraphoicsTransitionDrawble
+--- Esta aplicação usa os mesmo shapes que o aplicativo GraphShapeDraw, mostra um shape Ciano que "fade to" para o Shape Magenta
+
+
+AnimationDrawable
+- Anima uma serie de drawable, cada drawable is mostrado por uma quantidade específica de tempo
+-- GraphicsFrameAnimation, usa um AnimantionDrawable para apresentar uma animação frame by frame.
+
+Animation
+- Uma serie de transformações aplicadas ao conteúdo de uma View
+- Um Animation pode ser manitupalo para obter um efeito sequencial ou mudanças simultâneas
+-- GraphTweenAnimation
+--- Aplicação exibe uma simples imagem e a anima utilizando suas várias propriedades
+
+Property Animation
+- Animation - mudança das propriedades de um objeto durante um perido de tempo
+
+== Property Animation Architecture
+--- ValueAnimator - Motor de tempo
+--- TimeInterpolator - Define como os valores mudam em função do tempo
+--- AnimatorUpdateListener - Chamado cada vez que um frame da animação é mudado
+--- TypeEvaluator - Calcula um valor de uma propriedade em um determinado instante no tempo
+--- AnimatorSet - Combina animações individuais para criar animações mais complexas
+
+=== GraphicisValueAnimator
+- Usa ValueAnimator para animar a cor do background de uma ImageView
+
+=== GraphicisViewPropertyAnimator
+- Samemso que o GraphicsTweenAnimation, usa uma classe ViewPropertyAnimation que é simplificada para animar View.
+
+
+
+
+======================================================
+== MotionEvent
+- representa um movimeonto em feito por um dispositivivo de entrada (caneta, trackball, mouse, dedos)
+
+- Action Code: Estado da mudança que ocorreu
+- Action Values: Posição e propriedades do movimento , como tempo, origem, local, pressão e mais
+
+== MultiTouch
+- MultiToch screen emite um trajeto de movimento pela fonte do toque
+- Toques individuais são chamados de Pointers
+- Cada Pointer tem um único id durante o tempo que ele está ativo
+- MotionEvents podem se referir a multiplos Pointers
+- Cada pointer tem um indice dentro do evento, mas esse indice pode não ser estável durante todo tempo.
+
+== Alguns Ações do MotionsEvents 
+- ACTION_DOWN
+- ACTION_POINTER_DOWN
+- ACTION_POINTER_UP
+- ACTION_MOVE
+- ACTION_UP
+- ACTION_CANCEL
+
+
+== Garantias de Consistencia 
+- Para cada touch events, Android tenta garantir que toques 
+-- desça ujm de cada vez
+-- Se mova como um grupo
+-- suba um de cada vez ou é cancelado
+
+- Aplicativos devem ser tolerantes a inconsistências
+
+== MotinEvent Methods
+- getActionMasked() - retorna o código associado com o MotinEvent
+- getActionIndex() - Retorna o pointer associado com o Action Code, por ex: se o action code for ACTION_POINTER_DOWN você pode usa-lo para encontrar o index de um ponto em particular desse evento.
+- getPointerId(intpointerIndex) - Retorna o Stable ID do Pointer associado com esse Index
+- getPointerCount() - Retorna o numero de pointers associados com o MotionEvent
+- getX(intpointerIndex) -retorna a cordenada X do index
+- getY(intpointerIndex)-retorna a cordenada Y do index
+- findPointerIndex(intpointerId) - Retund index associado com Pointer ID informado
+
+== Handling Touch Evento on a View
+
+- A view sendo tocada recebe um View.onTouchEvent(MotionEvent event)
+- o onTouchEvent() deve retornar true se o MotinEvent foi consumido, ou false caso contrário;
+
+
+== Manipulando Touch Events com um Listener
+
+- View.OnTouchListener define um método de callback para o evento.
+- View.setOnTouchListener() registra um Listener para o TouchCallback
+- onTouch é chamado quando um Touch Event, como um PRESSING, RELEASING ou DRAGGING ocorre
+- onTouch() é chamado antes que o evento seja enviado para a View tocada
+- Deve retornar true se o evento foi consumido e false caso contrário.
+
+== Manipulando Multiplos Touch Events
+- Multiplos toques são comobinados para formar um gesto mais complexo
+- Identificar e processar uma combinação de toques
+- por xemplo um toque duplo
+ -- ACTION_DOWN, ACTION_UP, ACTION_DOW, ACTION_UP sucessivamente;
+
+ == Manipulação de Multi-Touch
+ - 
+
+ == TouchIndicateTouchLocation
+ - Aplicação desenha um circulo em qualquer lugar que o usuário toca na tela
+ - As cores do círculo são selecionadas randomicamente
+ - Redesenha os circulos quando usuários arrastam os dedos através da tela
+ - O Tamanho dos circulos são proporcionais ao numero de atividade atual do toque
+
+
+
+= GestureDetecor
+
+- Uma classe que recogniza TouchGestures comuns
+- Alguns gestos padrões incluem SINGLE TAP, DOUBLE TAP, FLING
+- Activity cria um GestureDetector e uma interface onGestureListener
+- Activity irá receber uma chamada para o onTouchEvent() quando a Activity for tocada
+- onTouchEvent delega o chamado para o GestureDetector.OnGestureListener
+
+== TouchGestureViewFliper
+- Exibe um TextView exibindo um número, se o usuário execura um gesto "fling" da direita para esquerda
+- O TextView irá rolar para fora da tela
+- E um novo textView irá deslizar para seu lugar
+
+
+
+
+
+
+
+
+
+
+
+
